@@ -42,7 +42,7 @@ const ActivityIcon= {
 function _convertSVG(svg, id) {
 	// Remove ENTITY HEADER
 	let read = svg;
-	var buf = read.replace(/<!DOCTYPE[\s\S.]*\]>/g,"");
+	var buf = read.toString().replace(/<!DOCTYPE[\s\S.]*\]>/g,"");
 
 	// Replace &fill_color; and &stroke_color;
 	buf = buf.replace(/&stroke_color;/g,"var(--stroke-color)");
