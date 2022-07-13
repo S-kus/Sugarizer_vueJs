@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/activity.css">
 	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 
+	<script src="lib/axios.min.js"></script>
 	<script src="https://unpkg.com/vue@3"></script>
     <script src="lib/require.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
@@ -29,11 +30,11 @@
         <h2>Hello Sugarizer</h2>
         <h3>{{ message }}</h3>
 		<activity-icon
-			v-bind:id="2"
-			v-bind:name="owner"
-			v-bind:svg="icons/owner-icon"
-			v-bind:color="7"
-			v-bind:size="16">
+			id="2"
+			name="owner"
+			svg="icons/owner-icon.svg"
+			color="7"
+			size="16">
 		</activity-icon>
 		<img src="icons/owner-icon.svg" alt="">
     </div>

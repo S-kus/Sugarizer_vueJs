@@ -14,6 +14,9 @@ const ActivityIcon= {
 		}
 	},
 	mounted: function() {
+		_loadIcon(this.svg).then(function(svg) {
+			this.svg = svg;
+		})
 		_setColor(this, this.color);
 		if (this.size) {
 			_setSize(this, this.size);
@@ -37,6 +40,16 @@ const ActivityIcon= {
 		}
 	}
 };
+// Load icon
+function _loadIcon(url) {
+	return new Promise(function(resolve, reject) {
+		axios.get(url).then(function(response) {
+			resolve(response.data);
+		}).catch(function(error) {
+			reject(error);
+ 		});
+	});
+}
 
 // Convert SVG to a pure SVG (remove Sugar stuff)
 function _convertSVG(svg, id) {
