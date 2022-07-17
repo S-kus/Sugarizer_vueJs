@@ -5,14 +5,17 @@
     <meta charset="utf-8" />
     <title>Sugarizer</title>
 
+	<link href="css/xocolor.css" rel="stylesheet" type="text/css" />
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, viewport-fit=cover"/>
 
 	<!-- Sugar Web Framework -->
+	
 	<link rel="stylesheet" media="not screen and (device-width: 1200px) and (device-height: 900px)"
 	href="lib/sugar-web/graphics/css/sugar-96dpi.css">
 	<link rel="stylesheet" media="screen and (device-width: 1200px) and (device-height: 900px)"
 	href="lib/sugar-web/graphics/css/sugar-200dpi.css">
     <link rel="stylesheet" href="css/activity.css">
+	<link rel="stylesheet" href="css/sugar-96dpi.css">
 	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 
 	<script src="lib/axios.min.js"></script>
@@ -29,18 +32,17 @@
 	<div id="app">
         <h2>Hello Sugarizer</h2>
         <h3>{{ message }}</h3>
-		<activity-icon
-			id="2"
-			name="owner"
-			svg="icons/owner-icon.svg"
-			color="7"
-			size="16">
-		</activity-icon>
-		<img src="icons/owner-icon.svg" alt="">
+		<div id="owner"></div>
+		<sugar-icon
+			parent="owner"
+			svgfile="icons/owner-icon.svg" 
+			xocolor="8" 
+			size="100"
+		></sugar-icon>
     </div>
 
 	<script src="js/xocolor.js"></script>
-	<script src="js/activity-icon.js"></script>
+	<script src="js/sugar-icon.js"></script>
 	<script src="js/app.js"></script>
   </body>
 </html>

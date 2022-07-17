@@ -9,8 +9,8 @@ requirejs.config({
 // Vue main app
 const app = Vue.createApp({
     components: {
-        "activity-icon" : ActivityIcon,
-        "xocolor": xocolor
+        "xocolor": xocolor,
+        "sugar-icon": SugarIcon
     },
     data() {
         return {
