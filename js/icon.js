@@ -1,12 +1,12 @@
-const SugarIcon ={
-    name: 'SugarIcon',
+const Icon ={
+    name: 'Icon',
     render() {},
-	props: ['parent','svgfile','xocolor','size'],
+	props: ['parent','svgfile','xocolor','size', 'intersectsize'],
     mounted() {
-        this.createIcon(document.getElementById(this.parent), this.svgfile, this.xocolor, this.size);
+        this.createIcon(document.getElementById(this.parent), this.svgfile, this.xocolor, this.size, this.intersectsize);
     },
     methods: {
-        createIcon(parent, svgfile, xocolor, size, callback) {
+        createIcon(parent, svgfile, xocolor, size, intersectsize, callback) {
             if (!parent) {
                 return null;
             }
@@ -17,6 +17,12 @@ const SugarIcon ={
                 svgElement.setAttribute("height", size+"px");
                 svgElement.setAttribute("style", "margin: -2px -4px");
                 svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
+                if (intersectsize) {
+                    svgElement.setAttribute("viewBox", "0 0 "+intersectsize+" "+intersectsize);
+                }
+                else {
+                    svgElement.setAttribute("viewBox", "0 0 55 55");
+                }
             }
             var useElement = document.createElementNS(svgElement.namespaceURI,"use");
             useElement.addEventListener('load', function() {
@@ -37,5 +43,6 @@ const SugarIcon ={
             svgElement.appendChild(useElement);
             parent.appendChild(svgElement);
         },
+        
     },
 };

@@ -32,18 +32,22 @@
 	<div id="app">
         <h2>Hello Sugarizer</h2>
         <h3>{{ message }}</h3>
+
+		<input type="button" value="Prev Color" v-on:click="prev()"/>
+    	<input type="button" value="Next Color" v-on:click="next()"/>
+
 		<div id="owner">
-			<sugar-icon
+			<icon
 				parent="owner"
 				svgfile="icons/owner-icon.svg" 
 				xocolor="8" 
 				size="100"
-			></sugar-icon>
+				intersectsize="100"
+			></icon>
 		</div>
     </div>
 
-	<script src="js/xocolor.js"></script>
-	<script src="js/sugar-icon.js"></script>
+	<script src="js/icon.js"></script>
 	<script src="js/app.js"></script>
   </body>
 </html>
