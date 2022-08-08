@@ -54,14 +54,14 @@ const app = Vue.createApp({
             return 0;
         },
         prev() {
-            var index = this.getIconColor(document.getElementById("owner"));
+            var index = this.getIconColor(document.getElementById("icon"));
             if (--index==-1) { index=179; }
-            this.setIconColor(document.getElementById("owner"), index);
+            this.setIconColor(document.getElementById("icon"), index);
         },
         next() {
-            var index = this.getIconColor(document.getElementById("owner"));
+            var index = this.getIconColor(document.getElementById("icon"));
             if (++index==180) { index=0; }
-            this.setIconColor(document.getElementById("owner"), index);
+            this.setIconColor(document.getElementById("icon"), index);
         }
     }
 });

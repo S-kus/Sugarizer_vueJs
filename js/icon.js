@@ -1,12 +1,21 @@
 const Icon ={
     name: 'Icon',
-    render() {},
-	props: ['parent','svgfile','xocolor','size', 'intersectsize'],
+    template: `<div id="icon"></div>`,
+	props: ['svgfile','xocolor','size', 'intersectsize'],
+    data() {
+        return {
+            isSugarNative : false,
+            x: -1,
+            y: -1,
+            icon: null,
+        }
+    },
     mounted() {
-        this.createIcon(document.getElementById(this.parent), this.svgfile, this.xocolor, this.size, this.intersectsize);
+        this.createIcon(this.svgfile, this.xocolor, this.size, this.intersectsize);
     },
     methods: {
-        createIcon(parent, svgfile, xocolor, size, intersectsize, callback) {
+        createIcon(svgfile, xocolor, size, intersectsize, callback) {
+            var parent =document.getElementById("icon");
             if (!parent) {
                 return null;
             }
@@ -42,7 +51,22 @@ const Icon ={
             // Detection of error no symbol #icon is not possible due to closed ShadowDOM
             svgElement.appendChild(useElement);
             parent.appendChild(svgElement);
+            this.icon=svgElement;
+            // this.x=50;
+            // this.xChanged();
         },
         
+        // Property changed
+        xChanged() {
+            if (this.x != -1) {
+                this.icon.setAttribute("style", "margin-left: "+this.x+"px");
+            }
+        },
+
+        yChanged() {
+            if (this.y != -1) {
+                this.icon.setAttribute("style", "margin-top: "+this.y+"px");
+            }
+        },
     },
 };
