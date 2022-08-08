@@ -1,7 +1,7 @@
 const Icon ={
     name: 'Icon',
     template: `<div id="icon"></div>`,
-	props: ['svgfile','xocolor','size', 'intersectsize'],
+	props: ['svgfile','color','size', 'intersectsize'],
     data() {
         return {
             isSugarNative : false,
@@ -11,16 +11,16 @@ const Icon ={
         }
     },
     mounted() {
-        this.createIcon(this.svgfile, this.xocolor, this.size, this.intersectsize);
+        this.createIcon(this.svgfile, this.color, this.size, this.intersectsize);
     },
     methods: {
-        createIcon(svgfile, xocolor, size, intersectsize, callback) {
+        createIcon(svgfile, color, size, intersectsize, callback) {
             var parent =document.getElementById("icon");
             if (!parent) {
                 return null;
             }
             var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            svgElement.setAttribute("class", "xo-color"+xocolor);
+            svgElement.setAttribute("class", "xo-color"+color);
             if (size) {
                 svgElement.setAttribute("width", size+"px");
                 svgElement.setAttribute("height", size+"px");

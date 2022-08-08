@@ -30,12 +30,12 @@ const app = Vue.createApp({
             if (element == null) {
                 return -1; // Error no SVG included
             }
-            var xocolor = element.getAttribute("class");
+            var color = element.getAttribute("class");
             var index;
-            if (!xocolor || (index = xocolor.indexOf("xo-color")) == -1) {
+            if (!color || (index = color.indexOf("xo-color")) == -1) {
                 return -1; // Error no XO color
             }
-            return parseInt(xocolor.substr(index+8));
+            return parseInt(color.substr(index+8));
         },
         setIconColor(icon,color) {
             if (!icon) {
