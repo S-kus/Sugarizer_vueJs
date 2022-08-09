@@ -35,15 +35,35 @@
 
 		<input type="button" value="Prev Color" v-on:click="prev()"/>
     	<input type="button" value="Next Color" v-on:click="next()"/>
-
-		<div id="owner">
-			<icon
-				svgfile="icons/owner-icon.svg" 
-				color="8" 
-				size="100"
-				intersectsize="100"
-			></icon>
-		</div>
+				
+		<icon ref="Icon"
+			id="1"
+			svgfile="icons/owner-icon.svg" 
+			color="8"
+			size="100"
+			intersectsize="100"
+		></icon>
+		<icon ref="Icon"
+			id="2"
+			svgfile="icons/abcd.svg" 
+			color="96" 
+			size="100"
+			intersectsize="100"
+		></icon>
+		<icon ref="Icon"
+			id="3"
+			svgfile="icons/star.svg" 
+			color="54" 
+			size="100"
+			intersectsize="100"
+		></icon>
+		<icon ref="Icon"
+			id="4"
+			svgfile="icons/write.svg" 
+			color="30" 
+			size="100"
+			intersectsize="100"
+		></icon>
     </div>
 
 	<script src="js/icon.js"></script>

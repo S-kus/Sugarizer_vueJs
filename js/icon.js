@@ -1,7 +1,7 @@
 const Icon ={
     name: 'Icon',
-    template: `<div id="icon"></div>`,
-	props: ['svgfile','color','size', 'intersectsize'],
+    template: `<div class="icon" :id="this.id"></div>`,
+	props: ['id','svgfile','color','size', 'intersectsize'],
     data() {
         return {
             isSugarNative : false,
@@ -15,7 +15,7 @@ const Icon ={
     },
     methods: {
         createIcon(svgfile, color, size, intersectsize, callback) {
-            var parent =document.getElementById("icon");
+            var parent =document.getElementById(this.id);
             if (!parent) {
                 return null;
             }
@@ -68,5 +68,60 @@ const Icon ={
                 this.icon.setAttribute("style", "margin-top: "+this.y+"px");
             }
         },
+
+        getIconColor(icon) {
+            if (!icon) {
+                return -1; // Error bad element
+            }
+            var element = null;
+            for (var i = 0 ; i < icon.children.length && !element ; i++) {
+                if (icon.children[i].tagName == "svg") {
+                    element = icon.children[i];
+                }
+            }
+            if (element == null) {
+                return -1; // Error no SVG included
+            }
+            var color = element.getAttribute("class");
+            var index;
+            if (!color || (index = color.indexOf("xo-color")) == -1) {
+                return -1; // Error no XO color
+            }
+            return parseInt(color.substr(index+8));
+        },
+        setIconColor(icon,color) {
+            if (!icon) {
+                return -1; // Error bad element
+            }
+            var element = null;
+            for (var i = 0 ; i < icon.children.length && !element ; i++) {
+                if (icon.children[i].tagName == "svg") {
+                    element = icon.children[i];
+                }
+            }
+            if (element == null) {
+                return -1; // Error no SVG included
+            }
+            element.setAttribute("class", "xo-color"+color);
+            return 0;
+        },
+        increaseColor() {
+            var allsvgs=document.getElementsByClassName("icon");
+            // console.log(allsvgs);
+            for(var i=0; i<allsvgs.length; i++) {
+                var index = this.getIconColor(allsvgs[i]);
+                if (--index==-1) { index=179; }
+                this.setIconColor(allsvgs[i], index);
+            }
+        },
+        decreaseColor() {
+            var allsvgs=document.getElementsByClassName("icon");
+            // console.log(allsvgs);
+            for(var i=0; i<allsvgs.length; i++) {
+                var index = this.getIconColor(allsvgs[i]);
+                if (++index==180) { index=0; }
+                this.setIconColor(allsvgs[i], index);
+            }
+        }
     },
 };
