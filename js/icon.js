@@ -1,7 +1,10 @@
 const Icon ={
     name: 'Icon',
-    template: `<div class="icon" :id="this.id"></div>`,
-	props: ['id','svgfile','color','size', 'intersectsize'],
+    template: `<div>
+            <input type="button" value="Position" v-on:click="position()"/>
+            <div class="icon" :id="this.id"></div>
+        </div>`,
+	props: ['id','svgfile','color','size'],
     data() {
         return {
             isSugarNative : false,
@@ -11,10 +14,10 @@ const Icon ={
         }
     },
     mounted() {
-        this.createIcon(this.svgfile, this.color, this.size, this.intersectsize);
+        this.createIcon(this.svgfile, this.color, this.size);
     },
     methods: {
-        createIcon(svgfile, color, size, intersectsize, callback) {
+        createIcon(svgfile, color, size, callback) {
             var parent =document.getElementById(this.id);
             if (!parent) {
                 return null;
@@ -24,14 +27,20 @@ const Icon ={
             if (size) {
                 svgElement.setAttribute("width", size+"px");
                 svgElement.setAttribute("height", size+"px");
+                // svgElement.setAttribute("position", fixed);
                 svgElement.setAttribute("style", "margin: -2px -4px");
                 svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
-                if (intersectsize) {
-                    svgElement.setAttribute("viewBox", "0 0 "+intersectsize+" "+intersectsize);
+                var img = new Image();
+                img.onload = function() {
+                    if(this.width!=size) {
+                        let intersectsize=this.width;
+                        svgElement.setAttribute("viewBox", "0 0 "+intersectsize+" "+intersectsize);
+                    }
+                    else {
+                        svgElement.setAttribute("viewBox", "0 0 55 55");
+                    }
                 }
-                else {
-                    svgElement.setAttribute("viewBox", "0 0 55 55");
-                }
+                img.src = svgfile;
             }
             var useElement = document.createElementNS(svgElement.namespaceURI,"use");
             useElement.addEventListener('load', function() {
@@ -54,19 +63,12 @@ const Icon ={
             this.icon=svgElement;
             // this.x=50;
             // this.xChanged();
+            
         },
-        
-        // Property changed
-        xChanged() {
-            if (this.x != -1) {
-                this.icon.setAttribute("style", "margin-left: "+this.x+"px");
-            }
-        },
-
-        yChanged() {
-            if (this.y != -1) {
-                this.icon.setAttribute("style", "margin-top: "+this.y+"px");
-            }
+        position() {
+            this.x=Math.floor(Math.random() * 100) + 1;
+            this.y=Math.floor(Math.random() * 100) + 1;
+            this.icon.setAttribute("style", "margin-left: "+this.x+"px; margin-top: "+this.y+"px");
         },
 
         getIconColor(icon) {
