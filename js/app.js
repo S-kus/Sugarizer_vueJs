@@ -15,14 +15,6 @@ const app = Vue.createApp({
         return {
             message: "Sugarizer in Vue"
         }
-    },
-    methods: {
-        prev() {
-            this.$root.$refs.Icon.increaseColor();
-        },
-        next() {
-            this.$root.$refs.Icon.decreaseColor();
-        }
     }
 });
 

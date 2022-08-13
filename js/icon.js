@@ -1,7 +1,8 @@
 const Icon ={
     name: 'Icon',
     template: `<div>
-            <input type="button" value="Position" v-on:click="position()"/>
+            <input type="button" value="Change Color" v-on:click="changeColor()"/>
+            <input type="button" value="Change Position" v-on:click="changePosition()"/>
             <div class="icon" :id="this.id"></div>
         </div>`,
 	props: ['id','svgfile','color','size'],
@@ -61,17 +62,21 @@ const Icon ={
             svgElement.appendChild(useElement);
             parent.appendChild(svgElement);
             this.icon=svgElement;
-            // this.x=50;
-            // this.xChanged();
-            
         },
-        position() {
+        changePosition() {
             this.x=Math.floor(Math.random() * 100) + 1;
             this.y=Math.floor(Math.random() * 100) + 1;
             this.icon.setAttribute("style", "margin-left: "+this.x+"px; margin-top: "+this.y+"px");
         },
 
-        getIconColor(icon) {
+        changeColor() {
+            this.newColor = Math.floor(Math.random() * 179);
+        },
+    },
+    computed: {
+        newColor: {
+          get: function() {
+            let icon=document.getElementById(this.id);
             if (!icon) {
                 return -1; // Error bad element
             }
@@ -91,7 +96,8 @@ const Icon ={
             }
             return parseInt(color.substr(index+8));
         },
-        setIconColor(icon,color) {
+        set: function(color) {
+            let icon=document.getElementById(this.id);
             if (!icon) {
                 return -1; // Error bad element
             }
@@ -105,25 +111,7 @@ const Icon ={
                 return -1; // Error no SVG included
             }
             element.setAttribute("class", "xo-color"+color);
-            return 0;
-        },
-        increaseColor() {
-            var allsvgs=document.getElementsByClassName("icon");
-            // console.log(allsvgs);
-            for(var i=0; i<allsvgs.length; i++) {
-                var index = this.getIconColor(allsvgs[i]);
-                if (--index==-1) { index=179; }
-                this.setIconColor(allsvgs[i], index);
-            }
-        },
-        decreaseColor() {
-            var allsvgs=document.getElementsByClassName("icon");
-            // console.log(allsvgs);
-            for(var i=0; i<allsvgs.length; i++) {
-                var index = this.getIconColor(allsvgs[i]);
-                if (++index==180) { index=0; }
-                this.setIconColor(allsvgs[i], index);
-            }
         }
-    },
+      }
+    }
 };
