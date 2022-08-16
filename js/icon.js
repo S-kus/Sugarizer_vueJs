@@ -1,10 +1,6 @@
 const Icon ={
     name: 'Icon',
-    template: `<div>
-            <input type="button" value="Change Color" v-on:click="changeColor()"/>
-            <input type="button" value="Change Position" v-on:click="changePosition()"/>
-            <div class="icon" :id="this.id"></div>
-        </div>`,
+    template: `<div class="icon" :id="this.id"></div>`,
 	props: ['id','svgfile','color','size'],
     data() {
         return {
@@ -28,7 +24,6 @@ const Icon ={
             if (size) {
                 svgElement.setAttribute("width", size+"px");
                 svgElement.setAttribute("height", size+"px");
-                // svgElement.setAttribute("position", fixed);
                 svgElement.setAttribute("style", "margin: -2px -4px");
                 svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
                 var img = new Image();
@@ -63,20 +58,20 @@ const Icon ={
             parent.appendChild(svgElement);
             this.icon=svgElement;
         },
-        changePosition() {
-            this.x=Math.floor(Math.random() * 100) + 1;
-            this.y=Math.floor(Math.random() * 100) + 1;
-            this.icon.setAttribute("style", "margin-left: "+this.x+"px; margin-top: "+this.y+"px");
+        changePosition(iconPosition,xPosition,yPosition) {
+            this.x=xPosition;
+            this.y=yPosition;
+            iconPosition.setAttribute("style", "margin-left: "+this.x+"px; margin-top: "+this.y+"px");
         },
-
-        changeColor() {
-            this.newColor = Math.floor(Math.random() * 179);
+        changeColor(changeIcon, color) {
+            this.icon = changeIcon;
+            this.newColor = color;
         },
     },
     computed: {
         newColor: {
           get: function() {
-            let icon=document.getElementById(this.id);
+            let icon=this.icon;
             if (!icon) {
                 return -1; // Error bad element
             }
@@ -97,7 +92,7 @@ const Icon ={
             return parseInt(color.substr(index+8));
         },
         set: function(color) {
-            let icon=document.getElementById(this.id);
+            let icon=this.icon;
             if (!icon) {
                 return -1; // Error bad element
             }
