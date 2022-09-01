@@ -60,7 +60,7 @@ const Icon ={
             parent.appendChild(svgElement);
         },
         getIconElement() {
-            let icon=this.iconData;
+            let icon=document.getElementById(this.idData);
             if (!icon) {
                 return -1; // Error bad element
             }
