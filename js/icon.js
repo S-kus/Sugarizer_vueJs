@@ -10,6 +10,7 @@ const Icon ={
             colorData: this.color,
             xData: this.x,
             yData: this.y,
+            _element: null
         }
     },
     mounted() {
@@ -55,38 +56,23 @@ const Icon ={
             var xref = svgfile+"#icon";
             useElement.setAttribute("xlink:href",xref);
             useElement.setAttribute("href",xref);
+            this._element = svgElement;
             // Detection of error no symbol #icon is not possible due to closed ShadowDOM
             svgElement.appendChild(useElement);
             parent.appendChild(svgElement);
-        },
-        getIconElement() {
-            let icon=document.getElementById(this.idData);
-            if (!icon) {
-                return -1; // Error bad element
-            }
-            var element = null;
-            for (var i = 0 ; i < icon.children.length && !element ; i++) {
-                if (icon.children[i].tagName == "svg") {
-                    element = icon.children[i];
-                }
-            }
-            if (element == null) {
-                return -1; // Error no SVG included
-            }
-            return element;
         }
     },
     watch: {
         colorData: function(newColor, oldColor) {
-            var element = this.getIconElement();
+            var element = this._element;
             element.setAttribute("class", "xo-color"+newColor);
         }, 
         xData: function(newX, oldX) {
-            var element = this.getIconElement();
+            var element = this._element;
             element.setAttribute("style", "margin: "+newX+"px "+this.yData+"px");
         }, 
         yData: function(newY, oldX) {
-            var element = this.getIconElement();
+            var element = this._element;
             element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");
         }, 
     },
