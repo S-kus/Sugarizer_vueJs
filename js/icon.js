@@ -26,7 +26,7 @@ const Icon ={
             if (size) {
                 svgElement.setAttribute("width", size+"px");
                 svgElement.setAttribute("height", size+"px");
-                svgElement.setAttribute("style", "margin: -2px -4px");
+                svgElement.setAttribute("style", "margin: "+this.xData+"px "+this.yData+"px");
                 svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
                 var img = new Image();
                 img.onload = function() {
