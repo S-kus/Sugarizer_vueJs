@@ -59,7 +59,7 @@ const Icon ={
             svgElement.appendChild(useElement);
             parent.appendChild(svgElement);
         },
-        getColor() {
+        getIconElement() {
             let icon=this.iconData;
             if (!icon) {
                 return -1; // Error bad element
@@ -73,62 +73,21 @@ const Icon ={
             if (element == null) {
                 return -1; // Error no SVG included
             }
-            var color = element.getAttribute("class");
-            var index;
-            if (!color || (index = color.indexOf("xo-color")) == -1) {
-                return -1; // Error no XO color
-            }
-            return parseInt(color.substr(index+8));
+            return element;
         }
     },
     watch: {
-		colorData: function(newColor, oldColor) {
-            let icon=this.iconData;
-            if (!icon) {
-                return -1; // Error bad element
-            }
-            var element = null;
-            for (var i = 0 ; i < icon.children.length && !element ; i++) {
-                if (icon.children[i].tagName == "svg") {
-                    element = icon.children[i];
-                }
-            }
-            if (element == null) {
-                return -1; // Error no SVG included
-            }
+        colorData: function(newColor, oldColor) {
+            var element = this.getIconElement();
             element.setAttribute("class", "xo-color"+newColor);
 		}, 
         x: function(newX, oldX) {
-            let icon=this.iconData;
-            if (!icon) {
-                return -1; // Error bad element
-            }
-            var element = null;
-            for (var i = 0 ; i < icon.children.length && !element ; i++) {
-                if (icon.children[i].tagName == "svg") {
-                    element = icon.children[i];
-                }
-            }
-            if (element == null) {
-                return -1; // Error no SVG included
-            }
+            var element = this.getIconElement();
             element.setAttribute("style", "margin: "+newX+"px "+this.y+"px");
-		}, 
+        }, 
         y: function(newY, oldX) {
-            let icon=this.iconData;
-            if (!icon) {
-                return -1; // Error bad element
-            }
-            var element = null;
-            for (var i = 0 ; i < icon.children.length && !element ; i++) {
-                if (icon.children[i].tagName == "svg") {
-                    element = icon.children[i];
-                }
-            }
-            if (element == null) {
-                return -1; // Error no SVG included
-            }
+            var element = this.getIconElement();
             element.setAttribute("style", "margin: "+this.x+"px "+newY+"px");
-		}, 
+        }, 
     },
 };
