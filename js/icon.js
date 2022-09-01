@@ -1,15 +1,15 @@
 const Icon ={
     name: 'Icon',
     template: `<div class="icon" :id="this.idData"></div>`,
-	props: ['id','svgfile','color','size'],
+	props: ['id','svgfile','color','size','x','y'],
     data() {
         return {
             idData: this.id,
             isSugarNative : false,
             iconData: this.svgfile,
             colorData: this.color,
-            x: -2,
-            y: -4,
+            xData: this.x,
+            yData: this.y,
         }
     },
     mounted() {
@@ -81,13 +81,13 @@ const Icon ={
             var element = this.getIconElement();
             element.setAttribute("class", "xo-color"+newColor);
         }, 
-        x: function(newX, oldX) {
+        xData: function(newX, oldX) {
             var element = this.getIconElement();
-            element.setAttribute("style", "margin: "+newX+"px "+this.y+"px");
+            element.setAttribute("style", "margin: "+newX+"px "+this.yData+"px");
         }, 
-        y: function(newY, oldX) {
+        yData: function(newY, oldX) {
             var element = this.getIconElement();
-            element.setAttribute("style", "margin: "+this.x+"px "+newY+"px");
+            element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");
         }, 
     },
 };

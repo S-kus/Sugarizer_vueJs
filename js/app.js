@@ -32,20 +32,20 @@ const app = Vue.createApp({
         },
         changePosition() {
             this.$refs.icon1.iconData=document.getElementById("1");
-            this.$refs.icon1.x=Math.floor(Math.random() * 100) + 1;
-            this.$refs.icon1.y=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon1.xData=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon1.yData=Math.floor(Math.random() * 100) + 1;
 
             this.$refs.icon2.iconData=document.getElementById("2");
-            this.$refs.icon2.x=Math.floor(Math.random() * 100) + 1;
-            this.$refs.icon2.y=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon2.xData=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon2.yData=Math.floor(Math.random() * 100) + 1;
 
             this.$refs.icon3.iconData=document.getElementById("3");
-            this.$refs.icon3.x=Math.floor(Math.random() * 100) + 1;
-            this.$refs.icon3.y=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon3.xData=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon3.yData=Math.floor(Math.random() * 100) + 1;
 
             this.$refs.icon4.iconData=document.getElementById("4");
-            this.$refs.icon4.x=Math.floor(Math.random() * 100) + 1;
-            this.$refs.icon4.y=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon4.xData=Math.floor(Math.random() * 100) + 1;
+            this.$refs.icon4.yData=Math.floor(Math.random() * 100) + 1;
         }
     },
 });
