@@ -80,7 +80,7 @@ const Icon ={
         colorData: function(newColor, oldColor) {
             var element = this.getIconElement();
             element.setAttribute("class", "xo-color"+newColor);
-		}, 
+        }, 
         x: function(newX, oldX) {
             var element = this.getIconElement();
             element.setAttribute("style", "margin: "+newX+"px "+this.y+"px");
