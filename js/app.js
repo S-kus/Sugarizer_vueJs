@@ -9,7 +9,8 @@ requirejs.config({
 // Vue main app
 const app = Vue.createApp({
     components: {
-        "icon": Icon
+        "icon": Icon,
+        "old": Old
     },
     data() {
         return {
