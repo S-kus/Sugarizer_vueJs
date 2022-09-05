@@ -24,7 +24,7 @@ const NativeIcon ={
 		});
 	},
 	computed: {
-		gensvg: async function() {
+		gensvg: function() {
 			console.log("h2")
 			console.log(this.svg)
 			return _convertSVG(this.svg, this.genid);
@@ -48,6 +48,9 @@ const NativeIcon ={
 		}
 	},
 	watch: {
+		gensvg: function() {
+			return _convertSVG(this.svg, this.genid);
+		},
 		color: function(newColor, oldColor) {
 			_setColor(this, newColor);
 		},
