@@ -10,7 +10,7 @@ requirejs.config({
 const app = Vue.createApp({
     components: {
         "icon": Icon,
-        "old": Old
+        "native-icon": NativeIcon
     },
     data() {
         return {

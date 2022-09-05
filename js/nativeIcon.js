@@ -1,5 +1,5 @@
-const Old ={
-    name: 'Old',
+const NativeIcon ={
+    name: 'NativeIcon.js',
     template: `
 		<div v-html="gensvg" v-bind:id="this.idData">
 		</div>
@@ -16,15 +16,17 @@ const Old ={
             yData: this.y,
         }
     },
+	async created() {
+		await this._loadIcon(this.svgfile).then(function(svg) {
+			this.svg=svg;
+			console.log("h1")
+			console.log(this.svg)
+		});
+	},
 	computed: {
 		gensvg: async function() {
-			await _loadIcon(this.svgfile).then(function(svg) {
-				this.svg=svg;
-				console.log("h1")
-				console.log(this.svg)
-			});
-			console.log(this.svg)
 			console.log("h2")
+			console.log(this.svg)
 			return _convertSVG(this.svg, this.genid);
 		},
 		genid: function() {
@@ -32,8 +34,8 @@ const Old ={
 		}
 	},
 	mounted: function() {
-		console.log(this.svg)
 		console.log("h3")
+		console.log(this.svg)
 		_setColor(this, this.color);
 		if (this.size) {
 			_setSize(this, this.size);
@@ -51,6 +53,18 @@ const Old ={
 		},
 		size: function(newSize, oldSize) {
 			_setSize(this, newSize);
+		}
+	},
+	methods: {
+		// Load icon
+		async _loadIcon(url) {
+			return new Promise(function(resolve, reject) {
+				axios.get(url).then(function(response) {
+					resolve(response.data);
+				}).catch(function(error) {
+					reject(error);
+				});
+			});
 		}
 	}
 };
@@ -130,13 +144,3 @@ function _setSize(vm, size) {
 	}, 0);
 }
 
-// Load icon
-function _loadIcon(url) {
-	return new Promise(function(resolve, reject) {
-		axios.get(url).then(function(response) {
-			resolve(response.data);
-		}).catch(function(error) {
-			reject(error);
- 		});
-	});
-}
