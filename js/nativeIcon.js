@@ -17,14 +17,16 @@ const NativeIcon ={
         }
     },
 	async created() {
+		var vm = this;
 		await this._loadIcon(this.svgfile).then(function(svg) {
-			this.svg=svg;
+			vm.svg=svg;
 			console.log("h1")
 			console.log(this.svg)
 		});
 	},
 	computed: {
 		gensvg: function() {
+			if (this.svg == null) return "";
 			console.log("h2")
 			console.log(this.svg)
 			return _convertSVG(this.svg, this.genid);
@@ -34,6 +36,7 @@ const NativeIcon ={
 		}
 	},
 	mounted: function() {
+		if (this.svg == null) return;
 		console.log("h3")
 		console.log(this.svg)
 		_setColor(this, this.color);
