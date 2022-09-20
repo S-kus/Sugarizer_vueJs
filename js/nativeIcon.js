@@ -1,10 +1,10 @@
 const NativeIcon ={
     name: 'NativeIcon.js',
     template: `
-	    <div v-html="gensvg" v-bind:id="this.idData">
+        <div v-html="gensvg" v-bind:id="this.idData">
         </div>
     `,
-	props: ['id','svgfile','color','size','x','y'],
+    props: ['id','svgfile','color','size','x','y'],
     data() {
         return {
             svg: null,
@@ -21,7 +21,7 @@ const NativeIcon ={
         await this._loadIcon(this.svgfile).then(function(svg) {
             vm.svg=svg;
         });
-	},
+    },
     computed: {
         gensvg: function() {
             if (this.svg == null) return "";
@@ -151,5 +151,5 @@ const NativeIcon ={
                 }
             }, 0);
         },
-	}
+    }
 };
