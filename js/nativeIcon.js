@@ -86,6 +86,10 @@ const NativeIcon ={
             // Remove ENTITY HEADER
             let read = svg;
             var buf = read.replace(/<!DOCTYPE[\s\S.]*\]>/g,"");
+			if(this.isSugarNative) {
+				buf = buf.replace(/<symbol id="icon">/g,"");
+				buf = buf.replace(/(<\/symbol>)/g,"");
+			}
 
             // Replace &fill_color; and &stroke_color;
             buf = buf.replace(/&stroke_color;/g,"var(--stroke-color)");
