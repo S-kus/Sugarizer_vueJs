@@ -8,8 +8,8 @@ const Icon ={
             isSugarNative : false,
             iconData: this.svgfile,
             colorData: this.color,
-            xData: this.x,
-            yData: this.y,
+            xData: this.x ? this.x: 0,
+            yData: this.y ? this.y: 0,
             _element: null
         }
     },
