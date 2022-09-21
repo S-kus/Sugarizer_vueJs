@@ -9,7 +9,6 @@ const NativeIcon ={
         return {
             svg: null,
             idData: this.id,
-            isSugarNative : false,
             iconData: this.svgfile,
             colorData: this.color,
             xData: this.x ? this.x: 0,
@@ -86,10 +85,10 @@ const NativeIcon ={
             // Remove ENTITY HEADER
             let read = svg;
             var buf = read.replace(/<!DOCTYPE[\s\S.]*\]>/g,"");
-            if(!this.isSugarNative) {
-                buf = buf.replace(/<symbol id="icon">/g,"");
-                buf = buf.replace(/(<\/symbol>)/g,"");
-            }
+
+            //if it's non-native SVG
+            buf = buf.replace(/<symbol id="icon">/g,"");
+            buf = buf.replace(/(<\/symbol>)/g,"");
 
             // Replace &fill_color; and &stroke_color;
             buf = buf.replace(/&stroke_color;/g,"var(--stroke-color)");
