@@ -10,7 +10,7 @@ requirejs.config({
 const app = Vue.createApp({
     components: {
         "icon": Icon,
-        "button-icon": ButtonIcon
+        "icon-button": IconButton
     },
     data() {
         return {

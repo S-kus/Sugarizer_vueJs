@@ -1,5 +1,5 @@
-const ButtonIcon ={
-    name: 'ButtonIcon',
+const IconButton ={
+    name: 'IconButton',
     template: `<div class="iconButton">
                 <button-icon
                     :id=this.id
