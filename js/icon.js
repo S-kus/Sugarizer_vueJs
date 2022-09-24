@@ -77,3 +77,5 @@ const Icon ={
         }, 
     },
 };
+
+module.exports = { Icon };
