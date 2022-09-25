@@ -115,7 +115,7 @@ const NativeIcon ={
                 if (color > 179 && color != 256 && color != 512) {
                     color = color % 180;
                 }
-            element.setAttribute("class", "xo-color"+color);
+                element.setAttribute("class", "xo-color"+color);
             }
         },
         // Change CSS size
