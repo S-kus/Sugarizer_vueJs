@@ -1,15 +1,16 @@
 const Icon ={
     name: 'Icon',
-    template: `<div class="icon" :id="this.idData"></div>`,
+    template: `<div :class="this.disabled? 'web-activity-disable icon' : 'icon'" :id="this.idData"></div>`,
 	props: ['id','svgfile','color','size','x','y'],
     data() {
         return {
             idData: this.id,
+            disabled: false,
             isSugarNative : false,
             iconData: this.svgfile,
             colorData: this.color,
-            xData: this.x,
-            yData: this.y,
+            xData: this.x ? this.x: 0,
+            yData: this.y ? this.y: 0,
             _element: null
         }
     },
@@ -78,4 +79,4 @@ const Icon ={
     },
 };
 
-// module.exports = { Icon }
+module.exports = { Icon }

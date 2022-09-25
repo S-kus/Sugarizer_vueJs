@@ -213,10 +213,9 @@ body {
 }
 
 .web-activity-disable {
-	position: absolute;
-	top: 0px;
+	color: black !important;
 	opacity: 0.5;
-	padding: 2px;
+	pointer-events: none;
 }
 
 .launcher-icons {
@@ -793,22 +792,26 @@ body {
 }
 
 .icon-button {
+	display: flex;
+	width: max-content;
+	cursor:pointer;
 	border-radius: 22px;
 	margin-top: 5px;
 	height: 35px;
+	color: white;
 	background-color: #808080;
 	border: 2px solid #808080;
 }
 
 .icon-button-icon {
+	align-self: center;
 }
 
 .icon-button-text {
 	margin-top: 10px;
 	width:inherit;
-	padding-left: 38px;
-	padding-right: 38px;
-	color: white;
+	padding-left: 10px;
+	padding-right: 20px;
 	display: inline-block;
 }
 

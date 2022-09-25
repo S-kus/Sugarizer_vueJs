@@ -39,6 +39,10 @@ const app = Vue.createApp({
 
             this.$refs.icon4.xData=Math.floor(Math.random() * 100) + 1;
             this.$refs.icon4.yData=Math.floor(Math.random() * 100) + 1;
+        },
+        testFunction: function (event) {
+            console.log('test clicked');
+            this.$refs.buttonIcon1.textData= "text changed"
         }
     },
 });
