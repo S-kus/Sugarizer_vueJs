@@ -8,6 +8,7 @@ const NativeIcon ={
     data() {
         return {
             svg: null,
+            isSugarNative : true,
             idData: this.id,
             iconData: this.svgfile,
             colorData: this.color,
@@ -80,15 +81,17 @@ const NativeIcon ={
         _convertSVG(svg, id) {
             // Remove ENTITY HEADER
             let read = svg;
-            var buf = read.replace(/<!DOCTYPE[\s\S.]*\]>/g,"");
+            var buf= read;
+            if(this.isSugarNative) {
+                buf = read.replace(/<!DOCTYPE[\s\S.]*\]>/g,"");
 
-            //if it's non-native SVG
-            buf = buf.replace(/<symbol id="icon">/g,"");
-            buf = buf.replace(/(<\/symbol>)/g,"");
-
-            // Replace &fill_color; and &stroke_color;
-            buf = buf.replace(/&stroke_color;/g,"var(--stroke-color)");
-            buf = buf.replace(/&fill_color;/g,"var(--fill-color)");
+                // Replace &fill_color; and &stroke_color;
+                buf = buf.replace(/&stroke_color;/g,"var(--stroke-color)");
+                buf = buf.replace(/&fill_color;/g,"var(--fill-color)");
+            } else {
+                buf = buf.replace(/<symbol id="icon">/g,"");
+                buf = buf.replace(/(<\/symbol>)/g,"");
+            }
 
             // Add symbol and /symbol
             buf = buf.replace(/(<svg[^>]*>)/g,'$1<symbol id="icon'+id+'">');
