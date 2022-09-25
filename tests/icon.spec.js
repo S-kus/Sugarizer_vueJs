@@ -7,7 +7,7 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 describe('Button.vue', () => {
     let wrapper;
     const id="1";
-    const svgfile="file:///home/lionel/src/olpc/Sugarizer_vueJs/icons/owner-icon.svg" ;
+    const svgfile="file:///home/saumya/Documents/Sugar Labs/Sugarizer_vueJs/icons/owner-icon.svg" ;
     const color="5";
     const size="100";
     const x="-2";
@@ -39,6 +39,13 @@ describe('Button.vue', () => {
         expect(wrapper.props('size')).toBe(size);
         expect(wrapper.props('x')).toBe(x);
         expect(wrapper.props('y')).toBe(y);
+
+        expect(wrapper.vm._element.getAttribute("height")).toBe('100px');
+        expect(wrapper.vm._element.getAttribute("width")).toBe('100px');
+    });
+
+    it('changes color and position data when passed', async () => {
+        await delay(1000);
 
         expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color5'); // HACK: get SVG directly in data _element 
         expect(wrapper.vm._element.getAttribute("style")).toBe('margin: -2px -4px');
