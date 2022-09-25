@@ -78,4 +78,4 @@ const Icon ={
     },
 };
 
-module.exports = { Icon };
+if (typeof module !== 'undefined') module.exports = { Icon }

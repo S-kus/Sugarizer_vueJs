@@ -52,21 +52,17 @@ const NativeIcon ={
         },
         xData: function(newX, oldCX) {
             const vm= this;
-            setTimeout(function() { // HACK: Timeout need to wait for SVG to be build
-                let element = vm._getSVGElement(document.getElementById(vm.genid));
-                if (element) {
-                    element.setAttribute("style", "margin: "+newX+"px "+vm.yData+"px");
-                }
-            },0);
+            let element = vm._getSVGElement(document.getElementById(vm.genid));
+            if (element) {
+                element.setAttribute("style", "margin: "+newX+"px "+vm.yData+"px");
+            }
         },
         yData: function(newY, oldY) {
             const vm= this;
-            setTimeout(function() { // HACK: Timeout need to wait for SVG to be build
-                let element = vm._getSVGElement(document.getElementById(vm.genid));
-                if (element) {
-                    element.setAttribute("style", "margin: "+vm.xData+"px "+newY+"px");
-                }
-            },0);
+            let element = vm._getSVGElement(document.getElementById(vm.genid));
+            if (element) {
+                element.setAttribute("style", "margin: "+vm.xData+"px "+newY+"px");
+            }
         },
     },
     methods: {
@@ -114,45 +110,41 @@ const NativeIcon ={
         },
         // Change CSS color
         _setColor(vm, color) {
-            setTimeout(function() { // HACK: Timeout need to wait for SVG to be build
-                let element = vm._getSVGElement(document.getElementById(vm.genid));
-                if (element) {
-                    if (color > 179 && color != 256 && color != 512) {
-                        color = color % 180;
-                    }
-                    element.setAttribute("class", "xo-color"+color);
+            let element = vm._getSVGElement(document.getElementById(vm.genid));
+            if (element) {
+                if (color > 179 && color != 256 && color != 512) {
+                    color = color % 180;
                 }
-            }, 0);
+            element.setAttribute("class", "xo-color"+color);
+            }
         },
         // Change CSS size
         _setSize(vm, size) {
-            setTimeout(function() { // HACK: Timeout need to wait for SVG to be build
-                let element = vm._getSVGElement(document.getElementById(vm.genid));
-                if (element) {
-                    // Compute optimal viewBox size depending of previous width/height value and unity
-                    let iwidth = element.getAttribute("width").replace("px","");
-                    if (iwidth == "100%") {
-                        iwidth = 55;
-                    } else if ((""+iwidth).indexOf("pt")!=-1) {
-                        iwidth = Math.round(parseInt(iwidth.replace("pt",""),10)*96/72); // Convert pt to px
-                    }
-                    let iheight = element.getAttribute("height").replace("px","").replace("pt","");
-                    if (iheight == "100%") {
-                        iheight = 55;
-                    } else if ((""+iheight).indexOf("pt")!=-1) {
-                        iheight = Math.round(parseInt(iheight.replace("pt",""),10)*96/72); // Convert pt to px
-                    }
-                    // Set Position
-                    element.setAttribute("style", "margin: "+vm.xData+"px "+vm.yData+"px");
-                    // Set size
-                    element.setAttribute("width", size+"px");
-                    element.setAttribute("height", size+"px");
-                    element.setAttribute("preserveAspectRatio", "xMidYMid meet");
-                    if (!element.getAttribute("viewBox")) {
-                        element.setAttribute("viewBox", "0 0 "+iwidth+" "+iheight);
-                    }
+            let element = vm._getSVGElement(document.getElementById(vm.genid));
+            if (element) {
+                // Compute optimal viewBox size depending of previous width/height value and unity
+                let iwidth = element.getAttribute("width").replace("px","");
+                if (iwidth == "100%") {
+                    iwidth = 55;
+                } else if ((""+iwidth).indexOf("pt")!=-1) {
+                    iwidth = Math.round(parseInt(iwidth.replace("pt",""),10)*96/72); // Convert pt to px
                 }
-            }, 0);
+                let iheight = element.getAttribute("height").replace("px","").replace("pt","");
+                if (iheight == "100%") {
+                    iheight = 55;
+                } else if ((""+iheight).indexOf("pt")!=-1) {
+                    iheight = Math.round(parseInt(iheight.replace("pt",""),10)*96/72); // Convert pt to px
+                }
+                // Set Position
+                element.setAttribute("style", "margin: "+vm.xData+"px "+vm.yData+"px");
+                // Set size
+                element.setAttribute("width", size+"px");
+                element.setAttribute("height", size+"px");
+                element.setAttribute("preserveAspectRatio", "xMidYMid meet");
+                if (!element.getAttribute("viewBox")) {
+                    element.setAttribute("viewBox", "0 0 "+iwidth+" "+iheight);
+                }
+            }
         },
     }
 };
