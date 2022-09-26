@@ -80,11 +80,11 @@ const Icon ={
                 element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");    
             }
         }, 
-        gensvg: async function(newVal) {
+        gensvg: function(newVal) {
             console.log(document.getElementById(this.genid))
             console.log("changed")
             const vm= this;
-            setTimeout( async () => {
+            setTimeout(() => {
                 let icon= document.getElementById(vm.genid);
                 if (!icon) {
                     return null;
@@ -98,7 +98,7 @@ const Icon ={
                 this._element= element;
                 console.log(this._element)
             }, 0);
-            console.log("hi")
+            console.log("after setTimeout")
         },
     },
     methods: {
