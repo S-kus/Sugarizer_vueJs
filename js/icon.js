@@ -7,17 +7,20 @@ const Icon ={
             idData: this.id,
             isSugarNative : false,
             iconData: this.svgfile,
-            colorData: this.color,
+            sizeData: this.size? this.size: 55,
+            colorData: this.color? this.color: 512,
             xData: this.x ? this.x: 0,
             yData: this.y ? this.y: 0,
             _element: null
         }
     },
     mounted() {
-        this.createIcon(this.svgfile, this.color, this.size);
+        this.createIcon(this.svgfile, this.colorData, this.sizeData);
     },
     methods: {
         createIcon(svgfile, color, size, callback) {
+            if(!svgfile)
+                return null;
             var parent =document.getElementById(this.id);
             if (!parent) {
                 return null;
