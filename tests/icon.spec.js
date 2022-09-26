@@ -9,12 +9,12 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('Button.vue', () => {
     let wrapper;
-    let id="1";
-    let svgfile="file://"+filename+"\\../icons/owner-icon.svg" ;
-    let color="5";
-    let size="100";
-    let x="-2";
-    let y="-4";
+    const id="1";
+    const svgfile="file://"+filename+"\\../icons/owner-icon.svg" ;
+    const color="5";
+    const size="100";
+    const x="-2";
+    const y="-4";
     beforeEach(() => {
         // HACK: Create parent in document since it's not created during mount
         let parent = document.createElement("div");
@@ -60,19 +60,16 @@ describe('Button.vue', () => {
     });
 
     it('renders icon with default color, position and size data when passed', async () => {
-        color= "";
-        size= "";
-        x= "";
-        y= "";
+        var colorProp, sizeProp, xProp, yProp;
 
         wrapper = mount(Icon, {
             props: { 
                 id: id,
                 svgfile: svgfile,
-                color: color,
-                size: size,
-                x: x,
-                y: y
+                color: colorProp,
+                size: sizeProp,
+                x: xProp,
+                y: yProp
             },
         })
 
@@ -84,12 +81,12 @@ describe('Button.vue', () => {
     });
 
     it('should not render icon if svgfile data is empty when passed', async () => {
-        svgfile= "";
+        var svgfileProp;
 
         wrapper = mount(Icon, {
             props: { 
                 id: id,
-                svgfile: svgfile,
+                svgfile: svgfileProp,
                 color: color,
                 size: size,
                 x: x,
