@@ -31,13 +31,6 @@ const NativeIcon ={
             return this.idData ? this.idData : this._uid;
         }
     },
-    mounted: function() {
-        if (this.svg == null) return;
-        this._setColor(this, this.colorData);
-        if (this.size) {
-            this._setSize(this, this.size);
-        }
-    },
     updated: function() {
         this._setColor(this, this.colorData);
         if (this.size) {
