@@ -60,16 +60,10 @@ describe('Button.vue', () => {
     });
 
     it('renders icon with default color, position and size data when passed', async () => {
-        var colorProp, sizeProp, xProp, yProp;
-
         wrapper = mount(Icon, {
             props: { 
                 id: id,
                 svgfile: svgfile,
-                color: colorProp,
-                size: sizeProp,
-                x: xProp,
-                y: yProp
             },
         })
 
@@ -81,12 +75,9 @@ describe('Button.vue', () => {
     });
 
     it('should not render icon if svgfile data is empty when passed', async () => {
-        var svgfileProp;
-
         wrapper = mount(Icon, {
             props: { 
                 id: id,
-                svgfile: svgfileProp,
                 color: color,
                 size: size,
                 x: x,
