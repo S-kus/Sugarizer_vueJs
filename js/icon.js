@@ -61,12 +61,6 @@ const Icon ={
             this._element = svgElement;
             // Detection of error no symbol #icon is not possible due to closed ShadowDOM
             svgElement.appendChild(useElement);
-            // for new Icon Data
-            var child = parent.lastElementChild;
-            while (child) {
-                parent.removeChild(child);
-                child = parent.lastElementChild;
-            } 
             parent.appendChild(svgElement);
         }
     },
@@ -82,10 +76,6 @@ const Icon ={
         yData: function(newY, oldX) {
             var element = this._element;
             element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");
-        }, 
-        iconData: function(newIcon, oldIcon) {
-            this.iconData= newIcon;
-            this.createIcon(this.iconData, this.color, this.sizeData);
         }
     },
 };
