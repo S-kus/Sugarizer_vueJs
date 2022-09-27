@@ -41,8 +41,9 @@ const app = Vue.createApp({
             this.$refs.icon4.yData=Math.floor(Math.random() * 100) + 1;
         },
         testFunction: function (event) {
-            console.log('test clicked');
-            this.$refs.buttonIcon1.isDisabled= "text changed"
+            // this.$refs.icon1.iconData= "icons/star.svg"
+            this.$refs.buttonIcon1.iconData="icons/owner-icon.svg"
+            // this.$refs.buttonIcon1.isDisabled= "text changed"
             this.$refs.buttonIcon1.textData= "text changed"
         }
     },

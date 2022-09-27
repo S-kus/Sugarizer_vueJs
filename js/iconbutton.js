@@ -2,6 +2,7 @@ const IconButton ={
     name: 'IconButton',
     template: `<div :class="this.isDisabled? 'web-activity-disable icon-button': 'icon-button'">
                 <button-icon v-if="this.iconData"
+                    :key="componentKey"
                     class="icon-button-icon"
                     :id=this.id
                     :svgfile=this.iconData 
@@ -30,6 +31,7 @@ const IconButton ={
             iconData: this.svgfile,
             textData: this.text,
             isDisabled: this.disabled,
+            componentKey: 0,
         }
     },
     watch: {
@@ -39,5 +41,9 @@ const IconButton ={
         isDisabled: function(newVal, oldVal) {
             this.isDisabled = newVal
         },
+        iconData: function(newIcon, oldIcon) {
+            this.iconData= newIcon
+            this.componentKey=! this.componentKey;
+        }
     },
 };
