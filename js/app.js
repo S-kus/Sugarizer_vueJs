@@ -42,6 +42,7 @@ const app = Vue.createApp({
         },
         testFunction: function (event) {
             console.log('test clicked');
+            this.$refs.buttonIcon1.isDisabled= "text changed"
             this.$refs.buttonIcon1.textData= "text changed"
         }
     },

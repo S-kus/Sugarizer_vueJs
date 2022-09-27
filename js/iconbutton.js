@@ -1,7 +1,7 @@
 const IconButton ={
     name: 'IconButton',
-    template: `<div :class="this.disabled? 'web-activity-disable icon-button': 'icon-button'">
-                <button-icon
+    template: `<div :class="this.isDisabled? 'web-activity-disable icon-button': 'icon-button'">
+                <button-icon v-if="this.iconData"
                     class="icon-button-icon"
                     :id=this.id
                     :svgfile=this.iconData 
@@ -12,7 +12,16 @@ const IconButton ={
                 ></button-icon>
                 <p class="icon-button-text">{{ this.textData }}</p>
             </div>`,
-	props: ['text','id','svgfile','color','size','x','y'],
+	props: {
+        text: String,
+        id: String,
+        svgfile: String,
+        color: String,
+        size: String,
+        x: String,
+        y: String,
+        disabled: Boolean
+    },
     components: {
         'button-icon': Icon, 
     },
@@ -20,12 +29,15 @@ const IconButton ={
         return {
             iconData: this.svgfile,
             textData: this.text,
-            disabled: false,
+            isDisabled: this.disabled,
         }
     },
     watch: {
         textData: function(newText, oldText) {
             this.textData = newText
-        }
+        },
+        isDisabled: function(newVal, oldVal) {
+            this.isDisabled = newVal
+        },
     },
 };

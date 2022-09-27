@@ -7,15 +7,16 @@ const Icon ={
             idData: this.id,
             disabled: false,
             isSugarNative : false,
+            sizeData: this.size? this.size: 55,
+            colorData: this.color? this.color: 512,
             iconData: this.svgfile,
-            colorData: this.color,
             xData: this.x ? this.x: 0,
             yData: this.y ? this.y: 0,
             _element: null
         }
     },
     mounted() {
-        this.createIcon(this.svgfile, this.color, this.size);
+        this.createIcon(this.svgfile, this.color, this.sizeData);
     },
     methods: {
         createIcon(svgfile, color, size, callback) {
