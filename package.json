@@ -23,7 +23,8 @@
 		"babel-jest": "^27.0.6",
 		"eslint": "^7.32.0",
 		"eslint-plugin-vue": "^8.0.3",
-		"jest": "^27.0.5"
+		"jest": "^27.0.5",
+		"canvas": "^2.10.1"
 	},
 	"eslintConfig": {
 		"root": true,
@@ -57,7 +58,8 @@
 		"not ie 11"
 	],
 	"jest":{
-		"testEnvironment": "jsdom"
+		"testEnvironment": "jsdom",
+		"testEnvironmentOptions": { "resources": "usable" }
 	}
 }
 
