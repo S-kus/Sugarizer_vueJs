@@ -79,27 +79,7 @@ const Icon ={
                 var element = this._element;
                 element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");    
             }
-        }, 
-        gensvg: function(newVal) {
-            console.log(document.getElementById(this.genid))
-            console.log("changed")
-            const vm= this;
-            setTimeout(() => {
-                let icon= document.getElementById(vm.genid);
-                if (!icon) {
-                    return null;
-                }
-                let element = null;
-                for (let i = 0 ; i < icon.children.length && !element ; i++) {
-                    if (icon.children[i].tagName == "svg") {
-                        element = icon.children[i];
-                    }
-                }
-                this._element= element;
-                console.log(this._element)
-            }, 0);
-            console.log("after setTimeout")
-        },
+        }
     },
     methods: {
         createIcon(svgfile, color, size, callback) {
