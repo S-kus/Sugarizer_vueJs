@@ -6,7 +6,7 @@ const Icon ={
         return {
             svg: null,
             idData: this.id,
-            isSugarNative : true,
+            isSugarNative : false,
             iconData: this.svgfile,
             sizeData: this.size? this.size: 55,
             colorData: this.color? this.color: 512,
@@ -31,7 +31,6 @@ const Icon ={
     computed: {
         gensvg: function() {
             if (this.svg == null) return "";
-            console.log("working")
             return this._convertSVG(this.svg, this.genid);
         },
         genid: function() {

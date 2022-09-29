@@ -10,7 +10,6 @@ requirejs.config({
 const app = Vue.createApp({
     components: {
         "icon": Icon,
-        "native-icon": NativeIcon
     },
     data() {
         return {
@@ -20,17 +19,10 @@ const app = Vue.createApp({
     methods: {
         changeColor() {
             this.$refs.icon1.colorData=Math.floor(Math.random() * 179);
-            this.$refs.old1.colorData=Math.floor(Math.random() * 179);
-            // this.$refs.old2.colorData=Math.floor(Math.random() * 179);
         },
         changePosition() {
             this.$refs.icon1.xData=Math.floor(Math.random() * 100) + 1;
             this.$refs.icon1.yData=Math.floor(Math.random() * 100) + 1;
-
-            this.$refs.old1.xData=Math.floor(Math.random() * 100) + 1;
-            this.$refs.old1.yData=Math.floor(Math.random() * 100) + 1;
-
-            // this.$refs.old2.yData=Math.floor(Math.random() * 100) + 1;
         }
     },
 });
