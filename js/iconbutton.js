@@ -1,6 +1,6 @@
 const IconButton ={
     name: 'IconButton',
-    template: `<div :class="this.isDisabled? 'web-activity-disable icon-button': 'icon-button'">
+    template: `<div :class="this.disabledData? 'web-activity-disable icon-button': 'icon-button'">
                 <button-icon v-if="this.iconData"
                     :key="componentKey"
                     class="icon-button-icon"
@@ -30,7 +30,7 @@ const IconButton ={
         return {
             iconData: this.svgfile,
             textData: this.text,
-            isDisabled: this.disabled,
+            disabledData: this.disabled,
             componentKey: 0,
         }
     },
@@ -38,8 +38,8 @@ const IconButton ={
         textData: function(newText, oldText) {
             this.textData = newText
         },
-        isDisabled: function(newVal, oldVal) {
-            this.isDisabled = newVal
+        disabledData: function(newVal, oldVal) {
+            this.disabledData = newVal
         },
         iconData: function(newIcon, oldIcon) {
             this.iconData= newIcon
