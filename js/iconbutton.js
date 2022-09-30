@@ -47,3 +47,5 @@ const IconButton ={
         }
     },
 };
+
+if (typeof module !== 'undefined') module.exports = { IconButton }
