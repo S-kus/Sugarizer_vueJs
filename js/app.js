@@ -10,6 +10,7 @@ requirejs.config({
 const app = Vue.createApp({
     components: {
         "icon": Icon,
+        "search-field": SearchField
     },
     data() {
         return {
