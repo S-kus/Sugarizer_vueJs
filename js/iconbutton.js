@@ -2,8 +2,8 @@ const IconButton ={
     name: 'IconButton',
     template: `<div :class="this.disabledData? 'web-activity-disable icon-button': 'icon-button'">
                 <button-icon v-if="this.iconData"
-                    :key="componentKey"
                     class="icon-button-icon"
+                    :key="componentKey"
                     :id=this.id
                     :svgfile=this.iconData 
                     :color=this.color 
@@ -29,8 +29,8 @@ const IconButton ={
     data() {
         return {
             iconData: this.svgfile,
-            textData: this.text,
-            disabledData: this.disabled,
+            textData: this.text? this.text: '',
+            disabledData: this.disabled? this.disabled: false,
             componentKey: 0,
         }
     },

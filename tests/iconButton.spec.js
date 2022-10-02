@@ -1,5 +1,5 @@
 const { mount } = require('@vue/test-utils');
-const { Icon } = require('../js/icon.js');
+if (typeof Icon == 'undefined') Icon = require('../js/icon.js').Icon;
 const { IconButton } = require('../js/iconbutton.js');
 
 const path = require('path');
@@ -28,13 +28,12 @@ describe('IconButton.vue', () => {
                 size: size,
                 x: x,
                 y: y,
-                text: buttonText,
+                text: text,
                 disabled: disabled
             },
         })
     });
-    it('renders props when passed', async () => {
-        await delay(1000);
+    it('renders props when passed', () => {
         expect(wrapper.props('id')).toBe(id);
         expect(wrapper.props('svgfile')).toBe(svgfile);
         expect(wrapper.props('color')).toBe(color);
@@ -43,6 +42,38 @@ describe('IconButton.vue', () => {
         expect(wrapper.props('y')).toBe(y);
         expect(wrapper.props('text')).toBe(text);
         expect(wrapper.props('disabled')).toBe(disabled);
+    });
+    it('renders no icon without error if no iconData is given when passed', () => {
+        expect(wrapper.find('.icon').exists()).toBe(true);
 
+        wrapper = mount(IconButton, {
+            props: { 
+                id: id,
+                color: color,
+                size: size,
+                x: x,
+                y: y,
+                text: text,
+                disabled: disabled
+            },
+        })
+
+        expect(wrapper.find('icon').exists()).toBe(false);
+    });
+    it('updated textData when passed', async () => {
+        expect(wrapper.find('.icon-button-text').text()).toBe('buttonText');
+
+        await wrapper.setData({textData: 'buttonTextUpdated'});
+        expect(wrapper.find('.icon-button-text').text()).toBe('buttonTextUpdated');
+    });
+    it('disabled the button when passed', async () => {
+        expect(wrapper.find('.web-activity-disable').exists()).toBe(false);
+        await wrapper.setData({disabledData: 'true'});
+        expect(wrapper.find('.web-activity-disable').exists()).toBe(true);
+    });
+    it('updated iconData when passed', async () => {
+        expect(wrapper.findComponent(Icon).exists()).toBe(true)
+        await delay(1000);
+        // console.log(Icon)
     });
 })
