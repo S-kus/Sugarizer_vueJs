@@ -1,6 +1,6 @@
 const { mount } = require('@vue/test-utils');
+if (typeof axios == 'undefined') axios = require('axios');
 const { Icon } = require('../js/icon.js');
-const { axios } = require('axios')
 
 const path = require('path');
 const filename = path.dirname(__filename);
