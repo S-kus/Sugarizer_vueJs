@@ -6,7 +6,7 @@ const Icon ={
         return {
             svg: null,
             idData: this.id,
-            isSugarNative : false,
+            isSugarNative : true,
             iconData: this.svgfile,
             sizeData: this.size? this.size: 55,
             colorData: this.color? this.color: 512,
