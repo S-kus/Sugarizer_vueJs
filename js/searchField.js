@@ -5,10 +5,9 @@ const SearchField ={
             <div class="search-field-iconsearch"></div>
             <input 
                 class="search-field-input" id="text"
-                type="text" v-model="input" 
+                type="text" v-model="searchQuery" 
                 :placeholder="this.placeholderData" 
                 @focus="onFocus" @blur="onBlur"
-                v-model="searchQuery"
             />
             <button-icon v-if="showCancel"
                 class="search-field-iconcancel"
@@ -17,21 +16,29 @@ const SearchField ={
             ></button-icon>
         </div>
     `,
-    props: ['placeholder', 'icons'],
+    props: ['placeholder'],
     components: {
         'button-icon': Icon, 
     },
     data() {
         return {
             placeholderData: this.placeholder? this.placeholder: '',
-            showCancel: true,
-            iconData: "icons/entry-cancel.svg"
+            showCancel: false,
+            iconData: "icons/entry-cancel.svg",
+            searchQuery: ''
         }
     },
     watch: {
         placeholderData: function(newData, oldData) {
             this.placeholderData= newData
         }, 
+        searchQuery: function(value) {
+            this.$emit('input-changed',value)
+            if(value.length>0)
+                this.showCancel= true
+            else
+                this.showCancel= false
+        }
     },
     methods: {
         onFocus() {
@@ -45,7 +52,7 @@ const SearchField ={
             element.classList.add("search-field-border-nofocus");
         },
         cancelClicked() {
-            console.log("cancelClicked")
+            this.searchQuery=''
         }
     }
 };
