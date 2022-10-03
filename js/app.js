@@ -10,6 +10,7 @@ requirejs.config({
 const app = Vue.createApp({
     components: {
         "icon": Icon,
+        "icon-button": IconButton,
         "search-field": SearchField
     },
     data() {
@@ -45,6 +46,12 @@ const app = Vue.createApp({
         changePosition() {
             this.$refs.icon1.xData=Math.floor(Math.random() * 100) + 1;
             this.$refs.icon1.yData=Math.floor(Math.random() * 100) + 1;
+        },
+        testFunction: function (event) {
+            // this.$refs.icon1.iconData= "icons/star.svg"
+            this.$refs.buttonIcon1.iconData="icons/owner-icon.svg"
+            // this.$refs.buttonIcon1.disabledData= "text changed"
+            this.$refs.buttonIcon1.textData= "text changed"
         },
         searchFunction(searchInput) {
             this.filterProducts = this.products.filter((product) => {

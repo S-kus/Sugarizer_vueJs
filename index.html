@@ -38,11 +38,20 @@
             
 		<icon ref="icon1"
 			id="1"
-			svgfile="icons/old-owner.svg" 
+			svgfile="icons/owner-icon.svg" 
 			color="8"
 			size="120"
 			x="-2"
 		></icon>
+		<icon-button ref="buttonIcon1"
+			text="hello"
+			id="2"
+			svgfile="icons/abcd.svg" 
+			size="28"
+			color="256"
+			v-on:click="testFunction"
+			v-bind:disabled=false
+		></icon-button>
 		<search-field 
 			placeholder="search in home"
 			v-on:input-changed="searchFunction($event)"
@@ -55,6 +64,7 @@
     </div>
 
 	<script src="js/icon.js"></script>
+	<script src="js/iconbutton.js"></script>
 	<script src="js/searchField.js"></script>
 	<script src="js/app.js"></script>
   </body>

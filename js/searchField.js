@@ -11,6 +11,7 @@ const SearchField ={
             />
             <button-icon v-if="showCancel"
                 class="search-field-iconcancel"
+                id="search-entry-cancelSvg"
                 :svgfile=this.iconData 
                 v-on:click="cancelClicked"
             ></button-icon>

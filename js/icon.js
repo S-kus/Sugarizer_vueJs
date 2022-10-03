@@ -1,12 +1,15 @@
 const Icon ={
     name: 'Icon',
-    template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
+    template: `<div :class="this.disabled? 'web-activity-disable icon' : 'icon'" 
+                    v-html="gensvg" :id="this.idData"
+                ></div>`,
 	props: ['id','svgfile','color','size','x','y'],
     data() {
         return {
             svg: null,
             idData: this.id,
-            isSugarNative : true,
+            disabled: false,
+            isSugarNative : false,
             iconData: this.svgfile,
             sizeData: this.size? this.size: 55,
             colorData: this.color? this.color: 512,
