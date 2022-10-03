@@ -91,4 +91,4 @@ describe('Icon.vue', () => {
     });
 })
 
-// needed to add testing for isSugarNative == true
+// TODO: add tests for isSugarNative == true

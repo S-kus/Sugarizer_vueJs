@@ -23,4 +23,6 @@ describe('SearchField.vue', () => {
     it('renders props when passed', () => {
         expect(wrapper.props('placeholder')).toBe(placeholder);
     });
+    
+    // TODO: tests
 })

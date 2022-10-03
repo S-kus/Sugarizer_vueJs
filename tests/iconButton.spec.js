@@ -76,14 +76,14 @@ describe('IconButton.vue', () => {
         expect(wrapper.find('.web-activity-disable').exists()).toBe(true);
     });
 
-    // need to test if testFunction is triggered once button is clicked
+    // TODO: test if testFunction is triggered once button is clicked
 
     // it("text changed is called when button is clicked", async () => {
     //     await wrapper.find('.icon-button').trigger('click')
     //     expect(wrapper.find('.icon-button-text').text()).toBe('text changed');
     // });
 
-    // need to test if Icon is changed inside icon component
+    // TODO: test if Icon is changed inside icon component
 
     // it('updated iconData when passed', async () => {
     //     expect(wrapper.findComponent(Icon).exists()).toBe(true)
