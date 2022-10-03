@@ -133,6 +133,7 @@ body {
 	width: 350px;
 	height: 35px;
 	display: inline-block;
+	position: relative;
 }
 
 .search-field-border-focus {
@@ -176,7 +177,7 @@ body {
 .search-field-input {
 	opacity: 1;
 	margin-left: 30px;
-	border: 0px;
+	border: 0px !important;
 	display: inline-block;
 	background-color: #e5e5e5;
 	width: 270px;
@@ -2250,7 +2251,7 @@ body {
 	}
 
 	.search-field-input {
-		width: 120px;
+		width: 120px !important;
 	}
 
 	.help-button {

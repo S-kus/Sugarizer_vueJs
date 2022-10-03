@@ -43,9 +43,19 @@
 			size="120"
 			x="-2"
 		></icon>
+		<search-field 
+			placeholder="search in home"
+			v-on:input-changed="searchFunction($event)"
+		></search-field>
+		<ul>
+			<li v-for="product in filterProducts" key="product.name">
+				Product Name : {{product.name}} - Price : {{product.price}} ({{product.category}})
+			</li>
+		</ul>
     </div>
 
 	<script src="js/icon.js"></script>
+	<script src="js/searchField.js"></script>
 	<script src="js/app.js"></script>
   </body>
 </html>
