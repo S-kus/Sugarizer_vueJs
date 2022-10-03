@@ -33,14 +33,6 @@ const SearchField ={
             this.placeholderData= newData
         }, 
     },
-    computed: {
-        vm: this,
-        searchResults: function(){
-            return this.IconArray.filter((icon) => {
-                return IconArray.name.match(this.search);
-            });
-        }
-    },
     methods: {
         onFocus() {
             var element = document.getElementById("searchField");
