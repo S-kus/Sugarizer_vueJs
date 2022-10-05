@@ -1,15 +1,12 @@
 const Icon ={
     name: 'Icon',
-    template: `<div :class="this.disabled? 'web-activity-disable icon' : 'icon'" 
-                    v-html="gensvg" :id="this.idData"
-                ></div>`,
-	props: ['id','svgfile','color','size','x','y'],
+    template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
+	props: ['id','svgfile','color','size','x','y','isNative'],
     data() {
         return {
             svg: null,
             idData: this.id,
-            disabled: false,
-            isSugarNative : false,
+            isSugarNative : this.isNative=="true"? true: false,
             iconData: this.svgfile,
             sizeData: this.size? this.size: 55,
             colorData: this.color? this.color: 512,
@@ -42,45 +39,35 @@ const Icon ={
     },
     updated: function() {
         if(this.isSugarNative) {
-            this._setColor(this, this.colorData);
-            if (this.size) {
-                this._setSize(this, this.size);
+            let vm=this, element = null;
+            let icon= document.getElementById(vm.genid);
+            if (!icon) {
+                return null;
+            }
+            for (let i = 0 ; i < icon.children.length && !element ; i++) {
+                if (icon.children[i].tagName == "svg") {
+                    element = icon.children[i];
+                }
+            }
+            vm._element=element;
+            vm._setColor(vm, vm.colorData);
+            if (vm.size) {
+                vm._setSize(vm, vm.size);
             }
         }
     },
     watch: {
         colorData: function(newColor, oldColor) {
-            if(this.isSugarNative) {
-                this._setColor(this, newColor);
-            } else {
-                var element = this._element;
-                element.setAttribute("class", "xo-color"+newColor);    
-            }
+            var element = this._element;
+            element.setAttribute("class", "xo-color"+newColor);
         }, 
         xData: function(newX, oldX) {
-            if(this.isSugarNative) {
-                const vm= this;
-                let element = vm._getSVGElement(document.getElementById(vm.genid));
-                if (element) {
-                    element.setAttribute("style", "margin: "+newX+"px "+vm.yData+"px");
-                }
-            } else {
-                var element = this._element;
-                element.setAttribute("style", "margin: "+newX+"px "+this.yData+"px");    
-            }
+            var element = this._element;
+            element.setAttribute("style", "margin: "+newX+"px "+this.yData+"px");
         }, 
         yData: function(newY, oldX) {
-            if(this.isSugarNative) {
-                const vm= this;
-                let element = vm._getSVGElement(document.getElementById(vm.genid));
-                // console.log(element)
-                if (element) {
-                    element.setAttribute("style", "margin: "+vm.xData+"px "+newY+"px");
-                }
-            } else {
-                var element = this._element;
-                element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");    
-            }
+            var element = this._element;
+            element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");
         }
     },
     methods: {
@@ -156,22 +143,10 @@ const Icon ={
             buf = buf.replace(/(<\/svg>)/g,'</symbol><use xlink:href="#icon'+id+'" href="#icon'+id+'"/>$1');
             return buf;
         },
-        // Get SVG element from an icon
-        _getSVGElement(icon) {
-            if (!icon) {
-                return null;
-            }
-            let element = null;
-            for (let i = 0 ; i < icon.children.length && !element ; i++) {
-                if (icon.children[i].tagName == "svg") {
-                    element = icon.children[i];
-                }
-            }
-            return element;
-        },
+
         // Change CSS color
         _setColor(vm, color) {
-            element = vm._getSVGElement(document.getElementById(vm.genid));
+            let element = vm._element;
             if (element) {
                 if (color > 179 && color != 256 && color != 512) {
                     color = color % 180;
@@ -181,7 +156,7 @@ const Icon ={
         },
         // Change CSS size
         _setSize(vm, size) {
-            let element = vm._getSVGElement(document.getElementById(vm.genid));
+            let element = vm._element;
             if (element) {
                 // Compute optimal viewBox size depending of previous width/height value and unity
                 let iwidth = element.getAttribute("width").replace("px","");
