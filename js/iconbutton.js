@@ -22,7 +22,8 @@ const IconButton ={
         size: String,
         x: String,
         y: String,
-        disabled: Boolean
+        disabled: Boolean,
+        clickFunction: { type: Function },
     },
     components: {
         'button-icon': Icon, 
@@ -49,7 +50,7 @@ const IconButton ={
     },
     methods: {
         buttonClicked() {
-            this.$emit('button-clicked')
+            this.clickFunction();
         }
     }
 };
