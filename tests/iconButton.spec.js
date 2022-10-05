@@ -83,11 +83,7 @@ describe('IconButton.vue', () => {
     //     expect(wrapper.find('.icon-button-text').text()).toBe('text changed');
     // });
 
-    // TODO: test if Icon is changed inside icon component
-
-    // it('updated iconData when passed', async () => {
-    //     expect(wrapper.findComponent(Icon).exists()).toBe(true)
-    //     await delay(1000);
-    //     console.log(Icon)
-    // });
+    it('Icon component rendered correctly when passed', () => {
+        expect(wrapper.findComponent(Icon).exists()).toBe(true)
+    });
 })
