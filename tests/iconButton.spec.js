@@ -76,14 +76,14 @@ describe('IconButton.vue', () => {
         expect(wrapper.find('.web-activity-disable').exists()).toBe(true);
     });
 
-    // it("text changed is called when button is clicked", async () => {
-    //     await wrapper.find('.icon-button').trigger('click')
-    //     expect(wrapper.find('.icon-button-text').text()).toBe('text changed');
-    // });
-
-    it('updated iconData when passed', async () => {
-        expect(wrapper.findComponent(Icon).exists()).toBe(true)
-        await delay(1000);
-        // console.log(Icon)
+    it("text changed is called when button is clicked", async () => {
+        await wrapper.find('.icon-button').trigger('click');
+        expect(wrapper.emitted()).toHaveProperty('button-clicked')
     });
+
+    // it('updated iconData when passed', async () => {
+    //     expect(wrapper.findComponent(Icon).exists()).toBe(true)
+    //     await delay(1000);
+    //     // console.log(Icon)
+    // });
 })
