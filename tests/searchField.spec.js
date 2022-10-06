@@ -9,20 +9,20 @@ const filename = path.dirname(__filename);
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('SearchField.vue', () => {
-    let wrapper;
-    const placeholder="placeHolder for testing";
-    beforeEach(() => {
-        // Mount object
-        wrapper = mount(SearchField, {
-            props: { 
-                placeholder: placeholder
-            },
-        })
-    });
+	let wrapper;
+	const placeholder="placeHolder for testing";
+	beforeEach(() => {
+		// Mount object
+		wrapper = mount(SearchField, {
+			props: { 
+				placeholder: placeholder
+			},
+		})
+	});
 
-    it('renders props when passed', () => {
-        expect(wrapper.props('placeholder')).toBe(placeholder);
-    });
-    
-    // TODO: tests
+	it('renders props when passed', () => {
+		expect(wrapper.props('placeholder')).toBe(placeholder);
+	});
+	
+	// TODO: tests
 })
