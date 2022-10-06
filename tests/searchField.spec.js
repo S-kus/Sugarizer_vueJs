@@ -1,5 +1,4 @@
 const { mount } = require('@vue/test-utils');
-if (typeof Icon == 'undefined') Icon = require('../js/icon.js').Icon;
 const { SearchField } = require('../js/searchField.js');
 
 describe('SearchField.vue', () => {
@@ -65,15 +64,5 @@ describe('SearchField.vue', () => {
         expect(inputElement.element.value).toBe('');
 
         expect(wrapper.find('.search-field-iconcancel').exists()).toBe(false)
-    });
-
-    it('Icon component rendered correctly when passed',async () => {
-        expect(wrapper.findComponent(Icon).exists()).toBe(false)
-
-        const inputElement= wrapper.find('input');
-        inputElement.element.value = "input text";
-
-        await inputElement.trigger('input')
-        expect(wrapper.findComponent(Icon).exists()).toBe(true)
     });
 })

@@ -9,22 +9,17 @@ const SearchField ={
                 :placeholder="this.placeholderData" 
                 @focus="onFocus" @blur="onBlur"
             />
-            <button-icon v-if="showCancel"
+            <div v-if="showCancel"
                 class="search-field-iconcancel"
-                :svgfile=this.iconData 
                 v-on:click="cancelClicked"
-            ></button-icon>
+            ></div>
         </div>
     `,
     props: ['placeholder'],
-    components: {
-        'button-icon': Icon, 
-    },
     data() {
         return {
             placeholderData: this.placeholder? this.placeholder: '',
             showCancel: false,
-            iconData: "icons/entry-cancel.svg",
             searchQuery: ''
         }
     },
