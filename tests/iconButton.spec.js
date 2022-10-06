@@ -5,6 +5,9 @@ const { IconButton } = require('../js/iconbutton.js');
 const path = require('path');
 const filename = path.dirname(__filename);
 
+// Promise to wait a delay
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
+
 describe('IconButton.vue', () => {
 	let wrapper;
 	const id="1";
@@ -16,6 +19,11 @@ describe('IconButton.vue', () => {
 	const y="-4";
 	const disabled=false;
 	beforeEach(() => {
+		// HACK: Create parent in document since it's not created during mount
+		let parent = document.createElement("div");
+		parent.setAttribute("id", id);
+		document.lastElementChild.appendChild(parent);
+
 		// Mount object
 		wrapper = mount(IconButton, {
 			props: { 
@@ -82,7 +90,17 @@ describe('IconButton.vue', () => {
 		jest.restoreAllMocks()
 	});
 
-	it('Icon component rendered correctly when passed', () => {
-		expect(wrapper.findComponent(Icon).exists()).toBe(true)
+	it('changed icon of button when passed',async () => {
+		await delay(1000);
+		expect(wrapper.getComponent(Icon).exists()).toBe(true);
+		let useElement= wrapper.getComponent(Icon).vm._element.firstChild;
+		expect(useElement.getAttribute("href")).toBe(svgfile +'#icon');
+		
+		const newIcon="file://"+filename+"\\../icons/abcd.svg";
+		await wrapper.setData({iconData: newIcon});
+		await delay(1000);
+
+		useElement= wrapper.getComponent(Icon).vm._element.firstChild;
+		expect(useElement.getAttribute("href")).toBe(newIcon +'#icon');
 	});
 })
