@@ -1,6 +1,7 @@
 const IconButton ={
     name: 'IconButton',
-    template: `<div :class="this.disabledData? 'web-activity-disable icon-button': 'icon-button'">
+    template: `<div :class="this.disabledData? 'web-activity-disable icon-button': 'icon-button'"
+                v-on:click="this.buttonClicked">
                 <button-icon v-if="this.iconData"
                     class="icon-button-icon"
                     :key="componentKey"
@@ -21,7 +22,8 @@ const IconButton ={
         size: String,
         x: String,
         y: String,
-        disabled: Boolean
+        disabled: Boolean,
+        clickFunction: { type: Function },
     },
     components: {
         'button-icon': Icon, 
@@ -46,6 +48,11 @@ const IconButton ={
             this.componentKey=! this.componentKey;
         }
     },
+    methods: {
+        buttonClicked() {
+            this.clickFunction();
+        }
+    }
 };
 
 if (typeof module !== 'undefined') module.exports = { IconButton }

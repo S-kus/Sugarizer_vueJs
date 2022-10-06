@@ -5,9 +5,6 @@ const { IconButton } = require('../js/iconbutton.js');
 const path = require('path');
 const filename = path.dirname(__filename);
 
-// Promise to wait a delay
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
-
 describe('IconButton.vue', () => {
     let wrapper;
     const id="1";
@@ -29,7 +26,8 @@ describe('IconButton.vue', () => {
                 x: x,
                 y: y,
                 text: text,
-                disabled: disabled
+                disabled: disabled,
+                clickFunction: jest.fn()
             },
         })
     });
@@ -76,12 +74,13 @@ describe('IconButton.vue', () => {
         expect(wrapper.find('.web-activity-disable').exists()).toBe(true);
     });
 
-    // TODO: test if testFunction is triggered once button is clicked
-
-    // it("text changed is called when button is clicked", async () => {
-    //     await wrapper.find('.icon-button').trigger('click')
-    //     expect(wrapper.find('.icon-button-text').text()).toBe('text changed');
-    // });
+    it("clickFunction is called when button is clicked", () => {
+        const iconButton = wrapper.find('.icon-button')
+        const spy = jest.spyOn(wrapper.vm, 'clickFunction');
+        iconButton.trigger('click')
+        expect(spy).toHaveBeenCalled()
+        jest.restoreAllMocks()
+    });
 
     it('Icon component rendered correctly when passed', () => {
         expect(wrapper.findComponent(Icon).exists()).toBe(true)
