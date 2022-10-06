@@ -1,31 +1,25 @@
 const SearchField ={
 	name: 'SearchField',
 	template: `
-		<div id="searchField" class="search-field-border search-field-border-nofocus">
+		<div id="searchField" ref="searchField" class="search-field-border search-field-border-nofocus">
 			<div class="search-field-iconsearch"></div>
 			<input 
-				class="search-field-input" id="text"
-				type="text" v-model="searchQuery"
-				:placeholder="this.placeholderData"
+				class="search-field-input" id="text" ref="text"
+				type="text" v-model="searchQuery" 
+				:placeholder="this.placeholderData" 
 				@focus="onFocus" @blur="onBlur"
 			/>
-			<button-icon v-if="showCancel"
+			<div v-if="showCancel"
 				class="search-field-iconcancel"
-				id="search-entry-cancelSvg"
-				:svgfile=this.iconData
 				v-on:click="cancelClicked"
-			></button-icon>
+			></div>
 		</div>
 	`,
 	props: ['placeholder'],
-	components: {
-		'button-icon': Icon, 
-	},
 	data() {
 		return {
 			placeholderData: this.placeholder? this.placeholder: '',
 			showCancel: false,
-			iconData: "icons/entry-cancel.svg",
 			searchQuery: ''
 		}
 	},
@@ -34,7 +28,7 @@ const SearchField ={
 			this.placeholderData= newData
 		}, 
 		searchQuery: function(value) {
-			this.$emit('input-changed',value)
+			this.$emit('inputChanged',value)
 			if(value.length>0)
 				this.showCancel= true
 			else
@@ -43,12 +37,12 @@ const SearchField ={
 	},
 	methods: {
 		onFocus() {
-			var element = document.getElementById("searchField");
+			var element = this.$refs.searchField;
 			element.classList.remove("search-field-border-nofocus");
 			element.classList.add("search-field-border-focus");
 		},
 		onBlur() {
-			var element = document.getElementById("searchField");
+			var element = this.$refs.searchField;
 			element.classList.remove("search-field-border-focus");
 			element.classList.add("search-field-border-nofocus");
 		},
