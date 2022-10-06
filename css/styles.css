@@ -17,28 +17,14 @@ html, button {
 
 /* sugar-vue-Icon */
 
-.web-activity {
-	position: absolute;
-}
 
-.web-activity-icon {
-	background-repeat: no-repeat;
-	background-position: center;
-	padding: 2px;
-}
-
-.web-activity-icon:hover {
-	background-color: #d5d5d5;
-	border-radius: 5px;
-}
+/* sugar-vue-IconButton */
 
 .web-activity-disable {
 	color: black !important;
 	opacity: 0.5;
 	pointer-events: none;
 }
-
-/* sugar-vue-IconButton */
 
 .icon-button {
 	display: flex;
