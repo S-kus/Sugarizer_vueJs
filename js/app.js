@@ -50,6 +50,10 @@ const app = Vue.createApp({
 			this.$refs.icon2.xData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon2.yData=Math.floor(Math.random() * 100) + 1;
 		},
+		changeSize() {
+			this.$refs.icon1.sizeData=Math.floor(Math.random() * 80) + 20;
+			this.$refs.icon2.sizeData=Math.floor(Math.random() * 80) + 20;
+		},
 		testFunction: function (event) {
 			// this.$refs.icon1.iconData= "icons/star.svg"
 			this.$refs.buttonIcon1.iconData="icons/owner-icon.svg"
