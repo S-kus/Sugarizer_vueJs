@@ -49,7 +49,7 @@ describe('Icon.vue', () => {
 		expect(wrapper.vm._element.getAttribute("width")).toBe('100px');
 	});
 
-	it('changes color and position data when passed', async () => {
+	it('changes color, position and size data when passed', async () => {
 		// Mount object
 		wrapper = mount(Icon, {
 			props: { 
@@ -72,6 +72,10 @@ describe('Icon.vue', () => {
 
 		await wrapper.setData({xData: 100, yData: 200});
 		expect(wrapper.vm._element.getAttribute("style")).toBe('margin: 100px 200px');
+
+		await wrapper.setData({sizeData: 200});
+		expect(wrapper.vm._element.getAttribute("width")).toBe('200px');
+		expect(wrapper.vm._element.getAttribute("height")).toBe('200px');
 	});
 
 	it('renders icon with default color, position and size data when passed', async () => {

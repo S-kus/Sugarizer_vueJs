@@ -68,6 +68,11 @@ const Icon ={
 		yData: function(newY, oldX) {
 			var element = this._element;
 			element.setAttribute("style", "margin: "+this.xData+"px "+newY+"px");
+		},		
+		sizeData: function(newSize, oldSize) {
+			var element = this._element;
+			element.setAttribute("width", newSize+"px");
+			element.setAttribute("height", newSize+"px");
 		}
 	},
 	methods: {
