@@ -11,7 +11,8 @@ const app = Vue.createApp({
 	components: {
 		"icon": Icon,
 		"icon-button": IconButton,
-		"search-field": SearchField
+		"search-field": SearchField,
+		"popup": Popup
 	},
 	data() {
 		return {
@@ -29,6 +30,8 @@ const app = Vue.createApp({
 				{ name: "Highlighter", price: 5, category: 'Stationary'}
 			],
 			filterProducts: null,
+			showPopup: false,
+			popupId: null
 		}
 	},
 	mounted() {
@@ -40,6 +43,7 @@ const app = Vue.createApp({
 		}, 
 	},
 	methods: {
+		// Icon component
 		changeColor() {
 			this.$refs.icon1.colorData=Math.floor(Math.random() * 179);
 			this.$refs.icon2.colorData=Math.floor(Math.random() * 179);
@@ -54,16 +58,27 @@ const app = Vue.createApp({
 			this.$refs.icon1.sizeData=Math.floor(Math.random() * 80) + 20;
 			this.$refs.icon2.sizeData=Math.floor(Math.random() * 80) + 20;
 		},
+		// IconButton component
 		testFunction: function (event) {
 			// this.$refs.icon1.iconData= "icons/star.svg"
 			this.$refs.buttonIcon1.iconData="icons/owner-icon.svg"
 			// this.$refs.buttonIcon1.disabledData= "text changed"
 			this.$refs.buttonIcon1.textData= "text changed"
 		},
+		// SearchField component
 		searchFunction(searchInput) {
 			this.filterProducts = this.products.filter((product) => {
 				return product.name.toUpperCase().includes(searchInput.toUpperCase())
 			})
+		},
+		// Popup component
+		showPopupFunction(e) {
+			if(!this.popupId) this.popupId= e.target.id
+			this.showPopup= true
+		},
+		removePopupFunction(e) {
+			this.popupId= null
+			this.showPopup= false
 		}
 	},
 });
