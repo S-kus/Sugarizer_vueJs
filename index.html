@@ -35,7 +35,17 @@
 			v-on:mouseover="showPopupFunction($event)"
 			v-on:mouseleave="removePopupFunction($event)"
 		></icon>
-		<popup v-show="showPopup" v-bind:activity="popupId"></popup>
+		<icon ref="popupIcon"
+			id="5"
+			svgfile="icons/write.svg" 
+			color="95"
+			size="40"
+			y="10"
+			x="5"
+			v-on:mouseover="showPopupFunction($event)"
+			v-on:mouseleave="removePopupFunction($event)"
+		></icon>
+		<popup ref="popup" v-show="showPopup" v-bind:event="popupEvent"></popup>
 		<input type="button" value="Change Color" v-on:click="changeColor()"/>
 		<input type="button" value="Change Position" v-on:click="changePosition()"/>
 		<input type="button" value="Change Size" v-on:click="changeSize()"/>

@@ -31,7 +31,8 @@ const app = Vue.createApp({
 			],
 			filterProducts: null,
 			showPopup: false,
-			popupId: null
+			// popupId: null
+			popupEvent: null
 		}
 	},
 	mounted() {
@@ -73,12 +74,15 @@ const app = Vue.createApp({
 		},
 		// Popup component
 		showPopupFunction(e) {
-			if(!this.popupId) this.popupId= e.target.id
-			this.showPopup= true
+			if(!this.$refs.popup.timer) {
+				if(!this.popupEvent) this.popupEvent= e
+				this.showPopup= true
+			}
 		},
 		removePopupFunction(e) {
-			this.popupId= null
+			this.popupEvent= null
 			this.showPopup= false
+			this.$refs.popup.timer= false
 		}
 	},
 });
