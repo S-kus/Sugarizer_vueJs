@@ -123,6 +123,101 @@ html, button {
 	background-color: #808080;
 }
 
+/* sugar-vue-PopUp */
+
+.home-activity-popup {
+	position: absolute;
+	z-index: 1;
+}
+
+.homeview-filter-text {
+	position: relative;
+	width: 350px;
+	margin-top: 2px;
+}
+
+.popup-title {
+	display: flex;
+	background-color: black;
+	color: white;
+	border-color: #808080;
+	border-style: solid;
+	border-width: 2px;
+	z-index: 1;
+}
+
+.popup-name-text {
+	margin-left: 50px;
+	padding-top: 10px;
+	margin-right: 40px;
+	font-weight: bold;
+	min-height: 16px;
+	z-index: 1;
+}
+
+.popup-name-text-bottom {
+	padding-bottom: 10px;
+}
+
+.popup-title-text {
+	margin-left: 50px;
+	margin-top: 0px;
+	margin-right: 40px;
+	padding-bottom: 10px;
+}
+
+.popup-items {
+	background-color: black;
+	color: white;
+	border-color: #808080;
+	border-style: none solid solid solid;
+	border-width: 2px;
+	z-index: 1;
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.popup-footer :hover{
+	background-color: #808080;
+}
+
+.popup-new-text {
+	margin-left: 30px;
+	margin-top: 0px;
+	margin-right: 10px;
+	padding: 10px;
+}
+
+.popup-item-listview {
+	padding: 8px 0px 8px 0px;
+}
+
+.item-list-item {
+	display: flex;
+	height: 40px;
+	z-index: 1;
+}
+
+.item-list-item :hover{
+	background-color: #808080;
+}
+
+.item-name {
+	margin-left: 30px;
+	margin-top: 0px;
+	margin-right: 20px;
+	padding: 8px 5px 8px 5px;
+	z-index: 1;
+}
+
+.item-name-enable {
+	color: white;
+}
+
+.item-name-disable {
+	color: #4C4C4C;
+}
+
 /* Handle small screen resolution */
 @media screen and (max-width: 410px) {
 	.search-field-border {
