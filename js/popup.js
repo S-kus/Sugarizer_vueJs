@@ -1,15 +1,18 @@
 const Popup ={
 	name: 'Popup',
-	template: `<div>
-					<p v-if="this.eventData">Current Activity: {{this.activityId}}</p>
+	template: `<div v-if="this.itemData">
+				<p>{{this.xData}} {{this.yData}}</p>
+				<p>{{this.itemData.name}}</p>
 				</div>`,
-	props: ['event'],
+	props: ['item','x','y'],
+	components: {
+		'icon': Icon, 
+	},
 	data() {
 		return {
-			eventData: this.event? this.event: null,
-			activityId: this.event? this.event.target.id: null,
-			x: this.event? this.event.clientX: null,
-			y: this.event? this.event.clientY: null,
+			itemData: this.item? this.item: null,
+			xData: this.x? this.x: null,
+			yData: this.y? this.y: null,
 			timer: false
 		}
 	},
@@ -17,20 +20,15 @@ const Popup ={
 		
 	},
 	watch: {
-		event: function(newEvent, oldEvent){
+		item: function(newItem, oldItem){
 			if(!this.timer)
-				this.eventData= newEvent;
-			if(newEvent && !this.timer) {
+				this.itemData= newItem;
+			if(newItem && !this.timer) {
 				var vm=this;
+				console.log(newItem)
 				this.timer= true;
-				if(newEvent.target.tagName=='svg')
-					this.activityId= newEvent.target.parentElement.id
-				else if(newEvent.target.tagName=='use')
-					this.activityId= newEvent.target.parentElement.parentElement.id
-				else
-					this.activityId= newEvent.target.id;
-				this.x= newEvent.clientX;
-				this.y= newEvent.clientY;
+				this.xData= this.x;
+				this.yData= this.y;
 				setInterval(() => {
 					vm.timer= false;
 				}, 3000);

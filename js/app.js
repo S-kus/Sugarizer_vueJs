@@ -31,8 +31,17 @@ const app = Vue.createApp({
 			],
 			filterProducts: null,
 			showPopup: false,
-			// popupId: null
-			popupEvent: null
+			popupData: null,
+			popupX: null,
+			popupY: null,
+			popupDummyData: {
+				"4": {
+					name: "Keyboard", price: 44, category: 'Accessories'
+				},
+				"5": {
+					name: "MacBook Pro", price: 899, category: 'Laptop'
+				}
+			}
 		}
 	},
 	mounted() {
@@ -74,13 +83,25 @@ const app = Vue.createApp({
 		},
 		// Popup component
 		showPopupFunction(e) {
-			if(!this.$refs.popup.timer) {
-				if(!this.popupEvent) this.popupEvent= e
+			if(!this.$refs.popup.timer  && !this.popupEvent) {
+				var itemId;
+				if(e.target.tagName=='svg')
+					itemId= e.target.parentElement.id
+				else if(e.target.tagName=='use')
+					itemId= e.target.parentElement.parentElement.id
+				else
+					itemId= e.target.id;
+				var obj= JSON.parse(JSON.stringify(this.popupDummyData))
+				this.popupData= obj[itemId];
+				this.popupX= e.clientX;
+				this.popupY= e.clientY;
 				this.showPopup= true
 			}
 		},
 		removePopupFunction(e) {
-			this.popupEvent= null
+			this.popupData= null
+			this.popupX= null
+			this.popupY= null
 			this.showPopup= false
 			this.$refs.popup.timer= false
 		}
