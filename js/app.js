@@ -35,11 +35,31 @@ const app = Vue.createApp({
 			popupX: null,
 			popupY: null,
 			popupDummyData: {
-				"4": {
-					name: "Keyboard", price: 44, category: 'Accessories'
+				4: {
+					icon: { id: "6", iconData: "icons/star.svg", color: "65", size: "10" },
+					name: "Star",
+					title: "Star Activity",
+					itemList: [
+						{ icon: { id: "7", iconData: "icons/star.svg", color: "65", size: "10" }, name: "item1" },
+						{ icon: { id: "8", iconData: "icons/star.svg", color: "65", size: "10" }, name: "item2" }
+					],
+					footerList: [
+						{ icon: { id: "9", iconData: "icons/star.svg", color: "65", size: "10" }, name: "footer1" },
+						{ icon: { id: "10", iconData: "icons/star.svg", color: "65", size: "10" }, name: "footer2" }
+					],
 				},
-				"5": {
-					name: "MacBook Pro", price: 899, category: 'Laptop'
+				5: {
+					icon: { id: "11", iconData: "icons/write.svg", color: "95", size: "10"},
+					name: "Write",
+					title: "Write Activity",
+					itemList: [
+						{ icon: { id: "12", iconData: "icons/write.svg", color: "95", size: "10" }, name: "item1" },
+						{ icon: { id: "13", iconData: "icons/star.svg", color: "95", size: "10" }, name: "item2" }
+					],
+					footerList: [
+						{ icon: { id: "14", iconData: "icons/write.svg", color: "95", size: "10" }, name: "footer1" },
+						{ icon: { id: "15", iconData: "icons/write.svg", color: "95", size: "10" }, name: "footer2" }
+					],
 				}
 			}
 		}
