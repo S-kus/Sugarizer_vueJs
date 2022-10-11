@@ -2,7 +2,8 @@ const Popup ={
 	name: 'Popup',
 	template: ` <div class="home-activity-popup" v-if="this.itemData">
 					<div class="popup-title">
-						<icon
+						<icon 
+							class="item-icon"
 							:id=itemData.icon.id
 							:svgfile=itemData.icon.iconData
 							:color=itemData.icon.color
@@ -68,7 +69,6 @@ const Popup ={
 				this.itemData= newItem;
 			if(newItem && !this.timer) {
 				var vm=this;
-				console.log(newItem)
 				this.timer= true;
 				this.xData= this.x;
 				this.yData= this.y;
@@ -77,6 +77,15 @@ const Popup ={
 				}, 3000);
 			}
 		}
+	},
+	updated: function() {
+		var ele= document.querySelector('.home-activity-popup')
+		// console.log(screen.width)
+		if(ele) 
+			ele.setAttribute("style", "left: "+this.xData+"px; top: "+this.yData+"px;");
+	},
+	methods: {
+		
 	}
 };
 
