@@ -60,14 +60,11 @@ const Popup ={
 			timer: false
 		}
 	},
-	mounted() {
-		
-	},
 	watch: {
 		item: function(newItem, oldItem){
 			if(!this.timer)
 				this.itemData= newItem;
-			if(newItem && !this.timer) {
+			if(newItem && !this.timer && newItem!=oldItem) {
 				var vm=this;
 				this.timer= true;
 				this.xData= this.x;
@@ -80,12 +77,8 @@ const Popup ={
 	},
 	updated: function() {
 		var ele= document.querySelector('.home-activity-popup')
-		// console.log(screen.width)
 		if(ele) 
 			ele.setAttribute("style", "left: "+this.xData+"px; top: "+this.yData+"px;");
-	},
-	methods: {
-		
 	}
 };
 

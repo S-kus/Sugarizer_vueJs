@@ -103,17 +103,27 @@ const app = Vue.createApp({
 		showPopupFunction(e) {
 			if(!this.$refs.popup.timer  && !this.popupEvent) {
 				var itemId;
-				if(e.target.tagName=='svg')
+				if(e.target.tagName=='svg') {
 					itemId= e.target.parentElement.id
-				else if(e.target.tagName=='use')
+					this.popupX= e.clientX-4;
+					this.popupY= e.clientY-4;
+				}
+				else if(e.target.tagName=='use') {
 					itemId= e.target.parentElement.parentElement.id
-				else
+					this.popupX= e.clientX;
+					this.popupY= e.clientY;
+				}
+				else {
 					itemId= e.target.id;
+					this.popupX= e.clientX-12;
+					this.popupY= e.clientY-12;
+				}
 				var obj= JSON.parse(JSON.stringify(this.popupDummyData))
 				this.popupData= obj[itemId];
-				this.popupX= e.clientX;
-				this.popupY= e.clientY;
-				this.showPopup= true
+				var vm= this;
+				setInterval(() => {
+					vm.showPopup= true;
+				}, 2000);
 			}
 		},
 		removePopupFunction(e) {
