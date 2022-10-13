@@ -57,7 +57,8 @@ const Popup ={
 			itemData: this.item? this.item: null,
 			xData: this.x? this.x: null,
 			yData: this.y? this.y: null,
-			timer: false
+			timer: false,
+			hide: true
 		}
 	},
 	watch: {
@@ -79,6 +80,9 @@ const Popup ={
 		var ele= document.querySelector('.home-activity-popup')
 		if(ele) 
 			ele.setAttribute("style", "left: "+this.xData+"px; top: "+this.yData+"px;");
+	},
+	methods: {
+
 	}
 };
 

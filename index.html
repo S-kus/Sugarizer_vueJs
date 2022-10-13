@@ -33,7 +33,7 @@
 			y="10"
 			x="5"
 			v-on:mouseover="showPopupFunction($event)"
-			v-on:mouseleave="removePopupFunction($event)"
+			v-on:mouseleave="removePopupFunction()"
 			style="width: fit-content;"
 		></icon>
 		<icon ref="popupIcon"
@@ -44,7 +44,7 @@
 			y="10"
 			x="5"
 			v-on:mouseover="showPopupFunction($event)"
-			v-on:mouseleave="removePopupFunction($event)"
+			v-on:mouseleave="removePopupFunction()"
 			style="width: fit-content;"
 		></icon>
 		<popup ref="popup" 
@@ -52,6 +52,8 @@
 			v-bind:item="popupData"
 			v-bind:x="popupX"
 			v-bind:y="popupY"
+			v-on:mouseover="showPopupFunction()"
+			v-on:mouseleave="removePopupFunction($event)"
 		></popup>
 		<input type="button" value="Change Color" v-on:click="changeColor()"/>
 		<input type="button" value="Change Position" v-on:click="changePosition()"/>

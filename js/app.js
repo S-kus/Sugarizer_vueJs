@@ -44,7 +44,7 @@ const app = Vue.createApp({
 						{ icon: { id: "8", iconData: "icons/star.svg", color: "65", size: "18" }, name: "item2" }
 					],
 					footerList: [
-						{ icon: { id: "9", iconData: "icons/star.svg", size: "18" }, name: "footer1" },
+						{ icon: { id: "9", iconData: "icons/star.svg", color: "1024", size: "18" }, name: "footer1" },
 					],
 				},
 				5: {
@@ -53,10 +53,10 @@ const app = Vue.createApp({
 					title: "Write Activity",
 					itemList: [
 						{ icon: { id: "12", iconData: "icons/write.svg", color: "95", size: "18" }, name: "item1" },
-						{ icon: { id: "13", iconData: "icons/star.svg", color: "95", size: "18" }, name: "item2" }
+						{ icon: { id: "13", iconData: "icons/write.svg", color: "95", size: "18" }, name: "item2" }
 					],
 					footerList: [
-						{ icon: { id: "14", iconData: "icons/write.svg", size: "18" }, name: "footer1" },
+						{ icon: { id: "14", iconData: "icons/write.svg", color: "1024", size: "18" }, name: "footer1" },
 					],
 				}
 			}
@@ -101,6 +101,10 @@ const app = Vue.createApp({
 		},
 		// Popup component
 		showPopupFunction(e) {
+			if(!e) {
+				this.$refs.popup.hide= false;
+				return;
+			}
 			if(!this.$refs.popup.timer  && !this.popupEvent) {
 				var itemId;
 				if(e.target.tagName=='svg') {
@@ -127,11 +131,13 @@ const app = Vue.createApp({
 			}
 		},
 		removePopupFunction(e) {
-			this.popupData= null
-			this.popupX= null
-			this.popupY= null
-			this.showPopup= false
-			this.$refs.popup.timer= false
+			if(this.$refs.popup.hide || e) {
+				this.popupData= null
+				this.popupX= null
+				this.popupY= null
+				this.showPopup= false
+				this.$refs.popup.timer= false
+			}
 		}
 	},
 });
