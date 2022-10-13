@@ -78,8 +78,14 @@ const Popup ={
 	},
 	updated: function() {
 		var ele= document.querySelector('.home-activity-popup')
-		if(ele) 
-			ele.setAttribute("style", "left: "+this.xData+"px; top: "+this.yData+"px;");
+		if(ele) {
+			var deltaX= this.xData + ele.clientWidth - window.innerWidth;
+			if (deltaX >= 1) {
+				ele.setAttribute("style", "left: "+(this.xData - deltaX)+"px; top: "+this.yData+"px;");
+			} else {
+				ele.setAttribute("style", "left: "+this.xData+"px; top: "+this.yData+"px;");
+			}
+		}
 	},
 	methods: {
 
