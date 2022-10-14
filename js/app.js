@@ -101,34 +101,28 @@ const app = Vue.createApp({
 		},
 		// Popup component
 		showPopupFunction(e) {
-			if(!e) {
-				this.$refs.popup.hide= false;
-				return;
+			this.showPopup= false
+			this.$refs.popup.cursorX= e.clientX;
+			this.$refs.popup.cursorY= e.clientY;
+			var itemId;
+			if(e.target.tagName=='svg') {
+				itemId= e.target.parentElement.id
+				this.popupX= e.clientX-4;
+				this.popupY= e.clientY-4;
 			}
-			if(!this.$refs.popup.timer  && !this.popupEvent) {
-				var itemId;
-				if(e.target.tagName=='svg') {
-					itemId= e.target.parentElement.id
-					this.popupX= e.clientX-4;
-					this.popupY= e.clientY-4;
-				}
-				else if(e.target.tagName=='use') {
-					itemId= e.target.parentElement.parentElement.id
-					this.popupX= e.clientX;
-					this.popupY= e.clientY;
-				}
-				else {
-					itemId= e.target.id;
-					this.popupX= e.clientX-12;
-					this.popupY= e.clientY-12;
-				}
-				var obj= JSON.parse(JSON.stringify(this.popupDummyData))
-				this.popupData= obj[itemId];
-				var vm= this;
-				setInterval(() => {
-					vm.showPopup= true;
-				}, 2000);
+			else if(e.target.tagName=='use') {
+				itemId= e.target.parentElement.parentElement.id
+				this.popupX= e.clientX;
+				this.popupY= e.clientY;
 			}
+			else {
+				itemId= e.target.id;
+				this.popupX= e.clientX-12;
+				this.popupY= e.clientY-12;
+			}
+			var obj= JSON.parse(JSON.stringify(this.popupDummyData))
+			this.popupData= obj[itemId];
+			this.showPopup= true;
 		},
 		removePopupFunction(e) {
 			if(this.$refs.popup.hide || e) {
@@ -136,7 +130,6 @@ const app = Vue.createApp({
 				this.popupX= null
 				this.popupY= null
 				this.showPopup= false
-				this.$refs.popup.timer= false
 			}
 		},
 		itemisClicked(item) {

@@ -1,3 +1,4 @@
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
 const Popup ={
 	name: 'Popup',
 	template: ` <div class="home-activity-popup" v-if="this.itemData">
@@ -64,24 +65,29 @@ const Popup ={
 			itemData: this.item? this.item: null,
 			xData: this.x? this.x: null,
 			yData: this.y? this.y: null,
-			timer: false,
-			hide: true
+			hide: true,
+			cursorX: null,
+			cursorY: null
 		}
 	},
 	watch: {
-		item: function(newItem, oldItem){
-			if(!this.timer)
-				this.itemData= newItem;
-			if(newItem && !this.timer && newItem!=oldItem) {
-				var vm=this;
-				this.timer= true;
-				this.xData= this.x;
-				this.yData= this.y;
-				setInterval(() => {
-					vm.timer= false;
-				}, 3000);
+		item: async function(newItem, oldItem){
+			if(newItem!=oldItem) {
+				await delay(1500);
 			}
-		}
+			this.itemData= newItem;
+			this.xData= this.x;
+			this.yData= this.y;
+		},
+		cursorX: function(newVal) {
+			this.cursorX= newVal
+		},
+		cursorY: function(newVal) {
+			this.cursorY= newVal
+		},
+		hide: function(newVal) {
+			this.hide= newVal
+		},
 	},
 	updated: function() {
 		var ele= document.querySelector('.home-activity-popup')
@@ -92,11 +98,31 @@ const Popup ={
 			} else {
 				ele.setAttribute("style", "left: "+this.xData+"px; top: "+this.yData+"px;");
 			}
+			if(this.isCursorIosition()) {
+				this.hide= false;
+			} else {
+				this.hide= true
+			}
 		}
 	},
 	methods: {
 		itemClicked(event) {
 			this.$emit('itemisClicked',event)
+		},
+		isCursorIosition() {
+			var ele= document.querySelector('.home-activity-popup')
+			if(ele) {
+				var popupXmin= this.xData;
+				var popupXmax= this.xData + ele.clientWidth;
+				var popupYmin= this.yData;
+				var popupYmax= this.yData + ele.clientHeight;
+				if(this.cursorX>= popupXmin && this.cursorX<=popupXmax && this.cursorY>=popupYmin && this.cursorY<=popupYmax)
+					return true;
+				else
+					return false;
+			} else {
+				return false;
+			}
 		}
 	}
 };
