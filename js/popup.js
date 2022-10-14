@@ -11,7 +11,7 @@ const Popup ={
 							:size=itemData.icon.size
 							:x=itemData.icon.iconx
 							:y=itemData.icon.icony
-							@click="itemClicked(itemData.name)"
+							@click="itemClicked(itemData.id+'_'+itemData.name)"
 						>
 						</icon>
 						<div>
@@ -23,7 +23,7 @@ const Popup ={
 						<div class="item-list">
 							<div class="item-list-item" 
 								v-for="ele in itemData.itemList" key="ele.index"
-								@click="itemClicked(itemData.name+'_'+ele.name)"
+								@click="itemClicked(itemData.id+'_'+ele.name)"
 							>
 								<icon class="item-icon"
 									:id=ele.icon.id
@@ -41,7 +41,7 @@ const Popup ={
 						<div class="item-list">
 							<div class="item-list-item" 
 								v-for="ele in itemData.footerList" key="ele.index"
-								@click="itemClicked(itemData.name+'_'+ele.name)"
+								@click="itemClicked(itemData.id+'_'+ele.name)"
 							>
 								<icon class="item-icon"
 									:id=ele.icon.id

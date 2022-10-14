@@ -36,6 +36,7 @@ const app = Vue.createApp({
 			popupY: null,
 			popupDummyData: {
 				4: {
+					id: "4",
 					icon: { id: "6", iconData: "icons/star.svg", color: "65", size: "25" },
 					name: "Star",
 					title: "Star Activity",
@@ -48,6 +49,7 @@ const app = Vue.createApp({
 					],
 				},
 				5: {
+					id: "5",
 					icon: { id: "11", iconData: "icons/write.svg", color: "95", size: "25"},
 					name: "Write",
 					title: "Write Activity",
