@@ -10,6 +10,7 @@ const Popup ={
 							:size=itemData.icon.size
 							:x=itemData.icon.iconx
 							:y=itemData.icon.icony
+							@click="itemClicked(itemData.name)"
 						>
 						</icon>
 						<div>
@@ -19,7 +20,10 @@ const Popup ={
 					</div>
 					<div id="items" class="popup-items" v-if="itemData.itemList">
 						<div class="item-list">
-							<div class="item-list-item" v-for="ele in itemData.itemList" key="ele.index">
+							<div class="item-list-item" 
+								v-for="ele in itemData.itemList" key="ele.index"
+								@click="itemClicked(itemData.name+'_'+ele.name)"
+							>
 								<icon class="item-icon"
 									:id=ele.icon.id
 									:svgfile=ele.icon.iconData
@@ -34,7 +38,10 @@ const Popup ={
 					</div>
 					<div id="footer" class="popup-items" v-if="itemData.footerList">
 						<div class="item-list">
-							<div class="item-list-item" v-for="ele in itemData.footerList" key="ele.index">
+							<div class="item-list-item" 
+								v-for="ele in itemData.footerList" key="ele.index"
+								@click="itemClicked(itemData.name+'_'+ele.name)"
+							>
 								<icon class="item-icon"
 									:id=ele.icon.id
 									:svgfile=ele.icon.iconData
@@ -88,7 +95,9 @@ const Popup ={
 		}
 	},
 	methods: {
-
+		itemClicked(event) {
+			this.$emit('itemisClicked',event)
+		}
 	}
 };
 

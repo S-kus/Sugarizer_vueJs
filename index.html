@@ -54,6 +54,7 @@
 			v-bind:y="popupY"
 			v-on:mouseover="showPopupFunction()"
 			v-on:mouseleave="removePopupFunction($event)"
+			v-on:itemis-clicked="itemisClicked($event)"
 		></popup>
 		<input type="button" value="Change Color" v-on:click="changeColor()"/>
 		<input type="button" value="Change Position" v-on:click="changePosition()"/>

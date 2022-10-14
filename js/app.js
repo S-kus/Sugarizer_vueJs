@@ -138,6 +138,9 @@ const app = Vue.createApp({
 				this.showPopup= false
 				this.$refs.popup.timer= false
 			}
+		},
+		itemisClicked(item) {
+			console.log(item);
 		}
 	},
 });
