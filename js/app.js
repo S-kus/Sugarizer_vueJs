@@ -103,9 +103,6 @@ const app = Vue.createApp({
 		},
 		// Popup component
 		showPopupFunction(e) {
-			this.showPopup= false
-			this.$refs.popup.cursorX= e.clientX;
-			this.$refs.popup.cursorY= e.clientY;
 			var itemId;
 			if(e.target.tagName=='svg') {
 				itemId= e.target.parentElement.id
@@ -127,12 +124,15 @@ const app = Vue.createApp({
 			this.showPopup= true;
 		},
 		removePopupFunction(e) {
-			if(this.$refs.popup.hide || e) {
+			if(!this.$refs.popup.show(e.clientX, e.clientY)){
+				console.log("outside")
 				this.popupData= null
 				this.popupX= null
 				this.popupY= null
 				this.showPopup= false
+				return
 			}
+			console.log("inside")
 		},
 		itemisClicked(item) {
 			console.log(item);

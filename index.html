@@ -33,7 +33,7 @@
 			y="10"
 			x="5"
 			v-on:mouseover="showPopupFunction($event)"
-			v-on:mouseleave="removePopupFunction()"
+			v-on:mouseleave="removePopupFunction($event)"
 			style="width: fit-content;"
 		></icon>
 		<icon ref="popupIcon"
@@ -44,7 +44,7 @@
 			y="10"
 			x="5"
 			v-on:mouseover="showPopupFunction($event)"
-			v-on:mouseleave="removePopupFunction()"
+			v-on:mouseleave="removePopupFunction($event)"
 			style="width: fit-content;"
 		></icon>
 		<popup ref="popup" 
