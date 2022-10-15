@@ -103,11 +103,6 @@ const Popup ={
 				var popupXmax= this.xData + ele.clientWidth;
 				var popupYmin= this.yData+15;
 				var popupYmax= this.yData + ele.clientHeight;
-				console.log("x= "+x+" y= "+y)
-				console.log(popupXmin)
-				console.log(popupXmax)
-				console.log(popupYmin)
-				console.log(popupYmax)
 				if((x>= popupXmin && x<=popupXmax && y>=popupYmin && y<=popupYmax))
 					return true;
 				else
