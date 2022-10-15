@@ -20,38 +20,42 @@ const Popup ={
 						</div>
 					</div>
 					<div id="items" class="popup-items" v-if="itemData.itemList">
-						<div class="item-list">
-							<div class="item-list-item" 
-								v-for="ele in itemData.itemList" key="ele.index"
-								@click="itemClicked(itemData.id+'_'+ele.name)"
-							>
-								<icon class="item-icon"
-									:id=ele.icon.id
-									:svgfile=ele.icon.iconData
-									:color=ele.icon.color
-									:size=ele.icon.size
-									:x=ele.icon.iconx
-									:y=ele.icon.icony
-								></icon>
-								<p class="item-name">{{ ele.name }}</p>
+						<div class="popup-item-listview">
+							<div class="item-list">
+								<div class="item-list-item" 
+									v-for="ele in itemData.itemList" key="ele.index"
+									@click="itemClicked(itemData.id+'_'+ele.name)"
+								>
+									<icon class="item-icon"
+										:id=ele.icon.id
+										:svgfile=ele.icon.iconData
+										:color=ele.icon.color
+										:size=ele.icon.size
+										:x=ele.icon.iconx
+										:y=ele.icon.icony
+									></icon>
+									<div class="item-name">{{ ele.name }}</div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div id="footer" class="popup-items" v-if="itemData.footerList">
-						<div class="item-list">
-							<div class="item-list-item" 
-								v-for="ele in itemData.footerList" key="ele.index"
-								@click="itemClicked(itemData.id+'_'+ele.name)"
-							>
-								<icon class="item-icon"
-									:id=ele.icon.id
-									:svgfile=ele.icon.iconData
-									:color=ele.icon.color
-									:size=ele.icon.size
-									:x=ele.icon.iconx
-									:y=ele.icon.icony
-								></icon>
-								<p class="item-name">{{ ele.name }}</p>
+						<div class="popup-item-listview">
+							<div class="item-list">
+								<div class="item-list-item" 
+									v-for="ele in itemData.footerList" key="ele.index"
+									@click="itemClicked(itemData.id+'_'+ele.name)"
+								>
+									<icon class="item-icon"
+										:id=ele.icon.id
+										:svgfile=ele.icon.iconData
+										:color=ele.icon.color
+										:size=ele.icon.size
+										:x=ele.icon.iconx
+										:y=ele.icon.icony
+									></icon>
+									<div class="item-name">{{ ele.name }}</div>
+								</div>
 							</div>
 						</div>
 					</div>

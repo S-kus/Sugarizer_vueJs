@@ -37,28 +37,28 @@ const app = Vue.createApp({
 			popupDummyData: {
 				4: {
 					id: "4",
-					icon: { id: "6", iconData: "icons/star.svg", color: "65", size: "25" },
+					icon: { id: "6", iconData: "icons/star.svg", color: "65", size: "30" },
 					name: "Star",
 					title: "Star Activity",
 					itemList: [
-						{ icon: { id: "7", iconData: "icons/star.svg", color: "65", size: "18" }, name: "item1" },
-						{ icon: { id: "8", iconData: "icons/star.svg", color: "65", size: "18" }, name: "item2" }
+						{ icon: { id: "7", iconData: "icons/star.svg", color: "65", size: "20" }, name: "item1" },
+						{ icon: { id: "8", iconData: "icons/star.svg", color: "65", size: "20" }, name: "item2" }
 					],
 					footerList: [
-						{ icon: { id: "9", iconData: "icons/star.svg", color: "1024", size: "18" }, name: "footer1" },
+						{ icon: { id: "9", iconData: "icons/star.svg", color: "1024", size: "20" }, name: "footer1" },
 					],
 				},
 				5: {
 					id: "5",
-					icon: { id: "11", iconData: "icons/write.svg", color: "95", size: "25"},
+					icon: { id: "11", iconData: "icons/write.svg", color: "95", size: "30"},
 					name: "Write",
 					title: "Write Activity",
 					itemList: [
-						{ icon: { id: "12", iconData: "icons/write.svg", color: "95", size: "18" }, name: "item1" },
-						{ icon: { id: "13", iconData: "icons/write.svg", color: "95", size: "18" }, name: "item2" }
+						{ icon: { id: "12", iconData: "icons/write.svg", color: "95", size: "20" }, name: "item1" },
+						{ icon: { id: "13", iconData: "icons/write.svg", color: "95", size: "20" }, name: "item2" }
 					],
 					footerList: [
-						{ icon: { id: "14", iconData: "icons/write.svg", color: "1024", size: "18" }, name: "footer1" },
+						{ icon: { id: "14", iconData: "icons/write.svg", color: "1024", size: "20" }, name: "footer1" },
 					],
 				}
 			}

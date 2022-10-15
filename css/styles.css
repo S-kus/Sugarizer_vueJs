@@ -127,7 +127,6 @@ html, button {
 
 .home-activity-popup {
 	position: absolute;
-	width: fit-content;
 	z-index: 1;
 }
 
@@ -142,15 +141,18 @@ html, button {
 }
 
 .popup-name-text {
-	margin: 2px 10px;
-	padding-top: 2px;
+	margin-left: 20px;
+	padding-top: 10px;
+	margin-right: 30px;
 	font-weight: bold;
 	min-height: 16px;
 	z-index: 1;
 }
 
 .popup-title-text {
-	margin: 0px 10px;
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-right: 30px;
 	padding-bottom: 10px;
 }
 
@@ -161,6 +163,7 @@ html, button {
 	border-style: none solid solid solid;
 	border-width: 2px;
 	z-index: 1;
+	max-height: 80vh;
 	overflow-y: auto;
 }
 
@@ -168,9 +171,13 @@ html, button {
 	background-color: #808080;
 }
 
+.popup-item-listview {
+	padding: 8px 0px 8px 0px;
+}
+
 .item-list-item {
 	display: flex;
-	height: 30px;
+	height: 40px;
 	z-index: 1;
 }
 
@@ -179,13 +186,17 @@ html, button {
 }
 
 .item-icon {
-	margin: 4px 4px;
+	margin: 2px;
+	padding: 8px;
 	align-self: center;
 }
 
 .item-name {
-	margin: 0px 10px;
-	padding: 8px 5px 8px 5px;
+	width: 100%;
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-right: 20px;
+	padding: 10px;
 	z-index: 1;
 }
 
