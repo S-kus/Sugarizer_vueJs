@@ -123,6 +123,33 @@ html, button {
 	background-color: #808080;
 }
 
+/* sugar-vue-SelectBox */
+
+.selectbox-border {
+	border-radius: 22px;
+	height: 35px;
+	display: inline-block;
+	background-color: #808080;
+	border: 2px solid #808080;
+}
+
+.selectbox-icon {
+}
+
+.selectbox-double {
+
+}
+.selectbox-text {
+	position: relative;
+	top: 8px;
+	margin-left: 36px;
+	margin-right: 8px;
+	height: 50px;
+	background-image: url(../icons/control-popup-arrow.svg);
+	background-repeat: no-repeat;
+	background-position: 95% 15%;
+}
+
 /* Handle small screen resolution */
 @media screen and (max-width: 410px) {
 	.search-field-border {
