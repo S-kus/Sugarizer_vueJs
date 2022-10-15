@@ -140,8 +140,14 @@ html, button {
 	z-index: 1;
 }
 
+.item-icon-title {
+	margin: 0px 4px;
+	padding: 8px;
+	align-self: center;
+}
+
 .popup-name-text {
-	margin-left: 20px;
+	margin-left: 2px;
 	padding-top: 10px;
 	margin-right: 30px;
 	font-weight: bold;
@@ -150,7 +156,7 @@ html, button {
 }
 
 .popup-title-text {
-	margin-left: 20px;
+	margin-left: 2px;
 	margin-top: 0px;
 	margin-right: 30px;
 	padding-bottom: 10px;
@@ -193,9 +199,8 @@ html, button {
 
 .item-name {
 	width: 100%;
-	margin-left: 10px;
 	margin-top: 0px;
-	margin-right: 20px;
+	margin-right: 10px;
 	padding: 10px;
 	z-index: 1;
 }

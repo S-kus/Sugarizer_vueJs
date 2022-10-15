@@ -125,14 +125,11 @@ const app = Vue.createApp({
 		},
 		removePopupFunction(e) {
 			if(!this.$refs.popup.show(e.clientX, e.clientY)){
-				console.log("outside")
 				this.popupData= null
 				this.popupX= null
 				this.popupY= null
 				this.showPopup= false
-				return
 			}
-			console.log("inside")
 		},
 		itemisClicked(item) {
 			console.log(item);

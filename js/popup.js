@@ -4,7 +4,7 @@ const Popup ={
 	template: ` <div class="home-activity-popup" v-if="this.itemData">
 					<div class="popup-title">
 						<icon 
-							class="item-icon"
+							class="item-icon-title"
 							:id=itemData.icon.id
 							:svgfile=itemData.icon.iconData
 							:color=itemData.icon.color
