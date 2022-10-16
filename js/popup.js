@@ -71,16 +71,6 @@ const Popup ={
 			isShown: false
 		}
 	},
-	watch: {
-		// item: async function(newItem, oldItem){
-		// 	if(newItem != oldItem) {
-		// 		await delay(1500);
-		// 		this.itemData= newItem;
-		// 		this.xData= this.x;
-		// 		this.yData= this.y;
-		// 	}
-		// }
-	},
 	updated: function() {
 		var ele= document.querySelector('.home-activity-popup')
 		if(ele) {
