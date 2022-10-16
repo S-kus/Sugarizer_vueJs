@@ -1,7 +1,7 @@
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 const Popup ={
 	name: 'Popup',
-	template: ` <div class="home-activity-popup" v-if="this.itemData">
+	template: ` <div class="home-activity-popup" v-if="this.itemData && this.isShown">
 					<div class="popup-title">
 						<icon 
 							class="item-icon-title"
@@ -60,26 +60,26 @@ const Popup ={
 						</div>
 					</div>
 				</div>`,
-	props: ['item','x','y'],
 	components: {
 		'icon': Icon, 
 	},
 	data() {
 		return {
-			itemData: this.item? this.item: null,
-			xData: this.x? this.x: null,
-			yData: this.y? this.y: null,
+			itemData: null,
+			xData: null,
+			yData: null,
+			isShown: false
 		}
 	},
 	watch: {
-		item: async function(newItem, oldItem){
-			if(newItem != oldItem) {
-				await delay(1500);
-				this.itemData= newItem;
-				this.xData= this.x;
-				this.yData= this.y;
-			}
-		}
+		// item: async function(newItem, oldItem){
+		// 	if(newItem != oldItem) {
+		// 		await delay(1500);
+		// 		this.itemData= newItem;
+		// 		this.xData= this.x;
+		// 		this.yData= this.y;
+		// 	}
+		// }
 	},
 	updated: function() {
 		var ele= document.querySelector('.home-activity-popup')
@@ -96,7 +96,29 @@ const Popup ={
 		itemClicked(event) {
 			this.$emit('itemisClicked',event)
 		},
-		show(x, y) {
+		async show(e, obj) {
+			if(this.isShown) return;
+			var itemId;
+			if(e.target.tagName=='svg') {
+				itemId= e.target.parentElement.id
+				this.xData= e.clientX-4;
+				this.yData= e.clientY-4;
+			}
+			else if(e.target.tagName=='use') {
+				itemId= e.target.parentElement.parentElement.id
+				this.xData= e.clientX;
+				this.yData= e.clientY;
+			}
+			else {
+				itemId= e.target.id;
+				this.xData= e.clientX-12;
+				this.yData= e.clientY-12;
+			}
+			this.itemData= obj[itemId];
+			await delay(1500);
+			this.isShown= true;
+		},
+		isCursorInside(x, y) {
 			var ele= document.querySelector('.home-activity-popup')
 			if(ele) {
 				var popupXmin= this.xData;
@@ -104,11 +126,17 @@ const Popup ={
 				var popupYmin= this.yData+15;
 				var popupYmax= this.yData + ele.clientHeight;
 				if((x>= popupXmin && x<=popupXmax && y>=popupYmin && y<=popupYmax))
-					return true;
+					return this.isShown=true;
 				else
-					return false;
+					return this.isShown=false;
 			} else 
-				return false;
+				return this.isShown=false;
+		},
+		hide() {
+			this.isShown= false;
+			this.itemData= null;
+			this.xData= null;
+			this.yData= null;
 		}
 	}
 };

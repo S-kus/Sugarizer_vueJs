@@ -48,10 +48,6 @@
 			style="width: fit-content;"
 		></icon>
 		<popup ref="popup" 
-			v-show="showPopup" 
-			v-bind:item="popupData"
-			v-bind:x="popupX"
-			v-bind:y="popupY"
 			v-on:mouseleave="removePopupFunction($event)"
 			v-on:itemis-clicked="itemisClicked($event)"
 		></popup>
