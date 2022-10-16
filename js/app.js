@@ -12,7 +12,8 @@ const app = Vue.createApp({
 		"icon": Icon,
 		"icon-button": IconButton,
 		"search-field": SearchField,
-		"popup": Popup
+		"popup": Popup,
+		"select-box": SelectBox
 	},
 	data() {
 		return {
@@ -58,6 +59,18 @@ const app = Vue.createApp({
 						{ icon: { id: "14", iconData: "icons/write.svg", color: "1024", size: "20" }, name: "footer1" },
 					],
 				}
+			},
+			selectBoxDummyData: {
+				id: "15",
+				icon: { id: "16", iconData: "icons/star.svg", color: "65", size: "20" },
+				name: "Star",
+				itemList: [
+					{ icon: { id: "17", iconData: "icons/owner-icon.svg", color: "65", size: "20" }, name: "item1" },
+					{ icon: { id: "18", iconData: "icons/abcd.svg", color: "65", size: "20" }, name: "item2" },
+					{ icon: { id: "19", iconData: "icons/write.svg", color: "65", size: "20" }, name: "item3" },
+					{ icon: { id: "20", iconData: "icons/star.svg", color: "65", size: "20" }, name: "item4" },
+					{ icon: { id: "21", iconData: "icons/abcd.svg", color: "65", size: "20" }, name: "item5" }
+				]
 			}
 		}
 	},
