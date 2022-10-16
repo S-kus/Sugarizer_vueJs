@@ -63,12 +63,18 @@ const Popup ={
 	components: {
 		'icon': Icon, 
 	},
+	props: ['item'],
 	data() {
 		return {
-			itemData: null,
+			itemData: this.item? this.item: null,
 			xData: null,
 			yData: null,
 			isShown: false
+		}
+	},
+	watch: {
+		item: async function(newItem, oldItem){
+			this.itemData= newItem;
 		}
 	},
 	updated: function() {
@@ -86,25 +92,10 @@ const Popup ={
 		itemClicked(event) {
 			this.$emit('itemisClicked',event)
 		},
-		async show(e, obj) {
+		async show(x, y) {
 			if(this.isShown) return;
-			var itemId;
-			if(e.target.tagName=='svg') {
-				itemId= e.target.parentElement.id
-				this.xData= e.clientX-4;
-				this.yData= e.clientY-4;
-			}
-			else if(e.target.tagName=='use') {
-				itemId= e.target.parentElement.parentElement.id
-				this.xData= e.clientX;
-				this.yData= e.clientY;
-			}
-			else {
-				itemId= e.target.id;
-				this.xData= e.clientX-12;
-				this.yData= e.clientY-12;
-			}
-			this.itemData= obj[itemId];
+			this.xData= x;
+			this.yData= y;
 			await delay(1500);
 			this.isShown= true;
 		},

@@ -30,10 +30,7 @@ const app = Vue.createApp({
 				{ name: "Highlighter", price: 5, category: 'Stationary'}
 			],
 			filterProducts: null,
-			showPopup: false,
 			popupData: null,
-			popupX: null,
-			popupY: null,
 			popupDummyData: {
 				4: {
 					id: "4",
@@ -103,8 +100,25 @@ const app = Vue.createApp({
 		},
 		// Popup component
 		showPopupFunction(e) {
+			var itemId, x, y;
+			if(e.target.tagName=='svg') {
+				itemId= e.target.parentElement.id
+				x= e.clientX-4;
+				y= e.clientY-4;
+			}
+			else if(e.target.tagName=='use') {
+				itemId= e.target.parentElement.parentElement.id
+				x= e.clientX;
+				y= e.clientY;
+			}
+			else {
+				itemId= e.target.id;
+				x= e.clientX-12;
+				y= e.clientY-12;
+			}
 			var obj= JSON.parse(JSON.stringify(this.popupDummyData))
-			this.$refs.popup.show(e,obj);
+			this.popupData= obj[itemId];
+			this.$refs.popup.show(x,y);
 		},
 		removePopupFunction(e) {
 			if(!this.$refs.popup.isCursorInside(e.clientX, e.clientY)){
