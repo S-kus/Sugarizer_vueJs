@@ -11,8 +11,6 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 describe('Popup.vue', () => {
 	let wrapper;
 	const id= 1;
-	const x= 100;
-	const y= 100;
 	const svgfile1="file://"+filename+"\\../icons/star.svg" ;
 	const svgfile2="file://"+filename+"\\../icons/write.svg" ;
 	const item1= {
@@ -50,36 +48,30 @@ describe('Popup.vue', () => {
 		// Mount object
 		wrapper = mount(Popup, {
 			props: { 
-				item: item1,
-				x: x,
-				y: y
+				item: item1
 			},
 		})
 	});
 
-	it('renders props when passed', async () => {
-		delay(2000);
-		expect(wrapper.props('x')).toBe(x);
-		expect(wrapper.props('y')).toBe(y);
+	it('renders props when passed', () => {
 		expect(wrapper.props('item')).toStrictEqual(item1);
 	});
 
 	it('update itemData when passed', async () => {
+		await wrapper.vm.show(100,100);
 		expect(wrapper.find('.popup-name-text').text()).toBe('Star');
 
 		wrapper = mount(Popup, {
 			props: { 
-				item: item2,
-				x: x,
-				y: y
+				item: item2
 			},
 		})
-		delay(2000);
+		await wrapper.vm.show(100,100);
 		expect(wrapper.find('.popup-name-text').text()).toBe('Write');
 	});
 
 	it('emits itemisClicked when items clicked with payload when passed', async () => {
-		delay(2000);
+		await wrapper.vm.show(100,100);
 		const item = wrapper.find('.item-icon-title')
 		item.trigger('click')
 		expect(wrapper.emitted('itemisClicked')).toBeTruthy()
@@ -97,5 +89,15 @@ describe('Popup.vue', () => {
 		const itemsName= wrapper.findAll('.item-name')
 		itemsName.at(1).trigger('click')
 		expect(wrapper.emitted('itemisClicked')[3]).toEqual(["4_item2"])
+	});
+
+	it('successfully show and hide the popup when passed', async () => {
+		expect(wrapper.find('.popup-name-text').exists()).toBe(false);
+
+		await wrapper.vm.show(100,100);
+		expect(wrapper.find('.popup-name-text').exists()).toBe(true);
+
+		await wrapper.vm.hide();
+		expect(wrapper.find('.popup-name-text').exists()).toBe(false);
 	});
 })
