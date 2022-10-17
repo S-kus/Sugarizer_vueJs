@@ -143,7 +143,8 @@ const app = Vue.createApp({
 		},
 		// SelectBox component
 		optionSelected(e) {
-			console.log(e+ " is Selected");
+			var obj= JSON.parse(JSON.stringify(e))
+			console.log(obj);
 		}
 	},
 });
