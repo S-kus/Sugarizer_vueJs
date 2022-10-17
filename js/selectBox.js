@@ -2,7 +2,7 @@ const SelectBox ={
 	name: 'SelectBox',
 	template: `
 		<div class="selectbox-border" v-if="optionsData">
-            <div v-on:click="showPopup($event)" v-if="this.selectedData">
+            <div class="selectbox-bar" v-on:click="showPopup($event)" v-if="this.selectedData">
                 <icon class="selectbox-icon"
                     :key="this.iconKey"
                     :id="'optionsData.id'+selectedData.icon.id"
@@ -13,6 +13,7 @@ const SelectBox ={
                     :y=selectedData.icon.icony
                 ></icon>
                 <div class="selectbox-text">{{ selectedData.name }}</div>
+                <div class="selectbox-arrow"></div>
             </div>
             <popup ref="selectboxPopup" 
                 class="selectbox-popup"
@@ -51,7 +52,9 @@ const SelectBox ={
     methods: {
         removePopup(e) {
             if(!this.$refs.selectboxPopup.isCursorInside(e.clientX, e.clientY)){
-				this.$refs.selectboxPopup.hide();
+                this.$refs.selectboxPopup.hide();
+                this.showselectBox= false;
+                this.popupKey= !this.popupKey;
 			}
         },
         async optionisSelected(str) {
@@ -79,9 +82,14 @@ const SelectBox ={
                 this.showselectBox= false;
                 return;
             }
+            var offsets = document.querySelector('.selectbox-border').getBoundingClientRect();
+            var top = offsets.top;
+            var left = offsets.left;
             var x, y;
-            x= e.clientX;
-            y= e.clientY;
+            y= top- 18;
+            x= left+ 8;
+            // x= e.clientX;
+            // y= e.clientY;
 			this.$refs.selectboxPopup.show(x,y);
             this.showselectBox= true;
         }
