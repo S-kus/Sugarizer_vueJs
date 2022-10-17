@@ -100,4 +100,6 @@ describe('Popup.vue', () => {
 		await wrapper.vm.hide();
 		expect(wrapper.find('.popup-name-text').exists()).toBe(false);
 	});
+
+	// TODO: More tests for popup
 })

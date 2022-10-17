@@ -66,4 +66,6 @@ describe('SelectBox.vue', () => {
 		})
 		expect(wrapper.find('.selectbox-text').text()).toBe('Write');
 	});
+
+	// TODO: More tests for selectBox
 })
