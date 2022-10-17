@@ -1,4 +1,3 @@
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
 const Popup ={
 	name: 'Popup',
 	template: ` <div class="home-activity-popup" v-if="this.itemData && this.isShown">
@@ -96,11 +95,10 @@ const Popup ={
 		itemClicked(event) {
 			this.$emit('itemisClicked',event)
 		},
-		async show(x, y) {
+		show(x, y) {
 			if(this.isShown) return;
 			this.xData= x;
 			this.yData= y;
-			await delay(1500);
 			this.isShown= true;
 		},
 		isCursorInside(x, y) {
