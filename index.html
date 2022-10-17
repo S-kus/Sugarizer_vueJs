@@ -25,6 +25,38 @@
 		<h2>Hello Sugarizer</h2>
 		<h3>{{ message }}</h3>
 
+		<select-box 
+			v-bind:options="selectBoxDummyData"
+			v-on:option-selected="optionSelected($event)" 
+		></select-box>
+
+		<icon ref="popupIcon"
+			id="4"
+			svgfile="icons/star.svg" 
+			color="65"
+			size="40"
+			y="10"
+			x="5"
+			v-on:mouseover="showPopupFunction($event)"
+			v-on:mouseleave="removePopupFunction($event)"
+			style="width: fit-content;"
+		></icon>
+		<icon ref="popupIcon"
+			id="5"
+			svgfile="icons/write.svg" 
+			color="95"
+			size="40"
+			y="10"
+			x="5"
+			v-on:mouseover="showPopupFunction($event)"
+			v-on:mouseleave="removePopupFunction($event)"
+			style="width: fit-content;"
+		></icon>
+		<popup ref="popup" 
+			v-bind:item="popupData"
+			v-on:mouseleave="removePopupFunction($event)"
+			v-on:itemis-clicked="itemisClicked($event)"
+		></popup>
 		<input type="button" value="Change Color" v-on:click="changeColor()"/>
 		<input type="button" value="Change Position" v-on:click="changePosition()"/>
 		<input type="button" value="Change Size" v-on:click="changeSize()"/>
@@ -67,6 +99,8 @@
 	<script src="js/icon.js"></script>
 	<script src="js/iconbutton.js"></script>
 	<script src="js/searchField.js"></script>
+	<script src="js/popup.js"></script>
+	<script src="js/selectBox.js"></script>
 	<script src="js/app.js"></script>
   </body>
 </html>
