@@ -4,6 +4,7 @@ const Popup ={
 	template: ` <div class="home-activity-popup" v-if="this.itemData && this.isShown">
 					<div class="popup-title" @click="itemClicked(itemData.id+'_'+itemData.name)">
 						<icon 
+							:key="iconKey"
 							class="item-icon-title"
 							:id=itemData.icon.id
 							:svgfile=itemData.icon.iconData
@@ -26,6 +27,7 @@ const Popup ={
 									@click="itemClicked(itemData.id+'_'+ele.name)"
 								>
 									<icon class="item-icon"
+										:key="iconKey"
 										:id=ele.icon.id
 										:svgfile=ele.icon.iconData
 										:color=ele.icon.color
@@ -46,6 +48,7 @@ const Popup ={
 									@click="itemClicked(itemData.id+'_'+ele.name)"
 								>
 									<icon class="item-icon"
+										:key="iconKey"
 										:id=ele.icon.id
 										:svgfile=ele.icon.iconData
 										:color=ele.icon.color
@@ -68,12 +71,14 @@ const Popup ={
 			itemData: this.item? this.item: null,
 			xData: null,
 			yData: null,
-			isShown: false
+			isShown: false,
+			iconKey: 0
 		}
 	},
 	watch: {
 		item: async function(newItem, oldItem){
 			this.itemData= newItem;
+			this.iconKey= !this.iconKey;
 		}
 	},
 	updated: function() {
@@ -106,11 +111,11 @@ const Popup ={
 				var popupYmin= this.yData+15;
 				var popupYmax= this.yData + ele.clientHeight;
 				if((x>= popupXmin && x<=popupXmax && y>=popupYmin && y<=popupYmax))
-					return this.isShown=true;
+					return true;
 				else
-					return this.isShown=false;
+					return false;
 			} else 
-				return this.isShown=false;
+				return false;
 		},
 		hide() {
 			this.isShown= false;
