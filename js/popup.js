@@ -2,7 +2,7 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 const Popup ={
 	name: 'Popup',
 	template: ` <div class="home-activity-popup" v-if="this.itemData && this.isShown">
-					<div class="popup-title">
+					<div class="popup-title" @click="itemClicked(itemData.id+'_'+itemData.name)">
 						<icon 
 							class="item-icon-title"
 							:id=itemData.icon.id
@@ -11,7 +11,6 @@ const Popup ={
 							:size=itemData.icon.size
 							:x=itemData.icon.iconx
 							:y=itemData.icon.icony
-							@click="itemClicked(itemData.id+'_'+itemData.name)"
 						>
 						</icon>
 						<div>
