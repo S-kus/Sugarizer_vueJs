@@ -88,8 +88,6 @@ const SelectBox ={
             var x, y;
             y= top- 18;
             x= left+ 8;
-            // x= e.clientX;
-            // y= e.clientY;
 			this.$refs.selectboxPopup.show(x,y);
             this.showselectBox= true;
         }
