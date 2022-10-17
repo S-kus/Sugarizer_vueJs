@@ -76,6 +76,7 @@ const SelectBox ={
 			this.showselectBox= false;
 			this.iconKey= !this.iconKey;
 			this.popupKey= !this.popupKey;
+			this.$emit('optionSelected',this.selectedData.name);
 		},
 		showPopup(e) {
 			if(this.showselectBox) {

@@ -140,6 +140,10 @@ const app = Vue.createApp({
 		},
 		itemisClicked(item) {
 			console.log(item);
+		},
+		// SelectBox component
+		optionSelected(e) {
+			console.log(e+ " is Selected");
 		}
 	},
 });

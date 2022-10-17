@@ -25,7 +25,10 @@
 		<h2>Hello Sugarizer</h2>
 		<h3>{{ message }}</h3>
 
-		<select-box v-bind:options="selectBoxDummyData"></select-box>
+		<select-box 
+			v-bind:options="selectBoxDummyData"
+			v-on:option-selected="optionSelected($event)" 
+		></select-box>
 
 		<icon ref="popupIcon"
 			id="4"
