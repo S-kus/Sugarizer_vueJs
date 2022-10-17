@@ -1,6 +1,6 @@
 const Popup ={
 	name: 'Popup',
-	template: ` <div class="home-activity-popup" v-if="this.itemData && this.isShown">
+	template: ` <div ref="homePopup" class="home-activity-popup" v-if="this.itemData && this.isShown">
 					<div class="popup-title" @click="itemClicked(itemData.id+'_'+itemData.name)">
 						<icon 
 							:key="iconKey"
@@ -81,7 +81,7 @@ const Popup ={
 		}
 	},
 	updated: function() {
-		var ele= document.querySelector('.home-activity-popup')
+		var ele= this.$refs.homePopup;
 		if(ele) {
 			var deltaX= this.xData + ele.clientWidth - window.innerWidth;
 			if (deltaX >= 1) {
@@ -102,7 +102,7 @@ const Popup ={
 			this.isShown= true;
 		},
 		isCursorInside(x, y) {
-			var ele= document.querySelector('.home-activity-popup')
+			var ele= this.$refs.homePopup;
 			if(ele) {
 				var popupXmin= this.xData;
 				var popupXmax= this.xData + ele.clientWidth;

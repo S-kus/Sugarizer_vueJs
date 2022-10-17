@@ -1,7 +1,7 @@
 const SelectBox ={
 	name: 'SelectBox',
 	template: `
-		<div class="selectbox-border" v-if="optionsData">
+		<div ref="selectBox" class="selectbox-border" v-if="optionsData">
 			<div class="selectbox-bar" v-on:click="showPopup($event)" v-if="this.selectedData">
 				<icon class="selectbox-icon"
 					:key="this.iconKey"
@@ -83,7 +83,7 @@ const SelectBox ={
 				this.showselectBox= false;
 				return;
 			}
-			var offsets = document.querySelector('.selectbox-border').getBoundingClientRect();
+			var offsets = this.$refs.selectBox.getBoundingClientRect();
 			var top = offsets.top;
 			var left = offsets.left;
 			var x, y;
