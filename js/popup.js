@@ -1,6 +1,8 @@
 const Popup ={
 	name: 'Popup',
-	template: ` <div ref="homePopup" class="home-activity-popup" v-if="this.itemData && this.isShown">
+	template: ` <div ref="homePopup" class="home-activity-popup" 
+					v-if="itemData && isShown && itemData.icon && itemData.name"
+				>
 					<div class="popup-title" @click="itemClicked(itemData.id+'_'+itemData.name)">
 						<icon 
 							:key="iconKey"

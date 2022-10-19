@@ -67,5 +67,30 @@ describe('SelectBox.vue', () => {
 		expect(wrapper.find('.selectbox-text').text()).toBe('Write');
 	});
 
-	// TODO: More tests for selectBox
+	it('emits message and updated select-Bar on optionSelected when passed', async () => {
+		expect(wrapper.find('.selectbox-text').text()).toBe('Star');
+
+		await wrapper.vm.optionisSelected("7_item2");
+		expect(wrapper.find('.selectbox-text').text()).toBe('item2');
+
+		expect(wrapper.emitted('optionSelected')).toBeTruthy();
+		expect(wrapper.emitted('optionSelected')[0]).toEqual([option1.itemList[1]]);
+	});
+
+	it('show and hide popUp when passed', async () => {
+		expect(wrapper.find('.selectbox-popup').exists()).toBe(false);
+
+		var selectBar= wrapper.find('.selectbox-bar');
+		await selectBar.trigger('click');
+		expect(wrapper.find('.selectbox-popup').exists()).toBe(true);
+
+		await wrapper.vm.optionisSelected("7_item2");
+		expect(wrapper.find('.selectbox-popup').exists()).toBe(false);
+
+		await selectBar.trigger('click');
+		expect(wrapper.find('.selectbox-popup').exists()).toBe(true);
+		await wrapper.find('.selectbox-popup').trigger('mouseleave');
+
+		expect(wrapper.find('.selectbox-popup').exists()).toBe(false);
+	});
 })
