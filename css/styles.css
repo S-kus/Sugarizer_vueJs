@@ -249,6 +249,103 @@ html, button {
 	background-repeat: no-repeat;
 	background-position: 95% 15%;
 }
+
+/* sugar-vue-Palette */
+
+.palette-demo {
+	background-color: #282828;
+}
+
+.palette-sugarizer {
+	margin-top: 0px;
+	height: 45px;
+	display: flex;
+	width: fit-content;
+	margin: 10px;
+	color: white
+}
+.palette-sugarizer:hover {
+	background-color: black;
+}
+
+.palette-icon {
+	margin: 2px;
+	margin-top: 12px !important;
+}
+
+.palette-down {
+	background-image: url('../icons/arrow-down.svg');
+	background-repeat: no-repeat;
+	background-position-y: bottom;
+	background-position-x: center;
+}
+
+.palette-up {
+	background-image: url('../icons/arrow-up.svg');
+	background-repeat: no-repeat;
+	background-position-y: bottom;
+	background-position-x: center;
+	background-color: black;
+	background-size: 47px;
+	border: 2px solid #808080;
+	border-bottom: 0;
+}
+
+.palette-text {
+	margin-top: 14px;
+	margin-left: 15px;
+	margin-right: 4px;
+}
+
+.palette-content {
+	position: absolute;
+	background-color: black;
+	max-width: 271px;
+	min-width: 161px;
+	min-height: 51px;
+	max-height: 80vh;
+	pointer-events: auto;
+	border: 2px solid #808080;
+	color: white;
+	overflow: auto;
+	z-index: 1;
+}
+
+.palette-header {
+	height: 40px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	line-height: 50px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+
+.palette-hr {
+	border: 1px solid #808080;
+	margin-top: 0;
+}
+
+.palette-items {
+	background-color: black;
+	color: white;
+	border-width: 2px;
+	z-index: 1;
+	max-height: 50vh;
+	overflow-y: auto;
+}
+
+.palette-items-item {
+	display: flex;
+	height: 35px;
+	margin: 3px 0px;
+}
+
+.palette-items-item:hover {
+	background-color: #808080;
+}
+
 /* Handle small screen resolution */
 @media screen and (max-width: 410px) {
 	.search-field-border {
