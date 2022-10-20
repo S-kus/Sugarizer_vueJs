@@ -18,6 +18,7 @@ const app = Vue.createApp({
 	data() {
 		return {
 			message: "Sugarizer in Vue",
+			// SearchField data
 			products: [
 				{ name: "Keyboard", price: 44, category: 'Accessories'},
 				{ name: "Mouse", price: 20, category: 'Accessories'},
@@ -31,6 +32,7 @@ const app = Vue.createApp({
 				{ name: "Highlighter", price: 5, category: 'Stationary'}
 			],
 			filterProducts: null,
+			// Popup data
 			popupData: null,
 			popupDummyData: {
 				4: {
@@ -60,6 +62,7 @@ const app = Vue.createApp({
 					],
 				}
 			},
+			// SelectBox data
 			selectBoxDummyData: {
 				id: "15",
 				icon: { id: "16", iconData: "icons/star.svg", color: "65", size: "20" },
