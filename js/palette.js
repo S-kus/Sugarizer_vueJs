@@ -20,7 +20,7 @@ const Palette ={
 					</div>
 					<div ref="palettePopup">
 						<div v-if="showSubpopup" class="palette-content">
-							<div class="palette-header">{{ optionsData.header }}</div>
+							<div v-if="optionsData.header" class="palette-header">{{ optionsData.header }}</div>
 							<div class="palette-hr"></div>
 							<div class="palette-items">
 								<div class="palette-items-item" 
@@ -55,8 +55,6 @@ const Palette ={
 				name: this.options? this.options.name: null,
 			},
 			showSubpopup: false,
-			xData: null,
-			yData: null,
 			iconKey: 0
 		}
 	},
@@ -66,8 +64,10 @@ const Palette ={
 			this.iconKey= !this.iconKey;
 		},
 		showPalette() {
-			this.showSubpopup= true;
-			this.iconKey= !this.iconKey;
+			if(this.optionsData.filterList && this.optionsData.filterList.length >0) {
+				this.showSubpopup= true;
+				this.iconKey= !this.iconKey;
+			}
 		},
 		optionisSelected(item) {
 			var data= JSON.parse(JSON.stringify(item))
@@ -76,7 +76,8 @@ const Palette ={
 				this.iconKey= !this.iconKey;
 			}
 			this.selectedData.name= data.name;
-			this.$emit('filterSelected', this.selectedData);
+			this.removePalette();
+			this.$emit('filterSelected', data);
 		},
 	}
 };
