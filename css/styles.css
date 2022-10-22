@@ -259,11 +259,15 @@ html, button {
 .palette-sugarizer {
 	margin-top: 0px;
 	height: 45px;
-	display: flex;
 	width: fit-content;
 	margin: 10px;
 	color: white
 }
+
+.paletteBox {
+	display: flex;
+}
+
 .palette-sugarizer:hover {
 	background-color: black;
 }
@@ -309,6 +313,8 @@ html, button {
 	color: white;
 	overflow: auto;
 	z-index: 1;
+	margin-top: 9px;
+	margin-left: -2px;
 }
 
 .palette-header {

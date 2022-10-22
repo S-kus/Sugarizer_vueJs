@@ -101,6 +101,7 @@ const app = Vue.createApp({
 					{ name: "item5" }
 				]
 			},
+			currentPaletteRef: null
 		}
 	},
 	mounted() {
@@ -176,8 +177,20 @@ const app = Vue.createApp({
 			console.log(obj);
 		},
 		// Palette component
-		paletteClicked(e) {
-			console.log(e)
+		paletteClicked(refData) {
+			if(!this.currentPaletteRef) {
+				this.$refs[refData].showPalette();
+				this.currentPaletteRef= refData;
+			}
+			else if(this.currentPaletteRef && this.currentPaletteRef ==refData) {
+				this.$refs[refData].removePalette();
+				this.currentPaletteRef= null;
+			}
+			else if(this.currentPaletteRef && this.currentPaletteRef!=refData) {
+				this.$refs[this.currentPaletteRef].removePalette();
+				this.currentPaletteRef= refData;
+				this.$refs[refData].showPalette();
+			}
 		}
 	},
 });
