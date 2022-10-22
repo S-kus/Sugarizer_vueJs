@@ -23,6 +23,7 @@ const Palette ={
 							<div class="palette-items">
 								<div class="palette-items-item" 
 									v-for="item in optionsData.filterList" key="item.index"
+									v-on:click=optionisSelected(item)
 								>
 									<icon class="palette-icon"
 										v-if="item.icon"
@@ -65,7 +66,16 @@ const Palette ={
 		showPalette() {
 			this.showSubpopup= true;
 			this.iconKey= !this.iconKey;
-		}
+		},
+		optionisSelected(item) {
+			var data= JSON.parse(JSON.stringify(item))
+			if(data.icon) {
+				this.selectedData.icon= data.icon;
+				this.iconKey= !this.iconKey;
+			}
+			this.selectedData.name= data.name;
+			this.$emit('filterSelected', this.selectedData);
+		},
 	}
 };
 

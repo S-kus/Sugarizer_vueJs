@@ -191,7 +191,11 @@ const app = Vue.createApp({
 				this.currentPaletteRef= refData;
 				this.$refs[refData].showPalette();
 			}
-		}
+		},
+		filterSelected(e) {
+			var obj= JSON.parse(JSON.stringify(e))
+			console.log(obj);
+		},
 	},
 });
 

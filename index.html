@@ -30,11 +30,13 @@
 				ref="palette1"
 				v-bind:options="Palette1Data"
 				v-on:click="paletteClicked('palette1')"
+				v-on:filter-selected="filterSelected($event)" 
 			></palette>
 			<palette 
 				ref="palette2"
 				v-bind:options="Palette2Data"
 				v-on:click="paletteClicked('palette2')"
+				v-on:filter-selected="filterSelected($event)" 
 			></palette>
 		</div>
 
