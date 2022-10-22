@@ -2,10 +2,12 @@ const Palette ={
 	name: 'Palette',
 	template: ` <div 
 					ref="palette"
+					v-if="optionsData && (optionsData.icon || optionsData.name)"
 					v-bind:class="showSubpopup? 'palette-sugarizer palette-up': 'palette-sugarizer palette-down'"
 				>
 					<div class="paletteBox">
 						<icon class="palette-icon"
+							v-if="selectedData.icon"
 							:key="this.iconKey"
 							:id="'optionsData.id'+selectedData.icon.id"
 							:svgfile=selectedData.icon.iconData
