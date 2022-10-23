@@ -27,15 +27,13 @@
 
 		<div class="palette-demo">
 			<palette 
-				ref="palette1"
+				ref="palette1" name="palette1"
 				v-bind:options="Palette1Data"
-				v-on:click="paletteClicked('palette1')"
 				v-on:filter-selected="filterSelected($event)" 
 			></palette>
 			<palette 
-				ref="palette2"
+				ref="palette2" name="palette2"
 				v-bind:options="Palette2Data"
-				v-on:click="paletteClicked('palette2')"
 				v-on:filter-selected="filterSelected($event)" 
 			></palette>
 		</div>

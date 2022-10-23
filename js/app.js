@@ -6,6 +6,9 @@ requirejs.config({
 	}
 });
 
+// Global Variables
+var currentPaletteRef= null;
+
 // Vue main app
 const app = Vue.createApp({
 	components: {
@@ -100,8 +103,7 @@ const app = Vue.createApp({
 					{ name: "item4" },
 					{ name: "item5" }
 				]
-			},
-			currentPaletteRef: null
+			}
 		}
 	},
 	mounted() {
@@ -177,21 +179,6 @@ const app = Vue.createApp({
 			console.log(obj);
 		},
 		// Palette component
-		paletteClicked(refData) {
-			if(!this.currentPaletteRef) {
-				this.$refs[refData].showPalette();
-				this.currentPaletteRef= refData;
-			}
-			else if(this.currentPaletteRef && this.currentPaletteRef ==refData) {
-				this.$refs[refData].removePalette();
-				this.currentPaletteRef= null;
-			}
-			else if(this.currentPaletteRef && this.currentPaletteRef!=refData) {
-				this.$refs[this.currentPaletteRef].removePalette();
-				this.currentPaletteRef= refData;
-				this.$refs[refData].showPalette();
-			}
-		},
 		filterSelected(e) {
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);

@@ -1,9 +1,9 @@
 const Palette ={
 	name: 'Palette',
 	template: ` <div 
-					ref="palette"
 					v-if="optionsData && (optionsData.icon || optionsData.name)"
 					v-bind:class="showSubpopup? 'palette-sugarizer palette-up': 'palette-sugarizer palette-down'"
+					v-on:click="showPalette($el)"
 				>
 					<div class="paletteBox">
 						<icon class="palette-icon"
@@ -63,10 +63,21 @@ const Palette ={
 			this.showSubpopup= false;
 			this.iconKey= !this.iconKey;
 		},
-		showPalette() {
+		showPalette(e) {
+			const currRef= e.getAttribute('name');
+			if(currentPaletteRef && currentPaletteRef ==currRef) {
+				this.removePalette();
+				currentPaletteRef= null;
+				return;
+			}
+			if(currentPaletteRef && currentPaletteRef!=currRef) {
+				this.$root.$refs[currentPaletteRef].removePalette();
+				currentPaletteRef= null;
+			}
 			if(this.optionsData.filterList && this.optionsData.filterList.length >0) {
 				this.showSubpopup= true;
 				this.iconKey= !this.iconKey;
+				currentPaletteRef= currRef;
 			}
 		},
 		optionisSelected(item) {
