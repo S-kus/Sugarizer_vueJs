@@ -71,7 +71,8 @@ describe('Palette.vue', () => {
 	it('emits message, updated paletteBox and close subPopup on selecting option when passed', async () => {
 		expect(wrapper.find('.palette-text').text()).toBe('abcd');
 
-		await wrapper.vm.showPalette();
+		await wrapper.find('.palette-sugarizer').trigger('click');
+		expect(wrapper.find('.palette-content').exists()).toBe(true);
 		const items= wrapper.findAll('.palette-items-item')
 		expect(wrapper.findAll('.palette-items-item').length).toBe(5)
 
@@ -80,31 +81,21 @@ describe('Palette.vue', () => {
 		expect(wrapper.emitted('filterSelected')[0]).toEqual([option1.filterList[1]])
 
 		expect(wrapper.find('.palette-text').text()).toBe(option1.filterList[1].name);
-		expect(wrapper.findAll('.palette-items-item').length).toBe(0)
-	});
-
-	it('show and hide subPopup when passed', async () => {
-		expect(wrapper.find('.palette-content').exists()).toBe(false);
-
-		await wrapper.vm.showPalette();
-		expect(wrapper.find('.palette-content').exists()).toBe(true);
-
-		await wrapper.vm.removePalette();
 		expect(wrapper.find('.palette-content').exists()).toBe(false);
 	});
 
-	it('show and hide subPopup when passed', async () => {
+	it('show and hide subPopup on clicking the paletteBox when passed', async () => {
 		expect(wrapper.find('.palette-content').exists()).toBe(false);
 
-		await wrapper.vm.showPalette();
+		await wrapper.find('.palette-sugarizer').trigger('click');
 		expect(wrapper.find('.palette-content').exists()).toBe(true);
 
-		await wrapper.vm.removePalette();
+		await wrapper.find('.palette-sugarizer').trigger('click');
 		expect(wrapper.find('.palette-content').exists()).toBe(false);
 	});
 
 	it('should render prroperly with different values of filterList and header when passed', async () => {
-		await wrapper.vm.showPalette();
+		await wrapper.find('.palette-sugarizer').trigger('click');
 		expect(wrapper.find('.palette-content').exists()).toBe(true);
 		// filterList is null
 		option2= {
@@ -117,7 +108,7 @@ describe('Palette.vue', () => {
 				options: option2
 			},
 		})
-		await wrapper.vm.showPalette();
+		await wrapper.find('.palette-sugarizer').trigger('click');
 		expect(wrapper.find('.paletteBox').exists()).toBe(true);
 		expect(wrapper.find('.palette-content').exists()).toBe(false);
 		// filterList with length 0
@@ -132,7 +123,7 @@ describe('Palette.vue', () => {
 				options: option2
 			},
 		})
-		await wrapper.vm.showPalette();
+		await wrapper.find('.palette-sugarizer').trigger('click');
 		expect(wrapper.find('.paletteBox').exists()).toBe(true);
 		expect(wrapper.find('.palette-content').exists()).toBe(false);
 		// paletteBox with name only
