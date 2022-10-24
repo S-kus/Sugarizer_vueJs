@@ -25,22 +25,33 @@ const SelectBox ={
 			></popup>
 		</div>
 	`,
+	// stores data ([object]) of options to be displayed in popup and 
+	// the default data value to shown in select-bar
 	props: ['options'],
 	components: {
+		// for displaying options data
 		'popup': Popup, 
+		// for diffrenet icons
 		'icon': Icon
 	},
 	data() {
 		return {
+			// stores options prop
 			optionsData: this.options? this.options: null,
+			// stores select-bar data object value
 			selectedData: {
 				icon: this.options? this.options.icon: null,
 				name: this.options? this.options.name: null,
 			},
+			// condition to display popup
 			showselectBox: false,
+			// left position of popup
 			xData: null,
+			// top position of popup
 			yData: null,
+			// key for the popup component
 			popupKey: 0,
+			// key for the icon component
 			iconKey: 0
 		}
 	},
@@ -50,13 +61,17 @@ const SelectBox ={
 		},
 	},
 	methods: {
+		// check for the cursor position and call hide() of popup component 
 		removePopup(e) {
 			if(!this.$refs.selectboxPopup.isCursorInside(e.clientX, e.clientY)){
 				this.$refs.selectboxPopup.hide();
 				this.showselectBox= false;
+				// re-render popup component with updated value
 				this.popupKey= !this.popupKey;
 			}
 		},
+		// set the select-bar data and emit optionSelected with the selected option
+		// it's excuted on the emit "itemis-clicked" from popup component
 		optionisSelected(str) {
 			const selectedDataName = str.split('_').pop();
 			if(this.optionsData.name==selectedDataName) {
@@ -78,6 +93,8 @@ const SelectBox ={
 			this.popupKey= !this.popupKey;
 			this.$emit('optionSelected',this.selectedData);
 		},
+		// get the top and left offset of select-box and 
+		// call show(x,y) of popup component with positions as parameter of popup
 		showPopup(e) {
 			if(this.showselectBox) {
 				this.showselectBox= false;

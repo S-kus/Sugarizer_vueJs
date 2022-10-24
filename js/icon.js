@@ -1,22 +1,32 @@
 const Icon ={
 	name: 'Icon',
 	template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
+	// id, fileUrl, color, size, left and top margin, native property of icon
 	props: ['id','svgfile','color','size','x','y','isNative'],
 	data() {
 		return {
+			// stores svg text in raw form after native icon loaded
 			svg: null,
+			// id prop data of icon
 			idData: this.id,
+			// native property of icon, false by default
 			isSugarNative : this.isNative=="true"? true: false,
+			// fileUrl prop data of icon
 			iconData: this.svgfile,
+			// size prop data of icon
 			sizeData: this.size? this.size: 55,
+			// color prop data of icon
 			colorData: this.color? this.color: 512,
+			// positions(margin) prop (x,y) data of icon
 			xData: this.x ? this.x: 0,
 			yData: this.y ? this.y: 0,
+			// stores current svg element of the icon
 			_element: null
 		}
 	},
 	async created() {
 		var vm = this;
+		// ready the raw svg data of the Native icons
 		if(this.isSugarNative) {
 			await this._loadIcon(this.svgfile).then(function(svg) {
 				vm.svg=svg;
@@ -24,20 +34,25 @@ const Icon ={
 		}
 	},
 	mounted() {
+		// to render the newformat icon
 		if(!this.isSugarNative) {
 			this.createIcon(this.svgfile, this.colorData, this.sizeData);
 		}
 	},
 	computed: {
+		// genrating final svg of oldSvg format
+		// takes input raw data form of svgfile and return pure SVG (remove Sugar stuff)
 		gensvg: function() {
 			if (this.svg == null) return "";
 			return this._convertSVG(this.svg, this.genid);
 		},
+		// set id of the icon
 		genid: function() {
 			return this.idData ? this.idData : this._uid;
 		}
 	},
 	updated: function() {
+		// set the _element value by retrieving svgElement from Native icon
 		if(this.isSugarNative) {
 			let vm=this, element = null;
 			let icon= document.getElementById(vm.genid);
@@ -57,6 +72,7 @@ const Icon ={
 		}
 	},
 	watch: {
+		// updates color, position and size of the icon
 		colorData: function(newColor, oldColor) {
 			var element = this._element;
 			element.setAttribute("class", "xo-color"+newColor);
@@ -76,6 +92,7 @@ const Icon ={
 		}
 	},
 	methods: {
+		// create function to set newSvg format icons, append the final svgElement inside the assign parent
 		createIcon(svgfile, color, size, callback) {
 			if(!svgfile)
 				return null;
@@ -122,7 +139,7 @@ const Icon ={
 			svgElement.appendChild(useElement);
 			parent.appendChild(svgElement);
 		},
-		// Load icon
+		// Load icon url and return raw data of file
 		async _loadIcon(url) {
 			return new Promise(function(resolve, reject) {
 			   axios.get(url).then(function(response) {
@@ -132,7 +149,8 @@ const Icon ={
 				});
 			});
 		},
-		// Convert SVG to a pure SVG (remove Sugar stuff)
+		// Convert SVG to a pure SVG (remove Sugar stuff) by removing <!DOCTYPE..> tag
+		// replacing stroke and fill color variable in new format and adding symbol tag inside the svgElement
 		_convertSVG(svg, id) {
 			// Remove ENTITY HEADER
 			let read = svg;
@@ -149,7 +167,7 @@ const Icon ={
 			return buf;
 		},
 
-		// Change CSS color
+		// Change CSS color to given color number class
 		_setColor(vm, color) {
 			let element = vm._element;
 			if (element) {

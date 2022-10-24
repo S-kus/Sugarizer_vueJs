@@ -15,27 +15,37 @@ const IconButton ={
 				<p class="icon-button-text">{{ this.textData }}</p>
 			</div>`,
 	props: {
+		// button label
 		text: String,
+		// input for icon
 		id: String,
 		svgfile: String,
 		color: String,
 		size: String,
 		x: String,
 		y: String,
+		// button's disablity condition
 		disabled: Boolean,
+		// function needed to performed when this button is clicked
 		clickFunction: { type: Function },
 	},
+	// for icons
 	components: {
 		'button-icon': Icon, 
 	},
 	data() {
 		return {
+			// icon file url
 			iconData: this.svgfile,
+			// button label prop data
 			textData: this.text? this.text: '',
+			// conditional data of "disabled" prop
 			disabledData: this.disabled? this.disabled: false,
+			// key for icon component
 			componentKey: 0,
 		}
 	},
+	// updates data values
 	watch: {
 		textData: function(newText, oldText) {
 			this.textData = newText
@@ -49,6 +59,7 @@ const IconButton ={
 		}
 	},
 	methods: {
+		// excute prop function if button clicked
 		buttonClicked() {
 			this.clickFunction();
 		}

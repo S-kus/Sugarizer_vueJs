@@ -18,7 +18,7 @@ const app = Vue.createApp({
 	data() {
 		return {
 			message: "Sugarizer in Vue",
-			// SearchField data
+			// SearchField Dummy data
 			products: [
 				{ name: "Keyboard", price: 44, category: 'Accessories'},
 				{ name: "Mouse", price: 20, category: 'Accessories'},
@@ -31,9 +31,11 @@ const app = Vue.createApp({
 				{ name: "Eraser", price: 2, category: 'Stationary'},
 				{ name: "Highlighter", price: 5, category: 'Stationary'}
 			],
+			// SearchField array data based on input
 			filterProducts: null,
-			// Popup data
+			// Popup data based on selected icon
 			popupData: null,
+			// Popup Dummy data
 			popupDummyData: {
 				4: {
 					id: "4",
@@ -62,7 +64,7 @@ const app = Vue.createApp({
 					],
 				}
 			},
-			// SelectBox data
+			// SelectBox Dummy data
 			selectBoxDummyData: {
 				id: "15",
 				icon: { id: "16", iconData: "icons/star.svg", color: "65", size: "20" },
@@ -87,21 +89,25 @@ const app = Vue.createApp({
 	},
 	methods: {
 		// Icon component
+		// updates color of icons
 		changeColor() {
 			this.$refs.icon1.colorData=Math.floor(Math.random() * 179);
 			this.$refs.icon2.colorData=Math.floor(Math.random() * 179);
 		},
+		// updates position of icons
 		changePosition() {
 			this.$refs.icon1.xData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon1.yData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon2.xData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon2.yData=Math.floor(Math.random() * 100) + 1;
 		},
+		// updates size of icons
 		changeSize() {
 			this.$refs.icon1.sizeData=Math.floor(Math.random() * 80) + 20;
 			this.$refs.icon2.sizeData=Math.floor(Math.random() * 80) + 20;
 		},
 		// IconButton component
+		// updates data of text, icon and disablity of buttonIcon
 		testFunction: function (event) {
 			// this.$refs.icon1.iconData= "icons/star.svg"
 			this.$refs.buttonIcon1.iconData="icons/owner-icon.svg"
@@ -109,12 +115,14 @@ const app = Vue.createApp({
 			this.$refs.buttonIcon1.textData= "text changed"
 		},
 		// SearchField component
+		// updates displayed products based on input in searchBox
 		searchFunction(searchInput) {
 			this.filterProducts = this.products.filter((product) => {
 				return product.name.toUpperCase().includes(searchInput.toUpperCase())
 			})
 		},
 		// Popup component
+		// call show() of Popup component with position as parameter and data as prop
 		showPopupFunction(e) {
 			var itemId, x, y;
 			if(e.target.tagName=='svg') {
@@ -136,15 +144,18 @@ const app = Vue.createApp({
 			this.popupData= obj[itemId];
 			this.$refs.popup.show(x,y);
 		},
+		// check for cursor position and call hide() to hide the popup
 		removePopupFunction(e) {
 			if(!this.$refs.popup.isCursorInside(e.clientX, e.clientY)){
 				this.$refs.popup.hide();
 			}
 		},
+		// display clicked item of popup after emit itemis-clicked
 		itemisClicked(item) {
 			console.log(item);
 		},
 		// SelectBox component
+		// display clicked item of popup after emit option-selected
 		optionSelected(e) {
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);
