@@ -76,7 +76,7 @@ const app = Vue.createApp({
 					{ icon: { id: "21", iconData: "icons/abcd.svg", color: "65", size: "20" }, name: "item5" }
 				]
 			},
-			// Palette data
+			// Palette Dummy data
 			Palette1Data: {
 				icon: { id: "22", iconData: "icons/abcd.svg", color: "1024", size: "18" },
 				name: "abcd",
@@ -175,7 +175,7 @@ const app = Vue.createApp({
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);
 		},
-		// Palette component
+		// display clicked option of palette after emit filter-selected
 		filterSelected(e) {
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);

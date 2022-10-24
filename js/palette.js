@@ -1,3 +1,4 @@
+// global variable which stores active ref value of palette instance (whose subPopup is visible)
 var currentPaletteRef= null;
 
 const Palette ={
@@ -45,42 +46,59 @@ const Palette ={
 						</div>
 					</div>
 				</div>`,
+	// for different icons
 	components: {
 		'icon': Icon,
 	},
+	// filter options object data with default value in palette-bar
 	props: ['options'],
 	data() {
 		return {
+			// options prop 
 			optionsData: this.options? this.options: null,
+			// current selected filter option data
 			selectedData: {
 				icon: this.options? this.options.icon: null,
 				name: this.options? this.options.name: null,
 			},
+			// condition to show subPopup
 			showSubpopup: false,
+			// key of icon component
 			iconKey: 0
 		}
 	},
 	methods: {
+		// hide the subPopup
 		removePalette() {
 			this.showSubpopup= false;
 			currentPaletteRef= null;
 		},
+		// to show the subPopup
 		showPalette() {
+			// retrieve current instance name attribute
 			const currRef= this.$refs.palette.getAttribute('name');
+			// if currentPaletteRef is not null and active ref name is current ref then 
+			// hide subPopup, it will works as toggling subPopup
 			if(currentPaletteRef && currentPaletteRef ==currRef) {
 				this.removePalette();
 				return;
 			}
+			// if currentPaletteRef is not null and active ref name is not current ref then 
+			// hide the active ref's subPopup so that we can open current one
 			if(currentPaletteRef && currentPaletteRef!=currRef) {
 				this.$root.$refs[currentPaletteRef].removePalette();
 				currentPaletteRef= null;
 			}
+			// if there is no active subPopup and current subPopup is also false
+			// we have filterList length to show some values in the subPopup then show subPopup
 			if(!currentPaletteRef && !this.showSubpopup && this.optionsData.filterList && this.optionsData.filterList.length >0) {
 				this.showSubpopup= true;
 				this.iconKey= !this.iconKey;
 				currentPaletteRef= currRef;
 			}
 		},
+		// if option is selected, the update the palette-bar with this,
+		// emit filterSelected with selected option and close the subPopup
 		optionisSelected(item) {
 			var data= JSON.parse(JSON.stringify(item))
 			if(data.icon) {
