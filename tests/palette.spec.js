@@ -5,9 +5,6 @@ const { Palette } = require('../js/palette.js');
 const path = require('path');
 const filename = path.dirname(__filename);
 
-// Promise to wait a delay
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
-
 describe('Palette.vue', () => {
 	let wrapper;
 	const id= 1;
@@ -50,6 +47,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option1
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 	});
 
@@ -64,6 +64,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option2
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 		expect(wrapper.find('.palette-text').text()).toBe('Star');
 	});
@@ -84,15 +87,15 @@ describe('Palette.vue', () => {
 		expect(wrapper.find('.palette-content').exists()).toBe(false);
 	});
 
-	// it('show and hide subPopup on clicking the paletteBox when passed', async () => {
-	// 	expect(wrapper.find('.palette-content').exists()).toBe(false);
+	it('show and hide subPopup on clicking the paletteBox when passed', async () => {
+		expect(wrapper.find('.palette-content').exists()).toBe(false);
 
-	// 	await wrapper.find('.paletteBox').trigger('click');
-	// 	expect(wrapper.find('.palette-content').exists()).toBe(true);
+		await wrapper.find('.paletteBox').trigger('click');
+		expect(wrapper.find('.palette-content').exists()).toBe(true);
 
-	// 	await wrapper.find('.paletteBox').trigger('click');
-	// 	expect(wrapper.find('.palette-content').exists()).toBe(false);
-	// });
+		await wrapper.find('.paletteBox').trigger('click');
+		expect(wrapper.find('.palette-content').exists()).toBe(false);
+	});
 
 	it('should render prroperly with different values of filterList and header when passed', async () => {
 		await wrapper.find('.paletteBox').trigger('click');
@@ -107,6 +110,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option2
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 		await wrapper.find('.paletteBox').trigger('click');
 		expect(wrapper.find('.paletteBox').exists()).toBe(true);
@@ -122,6 +128,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option2
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 		await wrapper.find('.paletteBox').trigger('click');
 		expect(wrapper.find('.paletteBox').exists()).toBe(true);
@@ -142,6 +151,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option2
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 		expect(wrapper.find('.paletteBox').exists()).toBe(true);
 		// paletteBox with icon only
@@ -160,6 +172,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option2
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 		expect(wrapper.find('.paletteBox').exists()).toBe(true);
 		// paletteBox with no icon or name
@@ -177,6 +192,9 @@ describe('Palette.vue', () => {
 			props: { 
 				options: option2
 			},
+			attrs: {
+				name: "palette",
+			}
 		})
 		expect(wrapper.find('.paletteBox').exists()).toBe(false);
 	});

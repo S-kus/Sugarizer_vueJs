@@ -64,13 +64,10 @@ const Palette ={
 		removePalette() {
 			this.showSubpopup= false;
 			currentPaletteRef= null;
-			// console.log("removed")
 		},
 		showPalette() {
 			const currRef= this.$refs.palette.getAttribute('name');
-			// console.log("currRef= "+currRef);
 			if(currentPaletteRef && currentPaletteRef ==currRef) {
-				// console.log("remove is called")
 				this.removePalette();
 				return;
 			}
@@ -82,7 +79,6 @@ const Palette ={
 				this.showSubpopup= true;
 				this.iconKey= !this.iconKey;
 				currentPaletteRef= currRef;
-				// console.log("set "+ currentPaletteRef)
 			}
 		},
 		optionisSelected(item) {
