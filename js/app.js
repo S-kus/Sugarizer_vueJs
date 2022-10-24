@@ -6,9 +6,6 @@ requirejs.config({
 	}
 });
 
-// Global Variables
-var currentPaletteRef= null;
-
 // Vue main app
 const app = Vue.createApp({
 	components: {

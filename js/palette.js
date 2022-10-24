@@ -1,12 +1,13 @@
+var currentPaletteRef= null;
+
 const Palette ={
 	name: 'Palette',
 	template: ` <div 
 					ref="palette"
 					v-if="optionsData && (optionsData.icon || optionsData.name)"
 					v-bind:class="showSubpopup? 'palette-sugarizer palette-up': 'palette-sugarizer palette-down'"
-					v-on:click="showPalette()"
 				>
-					<div class="paletteBox">
+					<div class="paletteBox" v-on:click="showPalette()">
 						<icon class="palette-icon"
 							v-if="selectedData.icon"
 							:key="this.iconKey"
@@ -62,23 +63,26 @@ const Palette ={
 	methods: {
 		removePalette() {
 			this.showSubpopup= false;
-			this.iconKey= !this.iconKey;
+			currentPaletteRef= null;
+			// console.log("removed")
 		},
-		showPalette(e) {
+		showPalette() {
 			const currRef= this.$refs.palette.getAttribute('name');
+			// console.log("currRef= "+currRef);
 			if(currentPaletteRef && currentPaletteRef ==currRef) {
+				// console.log("remove is called")
 				this.removePalette();
-				currentPaletteRef= null;
 				return;
 			}
 			if(currentPaletteRef && currentPaletteRef!=currRef) {
 				this.$root.$refs[currentPaletteRef].removePalette();
 				currentPaletteRef= null;
 			}
-			if(this.optionsData.filterList && this.optionsData.filterList.length >0) {
+			if(!currentPaletteRef && !this.showSubpopup && this.optionsData.filterList && this.optionsData.filterList.length >0) {
 				this.showSubpopup= true;
 				this.iconKey= !this.iconKey;
 				currentPaletteRef= currRef;
+				// console.log("set "+ currentPaletteRef)
 			}
 		},
 		optionisSelected(item) {
