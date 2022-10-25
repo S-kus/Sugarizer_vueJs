@@ -1,11 +1,11 @@
 const { mount } = require('@vue/test-utils');
 if (typeof Icon == 'undefined') Icon = require('../js/icon.js').Icon;
-const { Palette } = require('../js/palette.js');
+const { FilterBox } = require('../js/filterbox.js');
 
 const path = require('path');
 const filename = path.dirname(__filename);
 
-describe('Palette.vue', () => {
+describe('FilterBox.vue', () => {
 	let wrapper;
 	const id= 1;
 	const ownerIcon="file://"+filename+"\\../icons/owner-icon.svg" ;
@@ -15,8 +15,8 @@ describe('Palette.vue', () => {
 	const option1= {
         icon: { id: "2", iconData: abcd, color: "1024", size: "18" },
         name: "abcd",
-        header: "Select Filter",
-        filterList: [
+        header: "Select FilterBox",
+        filterBoxList: [
             { icon: { id: "3", iconData: ownerIcon, color: "1024", size: "20" }, name: "item1" },
             { icon: { id: "4", iconData: write, color: "1024", size: "18" }, name: "item2" },
             { icon: { id: "5", iconData: abcd, color: "1024", size: "18" }, name: "item3" },
@@ -28,7 +28,7 @@ describe('Palette.vue', () => {
         icon: { id: "8", iconData: "icons/star.svg", color: "1024", size: "18" },
         name: "Star",
         header: "Select Display",
-        filterList: [
+        filterBoxList: [
             { name: "item1" },
             { name: "item2" },
             { name: "item3" },
@@ -43,12 +43,12 @@ describe('Palette.vue', () => {
 		document.lastElementChild.appendChild(parent);
 
 		// Mount object
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option1
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
 	});
@@ -58,88 +58,88 @@ describe('Palette.vue', () => {
 	});
 
 	it('update optionsData when passed', () => {
-		expect(wrapper.find('.palette-text').text()).toBe('abcd');
+		expect(wrapper.find('.filterBox-text').text()).toBe('abcd');
 
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option2
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
-		expect(wrapper.find('.palette-text').text()).toBe('Star');
+		expect(wrapper.find('.filterBox-text').text()).toBe('Star');
 	});
 
-	it('emits message, updated paletteBox and close subPopup on selecting option when passed', async () => {
-		expect(wrapper.find('.palette-text').text()).toBe('abcd');
+	it('emits message, updated filterBox and close subPopup on selecting option when passed', async () => {
+		expect(wrapper.find('.filterBox-text').text()).toBe('abcd');
 
-		await wrapper.find('.paletteBox').trigger('click');
-		expect(wrapper.find('.palette-content').exists()).toBe(true);
-		const items= wrapper.findAll('.palette-items-item')
-		expect(wrapper.findAll('.palette-items-item').length).toBe(5)
+		await wrapper.find('.filterBox').trigger('click');
+		expect(wrapper.find('.filterBox-content').exists()).toBe(true);
+		const items= wrapper.findAll('.filterBox-items-item')
+		expect(wrapper.findAll('.filterBox-items-item').length).toBe(5)
 
 		await items.at(1).trigger('click')
 		expect(wrapper.emitted('filterSelected')).toBeTruthy()
-		expect(wrapper.emitted('filterSelected')[0]).toEqual([option1.filterList[1]])
+		expect(wrapper.emitted('filterSelected')[0]).toEqual([option1.filterBoxList[1]])
 
-		expect(wrapper.find('.palette-text').text()).toBe(option1.filterList[1].name);
-		expect(wrapper.find('.palette-content').exists()).toBe(false);
+		expect(wrapper.find('.filterBox-text').text()).toBe(option1.filterBoxList[1].name);
+		expect(wrapper.find('.filterBox-content').exists()).toBe(false);
 	});
 
-	it('show and hide subPopup on clicking the paletteBox when passed', async () => {
-		expect(wrapper.find('.palette-content').exists()).toBe(false);
+	it('show and hide subPopup on clicking the filterBox when passed', async () => {
+		expect(wrapper.find('.filterBox-content').exists()).toBe(false);
 
-		await wrapper.find('.paletteBox').trigger('click');
-		expect(wrapper.find('.palette-content').exists()).toBe(true);
+		await wrapper.find('.filterBox').trigger('click');
+		expect(wrapper.find('.filterBox-content').exists()).toBe(true);
 
-		await wrapper.find('.paletteBox').trigger('click');
-		expect(wrapper.find('.palette-content').exists()).toBe(false);
+		await wrapper.find('.filterBox').trigger('click');
+		expect(wrapper.find('.filterBox-content').exists()).toBe(false);
 	});
 
-	it('should render prroperly with different values of filterList and header when passed', async () => {
-		await wrapper.find('.paletteBox').trigger('click');
-		expect(wrapper.find('.palette-content').exists()).toBe(true);
-		// filterList is null
+	it('should render prroperly with different values of filterBoxList and header when passed', async () => {
+		await wrapper.find('.filterBox').trigger('click');
+		expect(wrapper.find('.filterBox-content').exists()).toBe(true);
+		// filterBoxList is null
 		option2= {
 			icon: { id: "8", iconData: "icons/star.svg", color: "1024", size: "18" },
 			name: "Star",
 			header: "Select Display"
 		};
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option2
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
-		await wrapper.find('.paletteBox').trigger('click');
-		expect(wrapper.find('.paletteBox').exists()).toBe(true);
-		expect(wrapper.find('.palette-content').exists()).toBe(false);
-		// filterList with length 0
+		await wrapper.find('.filterBox').trigger('click');
+		expect(wrapper.find('.filterBox').exists()).toBe(true);
+		expect(wrapper.find('.filterBox-content').exists()).toBe(false);
+		// filterBoxList with length 0
 		option2= {
 			icon: { id: "8", iconData: "icons/star.svg", color: "1024", size: "18" },
 			name: "Star",
 			header: "Select Display",
-			filterList: []
+			filterBoxList: []
 		};
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option2
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
-		await wrapper.find('.paletteBox').trigger('click');
-		expect(wrapper.find('.paletteBox').exists()).toBe(true);
-		expect(wrapper.find('.palette-content').exists()).toBe(false);
-		// paletteBox with name only
+		await wrapper.find('.filterBox').trigger('click');
+		expect(wrapper.find('.filterBox').exists()).toBe(true);
+		expect(wrapper.find('.filterBox-content').exists()).toBe(false);
+		// filterBox with name only
 		option2= {
 			name: "Star",
 			header: "Select Display",
-			filterList: [
+			filterBoxList: [
 				{ name: "item1" },
 				{ name: "item2" },
 				{ name: "item3" },
@@ -147,20 +147,20 @@ describe('Palette.vue', () => {
 				{ name: "item5" }
 			]
 		};
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option2
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
-		expect(wrapper.find('.paletteBox').exists()).toBe(true);
-		// paletteBox with icon only
+		expect(wrapper.find('.filterBox').exists()).toBe(true);
+		// filterBox with icon only
 		option2= {
 			icon: { id: "8", iconData: "icons/star.svg", color: "1024", size: "18" },
 			header: "Select Display",
-			filterList: [
+			filterBoxList: [
 				{ name: "item1" },
 				{ name: "item2" },
 				{ name: "item3" },
@@ -168,19 +168,19 @@ describe('Palette.vue', () => {
 				{ name: "item5" }
 			]
 		};
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option2
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
-		expect(wrapper.find('.paletteBox').exists()).toBe(true);
-		// paletteBox with no icon or name
+		expect(wrapper.find('.filterBox').exists()).toBe(true);
+		// filterBox with no icon or name
 		option2= {
 			header: "Select Display",
-			filterList: [
+			filterBoxList: [
 				{ name: "item1" },
 				{ name: "item2" },
 				{ name: "item3" },
@@ -188,14 +188,17 @@ describe('Palette.vue', () => {
 				{ name: "item5" }
 			]
 		};
-		wrapper = mount(Palette, {
+		wrapper = mount(FilterBox, {
 			props: { 
 				options: option2
 			},
 			attrs: {
-				name: "palette",
+				name: "filterBox",
 			}
 		})
-		expect(wrapper.find('.paletteBox').exists()).toBe(false);
+		expect(wrapper.find('.filterBox').exists()).toBe(false);
 	});
+
+	// TODO: to test if there are two instances of filterBox then our (line 88 of component) should close the 
+	// 		 subPopup of active instance and open new ones' subPopup
 })

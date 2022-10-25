@@ -14,7 +14,7 @@ const app = Vue.createApp({
 		"search-field": SearchField,
 		"popup": Popup,
 		"select-box": SelectBox,
-		"Palette": Palette
+		"filter-box": FilterBox
 	},
 	data() {
 		return {
@@ -76,12 +76,12 @@ const app = Vue.createApp({
 					{ icon: { id: "21", iconData: "icons/abcd.svg", color: "65", size: "20" }, name: "item5" }
 				]
 			},
-			// Palette Dummy data
-			Palette1Data: {
+			// FilterBox Dummy data
+			FilterBox1Data: {
 				icon: { id: "22", iconData: "icons/abcd.svg", color: "1024", size: "18" },
 				name: "abcd",
 				header: "Select Filter",
-				filterList: [
+				filterBoxList: [
 					{ icon: { id: "23", iconData: "icons/owner-icon.svg", color: "1024", size: "20" }, name: "item1" },
 					{ icon: { id: "24", iconData: "icons/write.svg", color: "1024", size: "18" }, name: "item2" },
 					{ icon: { id: "25", iconData: "icons/abcd.svg", color: "1024", size: "18" }, name: "item3" },
@@ -89,11 +89,11 @@ const app = Vue.createApp({
 					{ icon: { id: "27", iconData: "icons/write.svg", color: "1024", size: "18" }, name: "item5" }
 				]
 			},
-			Palette2Data: {
+			FilterBox2Data: {
 				icon: { id: "28", iconData: "icons/star.svg", color: "1024", size: "18" },
 				name: "Star",
 				header: "Select Display",
-				filterList: [
+				filterBoxList: [
 					{ name: "item1" },
 					{ name: "item2" },
 					{ name: "item3" },
@@ -175,7 +175,7 @@ const app = Vue.createApp({
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);
 		},
-		// display clicked option of palette after emit filter-selected
+		// display clicked option of filterBox after emit filter-selected
 		filterSelected(e) {
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);

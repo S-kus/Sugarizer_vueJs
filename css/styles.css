@@ -250,13 +250,13 @@ html, button {
 	background-position: 95% 15%;
 }
 
-/* sugar-vue-Palette */
+/* sugar-vue-FilterBox */
 
-.palette-demo {
+.filterBox-demo {
 	background-color: #282828;
 }
 
-.palette-sugarizer {
+.filterBox-sugarizer {
 	margin-top: 0px;
 	height: 45px;
 	width: fit-content;
@@ -264,27 +264,27 @@ html, button {
 	color: white
 }
 
-.paletteBox {
+.filterBox {
 	display: flex;
 }
 
-.palette-sugarizer:hover {
+.filterBox-sugarizer:hover {
 	background-color: black;
 }
 
-.palette-icon {
+.filterBox-icon {
 	margin: 2px;
 	margin-top: 12px !important;
 }
 
-.palette-down {
+.filterBox-down {
 	background-image: url('../icons/arrow-down.svg');
 	background-repeat: no-repeat;
 	background-position-y: bottom;
 	background-position-x: center;
 }
 
-.palette-up {
+.filterBox-up {
 	background-image: url('../icons/arrow-up.svg');
 	background-repeat: no-repeat;
 	background-position-y: bottom;
@@ -295,13 +295,13 @@ html, button {
 	border-bottom: 0;
 }
 
-.palette-text {
+.filterBox-text {
 	margin-top: 14px;
 	margin-left: 15px;
 	margin-right: 4px;
 }
 
-.palette-content {
+.filterBox-content {
 	position: absolute;
 	background-color: black;
 	max-width: 271px;
@@ -317,7 +317,7 @@ html, button {
 	margin-left: -2px;
 }
 
-.palette-header {
+.filterBox-header {
 	height: 40px;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -328,12 +328,12 @@ html, button {
 	-moz-user-select: none;
 }
 
-.palette-hr {
+.filterBox-hr {
 	border: 1px solid #808080;
 	margin-top: 0;
 }
 
-.palette-items {
+.filterBox-items {
 	background-color: black;
 	color: white;
 	border-width: 2px;
@@ -342,13 +342,13 @@ html, button {
 	overflow-y: auto;
 }
 
-.palette-items-item {
+.filterBox-items-item {
 	display: flex;
 	height: 35px;
 	margin: 3px 0px;
 }
 
-.palette-items-item:hover {
+.filterBox-items-item:hover {
 	background-color: #808080;
 }
 
