@@ -34,7 +34,7 @@ describe('Icon.vue', () => {
 				size: size,
 				x: x,
 				y: y,
-				sugarnative: isSugarNative
+				isNative: isSugarNative
 			},
 		})
 		await delay(1000);
@@ -59,7 +59,7 @@ describe('Icon.vue', () => {
 				size: size,
 				x: x,
 				y: y,
-				sugarnative: isSugarNative
+				isNative: isSugarNative
 			},
 		})
 		await delay(1000);
@@ -109,9 +109,9 @@ describe('Icon.vue', () => {
 	});
 
 	// Testing for sugarnative= true
-	isSugarNative= "true";
 
 	// it('renders props when passed for isSugarNative is true', async () => {
+	// 	isSugarNative= "true";
 	// 	// Mount object
 	// 	wrapper = mount(Icon, {
 	// 		props: { 
@@ -137,6 +137,7 @@ describe('Icon.vue', () => {
 	// });
 
 	// it('changes color and position data when passed for isSugarNative is true', async () => {
+	// 	isSugarNative= "true";
 	// 	// Mount object
 	// 	wrapper = mount(Icon, {
 	// 		props: { 
@@ -162,6 +163,7 @@ describe('Icon.vue', () => {
 	// });
 
 	// it('should not render icon if svgfile data is empty when passed for isSugarNative is true', async () => {
+	// 	isSugarNative= "true";
 	// 	wrapper = mount(Icon, {
 	// 		props: { 
 	// 			id: id,
@@ -178,6 +180,7 @@ describe('Icon.vue', () => {
 	// });
 
 	// it('renders icon with default color, position and size data when passed for isSugarNative is true', async () => {
+	// 	isSugarNative= "true";
 	// 	wrapper = mount(Icon, {
 	// 		props: { 
 	// 			id: id,
