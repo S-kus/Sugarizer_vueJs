@@ -25,7 +25,9 @@
 		<h2>Hello Sugarizer</h2>
 		<h3>{{ message }}</h3>
 
-		<password text="hello"></password>
+		<div class="password-demo">
+			<password v-bind:emojis="PasswordData"></password>
+		</div>
 		<div class="filterBox-demo">
 			<filter-box 
 				ref="filterBox1" name="filterBox1"
