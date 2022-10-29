@@ -14,7 +14,8 @@ const app = Vue.createApp({
 		"search-field": SearchField,
 		"popup": Popup,
 		"select-box": SelectBox,
-		"filter-box": FilterBox
+		"filter-box": FilterBox,
+		"password": Password
 	},
 	data() {
 		return {
