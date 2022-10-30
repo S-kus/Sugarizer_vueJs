@@ -18,37 +18,31 @@ const Password ={
 							<div class="emojiset1">
 								<div class="emoji"
 									v-for='index in 5' :key='index'
-									v-on:click="emojiClicked(key)"
+									v-on:click="emojiClicked($event, key)"
 								>
-									<div class="emoji-icon"></div>
+									<div class="emoji-icon" v-html="'&#x'+this.currentEmojis[index-1].value"></div>
 									<div class="emoji-letter">{{this.currentEmojis[index-1].letter}}</div>
 								</div>
 							</div>
 							<div class="emojiset2">
 								<div class="emoji"
 									v-for='index in 5' :key='index'
-									v-on:click="emojiClicked(key)"
+									v-on:click="emojiClicked($event, key)"
 								>
-									<div class="emoji-icon"></div>
+									<div class="emoji-icon" v-html="'&#x'+this.currentEmojis[index+4].value"></div>
 									<div class="emoji-letter">{{this.currentEmojis[index+4].letter}}</div>
 								</div>
 							</div>
 						</div>
 						<div class="password-emojis-category">
-							<div ref="category0" class="emoji-category" v-on:click="category0Clicked">
-								<div class="emoji" index="0">
-									<div class="emoji-icon"></div>
-								</div>
+							<div ref="category0" class="emoji-category emoji-selected" v-on:click="category0Clicked">
+								<div class="emoji-category-icon" v-html="'&#x'+this.emojisData[category0Index].value"></div>
 							</div>
-							<div ref="category1" class="emoji-category" v-on:click="category1Clicked">
-								<div class="emoji" index="10">
-									<div class="emoji-icon"></div>
-								</div>
+							<div ref="category1" class="emoji-category emoji-unselected" v-on:click="category1Clicked">
+								<div class="emoji-category-icon" v-html="'&#x'+this.emojisData[category1Index].value"></div>
 							</div>
-							<div ref="category2" class="emoji-category" v-on:click="category2Clicked">
-								<div class="emoji" index="20">
-									<div class="emoji-icon"></div>
-								</div>
+							<div ref="category2" class="emoji-category emoji-unselected" v-on:click="category2Clicked">
+								<div class="emoji-category-icon" v-html="'&#x'+this.emojisData[category2Index].value"></div>
 							</div>
 						</div>
 					</div>
@@ -62,6 +56,9 @@ const Password ={
 			emojisData: this.emojis,
 			currentEmojis: [],
 			currentIndex: null,
+			category0Index: 0,
+			category1Index: 10,
+			category2Index: 20
 		}
 	},
 	mounted() {
@@ -89,17 +86,85 @@ const Password ={
 		cancelClicked() {
 			this.passwordValue=''
 		},
-		emojiClicked(index) {
-			console.log("emogiClicked "+ index)
+		emojiClicked(e, index) {
+			console.log(e)
+			var parentElement= e.explicitOriginalTarget.parentElement;
+			parentElement.classList.add("emoji-flash");
+			setTimeout(() => {
+				parentElement.classList.remove("emoji-flash");
+			}, 500);
 		},
 		category0Clicked() {
-			console.log("category0")
+			if(this.currentIndex==0)
+				return;
+			if(this.currentIndex==10) {
+				this.currentIndex=0;
+				this.$refs.category1.classList.add("emoji-unselected");
+				this.$refs.category1.classList.remove("emoji-selected");
+
+				this.$refs.category0.classList.add("emoji-selected");
+				this.$refs.category0.classList.remove("emoji-unselected");
+			}
+			else {
+				this.currentIndex= this.category1Index-10;
+
+				this.$refs.category0.classList.add("emoji-unselected");
+				this.$refs.category0.classList.remove("emoji-selected");
+				this.$refs.category2.classList.add("emoji-unselected");
+				this.$refs.category2.classList.remove("emoji-selected");
+
+				this.$refs.category1.classList.add("emoji-selected");
+				this.$refs.category1.classList.remove("emoji-unselected");
+				this.category0Index= this.category0Index-10;
+				this.category1Index= this.category1Index-10;
+				this.category2Index= this.category2Index-10;
+			}
 		},
 		category1Clicked() {
-			console.log("category1")
+			if(this.currentIndex==this.category1Index)
+				return;
+			if(this.currentIndex==0) {
+				this.currentIndex=10;
+				this.$refs.category0.classList.add("emoji-unselected");
+				this.$refs.category0.classList.remove("emoji-selected");
+
+				this.$refs.category1.classList.add("emoji-selected");
+				this.$refs.category1.classList.remove("emoji-unselected");
+			}
+			else if(this.currentIndex==50) {
+				this.currentIndex=40;
+				this.$refs.category2.classList.add("emoji-unselected");
+				this.$refs.category2.classList.remove("emoji-selected");
+
+				this.$refs.category1.classList.add("emoji-selected");
+				this.$refs.category1.classList.remove("emoji-unselected");
+			}
 		},
 		category2Clicked() {
-			console.log("category2")
+			if(this.currentIndex==50)
+				return;
+			else if(this.currentIndex==40) {
+				this.currentIndex=50;
+				this.$refs.category1.classList.add("emoji-unselected");
+				this.$refs.category1.classList.remove("emoji-selected");
+
+				this.$refs.category2.classList.add("emoji-selected");
+				this.$refs.category2.classList.remove("emoji-unselected");
+			}
+			else {
+				this.currentIndex= this.category1Index+10;
+
+				this.$refs.category0.classList.add("emoji-unselected");
+				this.$refs.category0.classList.remove("emoji-selected");
+				this.$refs.category2.classList.add("emoji-unselected");
+				this.$refs.category2.classList.remove("emoji-selected");
+
+				this.$refs.category1.classList.add("emoji-selected");
+				this.$refs.category1.classList.remove("emoji-unselected");
+				this.category0Index= this.category1Index;
+				this.category1Index= this.category1Index+10;
+				this.category2Index= this.category1Index+10;
+			}
 		},
 		// Convert a char to an emoji code and reversly
 		convertToEmoji(char) {

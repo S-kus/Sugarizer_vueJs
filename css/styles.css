@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "Noto Emoji";
+	src: url("../fonts/NotoEmoji.woff") format('woff');
+}
+
 html {
 	height: 100%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -484,7 +489,16 @@ html, button {
 
 .emoji-category {
 	display: block;
-	border-radius: 0px 22px 22px 0px;
+	border: 2px solid #e5e5e5;
+	border-radius: 0px 26px 26px 0px;
+}
+
+.emoji-category-icon {
+	font-size: 15pt;
+	font-family: "Noto Emoji";
+	padding-left: 8px;
+	padding-top: 6px;
+	padding-right: 8px;
 }
 
 .hidden-emoji {
