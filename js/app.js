@@ -260,6 +260,10 @@ const app = Vue.createApp({
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);
 		},
+		// Password component
+		passwordSet(e) {
+			console.log("Password: "+e);
+		}
 	},
 });
 

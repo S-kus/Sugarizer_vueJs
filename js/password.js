@@ -6,7 +6,9 @@ const Password ={
 					<div class="password-input">
 						<input 
 							class="password-value" id="text" ref="password"
-							type="text" v-model="passwordValue"
+							v-on:keyup="keyEntered"
+							type="text"
+							v-bind:value="passwordValue"
 						/>
 						<div v-if="showCancel"
 							class="password-iconcancel"
@@ -18,7 +20,7 @@ const Password ={
 							<div class="emojiset1">
 								<div class="emoji"
 									v-for='index in 5' :key='index'
-									v-on:click="emojiClicked($event, key)"
+									v-on:click="emojiClicked($event, index-1)"
 								>
 									<div class="emoji-icon" v-html="'&#x'+this.currentEmojis[index-1].value"></div>
 									<div class="emoji-letter">{{this.currentEmojis[index-1].letter}}</div>
@@ -27,7 +29,7 @@ const Password ={
 							<div class="emojiset2">
 								<div class="emoji"
 									v-for='index in 5' :key='index'
-									v-on:click="emojiClicked($event, key)"
+									v-on:click="emojiClicked($event, index+4)"
 								>
 									<div class="emoji-icon" v-html="'&#x'+this.currentEmojis[index+4].value"></div>
 									<div class="emoji-letter">{{this.currentEmojis[index+4].letter}}</div>
@@ -53,6 +55,7 @@ const Password ={
 		return {
 			showCancel: false,
 			passwordValue: '',
+			passwordText: '',
 			emojisData: this.emojis,
 			currentEmojis: [],
 			currentIndex: null,
@@ -66,8 +69,6 @@ const Password ={
 	},
 	watch: {
 		passwordValue: function(newVal, oldVal) {
-			console.log(this.emojisData)
-			console.log(newVal)
 			if(newVal.length>0)
 				this.showCancel= true
 			else
@@ -79,20 +80,45 @@ const Password ={
 			for (var i = newVal ; i <= newVal+9 ; i++,j++) {
 				this.currentEmojis[j]= this.emojisData[i];
 			}
-			console.log(this.currentEmojis)
 		}
 	},
 	methods: {
 		cancelClicked() {
 			this.passwordValue=''
+			this.passwordText='';
 		},
 		emojiClicked(e, index) {
-			console.log(e)
 			var parentElement= e.explicitOriginalTarget.parentElement;
 			parentElement.classList.add("emoji-flash");
 			setTimeout(() => {
 				parentElement.classList.remove("emoji-flash");
 			}, 500);
+			this.$refs.password.focus();
+			var emoji=this.currentEmojis[index];
+			this.passwordText=this.passwordText+emoji.letter;
+			this.passwordValue=this.passwordValue+String.fromCodePoint(this.convertToEmoji(emoji.letter));
+		},
+		keyEntered(e) {
+			var key= e.key;
+			if(key=="Backspace") {
+				if(this.passwordText=='')
+					return;
+				var char=this.passwordText[this.passwordText.length-1];
+				this.passwordText=this.passwordText.substring(0, this.passwordText.length - 1);
+				
+				var lastIndex = this.passwordValue.lastIndexOf(String.fromCodePoint(this.convertToEmoji(char)));
+				this.passwordValue = this.passwordValue.substring(0, lastIndex);
+			}
+			else if(key=="Enter") {
+				console.log(this.passwordText)
+				console.log(this.passwordValue)
+				this.$emit('inputChanged',this.passwordText)
+				this.cancelClicked();
+			}
+			else if((key >= '0' && key <= '9') || (key >= 'a' && key <= 'z')|| (key >= 'A' && key <= 'Z')) {
+				this.passwordText=this.passwordText+key;
+				this.passwordValue=this.passwordValue+String.fromCodePoint(this.convertToEmoji(key));
+			}
 		},
 		category0Clicked() {
 			if(this.currentIndex==0)
