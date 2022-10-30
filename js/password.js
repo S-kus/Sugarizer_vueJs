@@ -88,10 +88,14 @@ const Password ={
 			this.passwordText='';
 		},
 		emojiClicked(e, index) {
-			var parentElement= e.explicitOriginalTarget.parentElement;
-			parentElement.classList.add("emoji-flash");
+			var element;
+			if(e.target.className!='emoji') 
+				element= e.explicitOriginalTarget.parentElement;
+			else
+				element= e.target;
+			element.classList.add("emoji-flash");
 			setTimeout(() => {
-				parentElement.classList.remove("emoji-flash");
+				element.classList.remove("emoji-flash");
 			}, 500);
 			this.$refs.password.focus();
 			var emoji=this.currentEmojis[index];
