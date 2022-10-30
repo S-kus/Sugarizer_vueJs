@@ -100,6 +100,7 @@ const Password ={
 		},
 		keyEntered(e) {
 			var key= e.key;
+			var keyCode= e.keyCode;
 			if(key=="Backspace") {
 				if(this.passwordText=='')
 					return;
@@ -110,12 +111,10 @@ const Password ={
 				this.passwordValue = this.passwordValue.substring(0, lastIndex);
 			}
 			else if(key=="Enter") {
-				console.log(this.passwordText)
-				console.log(this.passwordValue)
-				this.$emit('inputChanged',this.passwordText)
+				this.$emit('passwordSet',this.passwordText)
 				this.cancelClicked();
 			}
-			else if((key >= '0' && key <= '9') || (key >= 'a' && key <= 'z')|| (key >= 'A' && key <= 'Z')) {
+			else if((keyCode>64 && keyCode<91) ||(keyCode>96 && keyCode<123) || (keyCode>47 && keyCode<58) ) {
 				this.passwordText=this.passwordText+key;
 				this.passwordValue=this.passwordValue+String.fromCodePoint(this.convertToEmoji(key));
 			}
@@ -125,22 +124,13 @@ const Password ={
 				return;
 			if(this.currentIndex==10) {
 				this.currentIndex=0;
-				this.$refs.category1.classList.add("emoji-unselected");
-				this.$refs.category1.classList.remove("emoji-selected");
-
-				this.$refs.category0.classList.add("emoji-selected");
-				this.$refs.category0.classList.remove("emoji-unselected");
+				this.removeAddFocus("category1","category0")
 			}
 			else {
 				this.currentIndex= this.category1Index-10;
+				this.removeAddFocus("category0","category1")
+				this.removeAddFocus("category2");
 
-				this.$refs.category0.classList.add("emoji-unselected");
-				this.$refs.category0.classList.remove("emoji-selected");
-				this.$refs.category2.classList.add("emoji-unselected");
-				this.$refs.category2.classList.remove("emoji-selected");
-
-				this.$refs.category1.classList.add("emoji-selected");
-				this.$refs.category1.classList.remove("emoji-unselected");
 				this.category0Index= this.category0Index-10;
 				this.category1Index= this.category1Index-10;
 				this.category2Index= this.category2Index-10;
@@ -151,19 +141,11 @@ const Password ={
 				return;
 			if(this.currentIndex==0) {
 				this.currentIndex=10;
-				this.$refs.category0.classList.add("emoji-unselected");
-				this.$refs.category0.classList.remove("emoji-selected");
-
-				this.$refs.category1.classList.add("emoji-selected");
-				this.$refs.category1.classList.remove("emoji-unselected");
+				this.removeAddFocus("category0","category1")
 			}
 			else if(this.currentIndex==50) {
 				this.currentIndex=40;
-				this.$refs.category2.classList.add("emoji-unselected");
-				this.$refs.category2.classList.remove("emoji-selected");
-
-				this.$refs.category1.classList.add("emoji-selected");
-				this.$refs.category1.classList.remove("emoji-unselected");
+				this.removeAddFocus("category2","category1")
 			}
 		},
 		category2Clicked() {
@@ -171,22 +153,12 @@ const Password ={
 				return;
 			else if(this.currentIndex==40) {
 				this.currentIndex=50;
-				this.$refs.category1.classList.add("emoji-unselected");
-				this.$refs.category1.classList.remove("emoji-selected");
-
-				this.$refs.category2.classList.add("emoji-selected");
-				this.$refs.category2.classList.remove("emoji-unselected");
+				this.removeAddFocus("category1","category2")
 			}
 			else {
 				this.currentIndex= this.category1Index+10;
-
-				this.$refs.category0.classList.add("emoji-unselected");
-				this.$refs.category0.classList.remove("emoji-selected");
-				this.$refs.category2.classList.add("emoji-unselected");
-				this.$refs.category2.classList.remove("emoji-selected");
-
-				this.$refs.category1.classList.add("emoji-selected");
-				this.$refs.category1.classList.remove("emoji-unselected");
+				this.removeAddFocus("category0","category1")
+				this.removeAddFocus("category2");
 				this.category0Index= this.category1Index;
 				this.category1Index= this.category1Index+10;
 				this.category2Index= this.category1Index+10;
@@ -202,15 +174,14 @@ const Password ={
 			}
 			return "";
 		},
-		convertToChar(emoji) {
-			for (var i = 0 ; i < this.emojisData.length ; i++) {
-				var item = this.emojisData.emojis[i];
-				if (String.fromCodePoint("0x"+item.value) == emoji) {
-					return item.letter;
-				}
+		removeAddFocus(currentFocusRef, newFocusRef) {
+			this.$refs[currentFocusRef].classList.add("emoji-unselected");
+			this.$refs[currentFocusRef].classList.remove("emoji-selected");
+			if(newFocusRef) {
+				this.$refs[newFocusRef].classList.add("emoji-selected");
+				this.$refs[newFocusRef].classList.remove("emoji-unselected");
 			}
-			return "";
-		},
+		}
 	}
 };
 
