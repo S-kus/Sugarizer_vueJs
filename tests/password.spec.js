@@ -141,4 +141,53 @@ describe('Password.vue', () => {
 
 		expect(wrapper.find('.password-iconcancel').exists()).toBe(false)
 	});
+
+    it('should take input from images as well as keyboard, update it on backspace and emit message when clicked enter when passed', async () => {
+		const inputElement= wrapper.find('input');
+		await wrapper.findAll('.emoji').at(3).trigger('click');
+        await wrapper.findAll('.emoji-category').at(1).trigger('click')
+        await wrapper.findAll('.emoji').at(8).trigger('click');
+		expect(inputElement.element.value).toBe(String.fromCodePoint('0x1F434')+String.fromCodePoint('0x1F622'));
+        await inputElement.trigger('keyup', {
+            key: 'w',
+            keyCode: '87'
+        })
+        expect(inputElement.element.value).toBe(
+            String.fromCodePoint('0x1F434')+
+            String.fromCodePoint('0x1F622')+
+            String.fromCodePoint('0x1F347')
+        );
+        await inputElement.trigger('keyup', {
+            key: 'Shift',
+            keyCode: '16'
+        })
+        expect(inputElement.element.value).toBe(
+            String.fromCodePoint('0x1F434')+
+            String.fromCodePoint('0x1F622')+
+            String.fromCodePoint('0x1F347')
+        );
+        await wrapper.findAll('.emoji').at(6).trigger('click');
+        expect(inputElement.element.value).toBe(
+            String.fromCodePoint('0x1F434')+
+            String.fromCodePoint('0x1F622')+
+            String.fromCodePoint('0x1F347')+
+            String.fromCodePoint('0x1F614')
+        );
+        await inputElement.trigger('keyup', {
+            key: 'Backspace',
+            keyCode: '8'
+        })
+        expect(inputElement.element.value).toBe(
+            String.fromCodePoint('0x1F434')+
+            String.fromCodePoint('0x1F622')+
+            String.fromCodePoint('0x1F347')
+        );
+        await inputElement.trigger('keyup', {
+            key: 'Enter',
+            keyCode: '13'
+        })
+        expect(wrapper.emitted()).toHaveProperty('passwordSet')
+		expect(wrapper.emitted().passwordSet).toHaveLength(1)
+		expect(wrapper.emitted().passwordSet[0]).toEqual(['dsw'])
+    });
 })
