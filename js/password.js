@@ -89,8 +89,9 @@ const Password ={
 		},
 		emojiClicked(e, index) {
 			var element;
-			if(e.target.className!='emoji') 
-				element= e.explicitOriginalTarget.parentElement;
+			if(e.target.className!='emoji') {
+				element= e.target.parentNode;
+			}
 			else
 				element= e.target;
 			element.classList.add("emoji-flash");

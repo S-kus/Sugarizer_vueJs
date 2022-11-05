@@ -125,7 +125,7 @@ describe('Password.vue', () => {
         expect(categories.at(2).html()).toContain(String.fromCodePoint('0x231A'))
 	});
 
-    it('set input value and cleared on cancel button clicked when passed', async () => {
+    it('set input value, cleared it on cancel button clicked and add emoji-flash accordingly when passed', async () => {
 		expect(wrapper.find('.password-iconcancel').exists()).toBe(false)
         const inputElement= wrapper.find('input');
 		await wrapper.findAll('.emoji').at(3).trigger('click');
@@ -140,6 +140,11 @@ describe('Password.vue', () => {
 		expect(inputElement.element.value).toBe('');
 
 		expect(wrapper.find('.password-iconcancel').exists()).toBe(false)
+
+        await wrapper.findAll('.emoji-icon').at(3).trigger('click');
+        expect(wrapper.findAll('.emoji').at(3).classes()).toContain('emoji-flash');
+        await delay(501);
+        expect(wrapper.findAll('.emoji').at(3).classes('emoji-flash')).toBe(false)
 	});
 
     it('should take input from images as well as keyboard, update it on backspace and emit message when clicked enter when passed', async () => {
