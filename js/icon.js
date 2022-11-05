@@ -1,3 +1,14 @@
+
+/**
+ * @module Icon
+ * @desc This is an icon
+ * @vue-prop {Number} initialCounter
+ * @vue-prop {Number} [step=1] Step
+ * @vue-data {Number} counter - Current counter's value
+ * @vue-computed {Array.<String>} fooList - A list of foo
+ * @vue-computed {Array.<String>} barList - A list of bar
+ * @vue-computed {String} message A message
+ */
 const Icon ={
 	name: 'Icon',
 	template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
@@ -92,7 +103,16 @@ const Icon ={
 		}
 	},
 	methods: {
-		// create function to set newSvg format icons, append the final svgElement inside the assign parent
+		/** 
+		 * @memberOf module:Icon.methods
+		 * @method createIcon
+		 * @desc create function to set newSvg format icons, append the final svgElement inside the assign parent
+		 * @param {String} svgfile - file name
+		 * @param {Number} color - color index
+		 * @param {Number} size - size value
+		 * @param {callback} callback - callback called
+		 * @returns {number}
+		 */ 
 		createIcon(svgfile, color, size, callback) {
 			if(!svgfile)
 				return null;

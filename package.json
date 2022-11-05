@@ -12,7 +12,8 @@
 	"scripts": {
 		"test:unit": "vue-cli-service test:unit",
 		"test:coverage": "vue-cli-service test:unit --coverage",
-		"lint": "vue-cli-service lint"
+		"lint": "vue-cli-service lint",
+		"docs": "rm -rf docs && jsdoc --verbose -d docs -c .jsdoc.js"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.16",
@@ -27,7 +28,10 @@
 		"eslint": "^7.32.0",
 		"eslint-plugin-vue": "^8.0.3",
 		"jest": "^27.0.5",
-		"canvas": "^2.10.1"
+		"canvas": "^2.10.1",
+		"jsdoc": "^3.6.3",
+		"jsdoc-vuejs": "^4.0.0",
+		"@vue/compiler-sfc": "^3.2.0"
 	},
 	"eslintConfig": {
 		"root": true,
