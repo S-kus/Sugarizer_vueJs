@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "Noto Emoji";
+	src: url("../fonts/NotoEmoji.woff") format('woff');
+}
+
 html {
 	height: 100%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -350,6 +355,157 @@ html, button {
 
 .filterBox-items-item:hover {
 	background-color: #808080;
+}
+
+
+/* sugar-vue-Password */
+
+.password-demo {
+	background-color: white;
+}
+
+.password-line {
+	vertical-align: middle;
+	text-align: center;
+	width: 380px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.password-input {
+	text-align: center;
+	display: inline-block;
+	border-width: 2px;
+	border-style: inset;
+	border-top-color: #9a9a9a;
+ 	border-right-color: #eeeeee;
+	border-bottom-color: #eeeeee;
+	border-left-color: #9a9a9a;
+	border-image: initial;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 30px;
+	width: 310px;
+	height: 36px;
+}
+
+.password-value {
+	font-size: 16pt;
+	font-family: "Noto Emoji";
+	border: none;
+	width: 270px;
+	padding: 4px;
+	line-height: 30px;
+	min-height: 30px;
+	background-color: white;
+	padding: 1px;
+	text-align: left;
+	outline: 0;
+	margin-left: 10px;
+	margin-top: 3px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	display: inline-block;
+}
+
+.password-iconcancel {
+	position: relative;
+	background-image: url(../icons/entry-cancel.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	top: 2px;
+	right: 10px;
+	background-size: 20px 20px;
+	width: 20px;
+	height: 20px;
+	margin-left: 0px;
+	display: inline-block;
+}
+
+.password-label {
+	position: relative;
+	left: 20px;
+	margin-top: 20px;
+	color: #808080;
+	width: 350px;
+	margin-bottom: 5px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.password-emojis {
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.password-emojis-line {
+}
+
+.password-emojis-category {
+	margin-top: 10px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.emoji {
+	display: inline-block;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border: 2px solid #e5e5e5;
+}
+
+.emoji-selected {
+	background-color: white;
+}
+
+.emoji-unselected {
+	background-color: #e5e5e5;
+}
+
+.emoji-flash {
+	background-color: #e5e5e5;
+}
+
+.emoji-icon {
+	font-size: 24pt;
+	font-family: "Noto Emoji";
+	padding-left: 8px;
+	padding-top: 6px;
+	padding-right: 8px;
+}
+
+.emoji-letter {
+	font-size: 8pt;
+	text-align: right;
+	padding-right: 4px;
+	padding-bottom: 4px;
+}
+
+.emoji-category {
+	display: block;
+	border: 2px solid #e5e5e5;
+	border-radius: 0px 26px 26px 0px;
+}
+
+.emoji-category-icon {
+	font-size: 15pt;
+	font-family: "Noto Emoji";
+	padding-left: 8px;
+	padding-top: 6px;
+	padding-right: 8px;
+}
+
+.hidden-emoji {
+	font-family: "Noto Emoji";
+	position: absolute;
+	top: -10000px;
+	left: -10000px;
 }
 
 /* Handle small screen resolution */
