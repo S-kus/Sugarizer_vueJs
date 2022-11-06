@@ -86,6 +86,18 @@ describe('Password.vue', () => {
 		expect(wrapper.props('emojis')).toStrictEqual(PasswordData);
 	});
 
+	it('convertToEmoji should return emoji code of char if its present in data when passed',async () => {
+		var emoji;
+		emoji =await wrapper.vm.convertToEmoji('p');
+		expect(emoji).toStrictEqual('0x1F60E');
+
+		emoji =await wrapper.vm.convertToEmoji('+');
+		expect(emoji).toStrictEqual('');
+
+		emoji =await wrapper.vm.convertToEmoji('8');
+		expect(emoji).toStrictEqual('0x1F3BE');
+	});
+
 	it('clicking categories will add and remove classes and updates active category when passed', async () => {
 		const categories= wrapper.findAll('.emoji-category')
 		expect(wrapper.findAll('.emoji-category').length).toBe(3);
@@ -93,7 +105,9 @@ describe('Password.vue', () => {
 		expect(categories.at(0).classes()).toContain('emoji-selected')
 		expect(categories.at(0).classes('emoji-unselected')).toBe(false)
 		expect(categories.at(1).classes()).toContain('emoji-unselected')
+		expect(categories.at(1).classes('emoji-selected')).toBe(false)
 		expect(categories.at(2).classes()).toContain('emoji-unselected')
+		expect(categories.at(2).classes('emoji-selected')).toBe(false)
 		expect(wrapper.find('.password-emojis').text()).toContain('i')
 		expect(categories.at(0).html()).toContain(String.fromCodePoint('0x1F436'))
 
@@ -123,6 +137,50 @@ describe('Password.vue', () => {
 		expect(wrapper.find('.password-emojis').text()).toContain('T')
 		expect(categories.at(0).html()).toContain(String.fromCodePoint('0x26BD'))
 		expect(categories.at(2).html()).toContain(String.fromCodePoint('0x231A'))
+
+		await categories.at(1).trigger('click')
+		expect(categories.at(0).classes()).toContain('emoji-unselected')
+		expect(categories.at(0).classes('emoji-selected')).toBe(false)
+		expect(categories.at(1).classes()).toContain('emoji-selected')
+		expect(categories.at(2).classes()).toContain('emoji-unselected')
+		expect(wrapper.find('.password-emojis').text()).toContain('L')
+
+		await categories.at(2).trigger('click')
+		expect(categories.at(0).classes()).toContain('emoji-unselected')
+		expect(categories.at(1).classes()).toContain('emoji-unselected')
+		expect(categories.at(2).classes()).toContain('emoji-selected')
+		
+		await categories.at(2).trigger('click')
+		expect(categories.at(0).classes()).toContain('emoji-unselected')
+		expect(categories.at(1).classes()).toContain('emoji-unselected')
+		expect(categories.at(2).classes()).toContain('emoji-selected')
+		
+		await categories.at(0).trigger('click')
+		expect(categories.at(0).classes()).toContain('emoji-unselected')
+		expect(categories.at(0).classes('emoji-selected')).toBe(false)
+		expect(categories.at(1).classes()).toContain('emoji-selected')
+		expect(categories.at(2).classes()).toContain('emoji-unselected')
+		expect(wrapper.find('.password-emojis').text()).toContain('9')
+
+		await categories.at(1).trigger('click') // change nothing
+		expect(wrapper.find('.password-emojis').text()).toContain('9')
+		await categories.at(0).trigger('click')
+		await categories.at(0).trigger('click')
+		await categories.at(0).trigger('click')
+
+		expect(categories.at(0).classes()).toContain('emoji-selected')
+		expect(categories.at(1).classes()).toContain('emoji-unselected')
+		expect(categories.at(1).classes('emoji-selected')).toBe(false)
+		expect(categories.at(2).classes()).toContain('emoji-unselected')
+
+		expect(wrapper.find('.password-emojis').text()).toContain('h')
+		await categories.at(0).trigger('click')
+		expect(categories.at(0).classes()).toContain('emoji-selected')
+		expect(categories.at(1).classes()).toContain('emoji-unselected')
+		expect(categories.at(1).classes('emoji-selected')).toBe(false)
+		expect(categories.at(2).classes()).toContain('emoji-unselected')
+
+		expect(wrapper.find('.password-emojis').text()).toContain('h')
 	});
 
 	it('set input value, cleared it on cancel button clicked and add emoji-flash accordingly when passed', async () => {
@@ -194,5 +252,13 @@ describe('Password.vue', () => {
 		expect(wrapper.emitted()).toHaveProperty('passwordSet')
 		expect(wrapper.emitted().passwordSet).toHaveLength(1)
 		expect(wrapper.emitted().passwordSet[0]).toEqual(['dsw'])
+
+		expect(wrapper.vm.passwordText).toBe('');
+		await inputElement.trigger('keyup', {
+			key: 'Backspace',
+			keyCode: '8'
+		})
+		expect(wrapper.vm.passwordText).toBe('');
+		expect(wrapper.emitted().passwordSet).toHaveLength(1)
 	});
 })
