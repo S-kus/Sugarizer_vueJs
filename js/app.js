@@ -6,7 +6,17 @@ requirejs.config({
 	}
 });
 
-// Vue main app
+/**
+ * @module App
+ * @desc This is main app component
+ * @vue-data {Array.<Object>} products - dummy data of searchField component
+ * @vue-data {Array.<Object>} filterProducts - products filtered array based on input in searchBox
+ * @vue-data {Object.<Object>} popupDummyData - dummy data of popup component
+ * @vue-data {Object.<Object>} popupData - popup div data based on selected icon
+ * @vue-data {Object.<Object>} selectBoxDummyData - dummy data of selectBox component
+ * @vue-data {Object.<Object>} FilterBoxData - dummy data of filter component
+ * @vue-data {Array.<Object>} passwordData - dummy data of password component
+ */
 const app = Vue.createApp({
 	components: {
 		"icon": Icon,
@@ -20,7 +30,6 @@ const app = Vue.createApp({
 	data() {
 		return {
 			message: "Sugarizer in Vue",
-			// SearchField Dummy data
 			products: [
 				{ name: "Keyboard", price: 44, category: 'Accessories'},
 				{ name: "Mouse", price: 20, category: 'Accessories'},
@@ -33,11 +42,8 @@ const app = Vue.createApp({
 				{ name: "Eraser", price: 2, category: 'Stationary'},
 				{ name: "Highlighter", price: 5, category: 'Stationary'}
 			],
-			// SearchField array data based on input
 			filterProducts: null,
-			// Popup data based on selected icon
 			popupData: null,
-			// Popup Dummy data
 			popupDummyData: {
 				4: {
 					id: "4",
@@ -66,7 +72,6 @@ const app = Vue.createApp({
 					],
 				}
 			},
-			// SelectBox Dummy data
 			selectBoxDummyData: {
 				id: "15",
 				icon: { id: "16", iconData: "icons/star.svg", color: "65", size: "20" },
@@ -79,7 +84,6 @@ const app = Vue.createApp({
 					{ icon: { id: "21", iconData: "icons/abcd.svg", color: "65", size: "20" }, name: "item5" }
 				]
 			},
-			// FilterBox Dummy data
 			FilterBox1Data: {
 				icon: { id: "22", iconData: "icons/abcd.svg", color: "1024", size: "18" },
 				name: "abcd",
@@ -104,7 +108,6 @@ const app = Vue.createApp({
 					{ name: "item5" }
 				]
 			},
-			// Password Dummy data of emogis
 			PasswordData: [
 				{"name": "dog", "value": "1F436", "letter": "a", "category": "animal"},
 				{"name": "cat", "value": "1F431", "letter": "b", "category": "animal"},
@@ -183,41 +186,61 @@ const app = Vue.createApp({
 		}, 
 	},
 	methods: {
-		// Icon component
-		// updates color of icons
+		/** 
+		 * @memberOf module:App.methods
+		 * @method changeColor
+		 * @desc changes color of icon
+		 */ 
 		changeColor() {
 			this.$refs.icon1.colorData=Math.floor(Math.random() * 179);
 			this.$refs.icon2.colorData=Math.floor(Math.random() * 179);
 		},
-		// updates position of icons
+		/** 
+		 * @memberOf module:App.methods
+		 * @method changePosition
+		 * @desc changes position of icon
+		 */ 
 		changePosition() {
 			this.$refs.icon1.xData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon1.yData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon2.xData=Math.floor(Math.random() * 100) + 1;
 			this.$refs.icon2.yData=Math.floor(Math.random() * 100) + 1;
 		},
-		// updates size of icons
+		/** 
+		 * @memberOf module:App.methods
+		 * @method changeSize
+		 * @desc changes size of icon
+		 */ 
 		changeSize() {
 			this.$refs.icon1.sizeData=Math.floor(Math.random() * 80) + 20;
 			this.$refs.icon2.sizeData=Math.floor(Math.random() * 80) + 20;
 		},
-		// IconButton component
-		// updates data of text, icon and disablity of buttonIcon
+		/** 
+		 * @memberOf module:App.methods
+		 * @method testFunction
+		 * @desc updates data of text, icon and disablity of buttonIcon
+		 */ 
 		testFunction: function (event) {
 			// this.$refs.icon1.iconData= "icons/star.svg"
 			this.$refs.buttonIcon1.iconData="icons/owner-icon.svg"
 			// this.$refs.buttonIcon1.disabledData= "text changed"
 			this.$refs.buttonIcon1.textData= "text changed"
 		},
-		// SearchField component
-		// updates displayed products based on input in searchBox
+		/** 
+		 * @memberOf module:App.methods
+		 * @method searchFunction
+		 * @desc updates displayed products based on input in searchBox
+		 */ 
 		searchFunction(searchInput) {
 			this.filterProducts = this.products.filter((product) => {
 				return product.name.toUpperCase().includes(searchInput.toUpperCase())
 			})
 		},
-		// Popup component
-		// call show() of Popup component with position as parameter and data as prop
+		/** 
+		 * @memberOf module:App.methods
+		 * @method showPopupFunction
+		 * @desc call show() of Popup component with position as parameter and data to be displayed as prop
+		 */ 
 		showPopupFunction(e) {
 			var itemId, x, y;
 			if(e.target.tagName=='svg') {
@@ -239,28 +262,47 @@ const app = Vue.createApp({
 			this.popupData= obj[itemId];
 			this.$refs.popup.show(x,y);
 		},
-		// check for cursor position and call hide() to hide the popup
+		/** 
+		 * @memberOf module:App.methods
+		 * @method removePopupFunction
+		 * @desc check for cursor position and call hide() to hide the popup
+		 */ 
 		removePopupFunction(e) {
 			if(!this.$refs.popup.isCursorInside(e.clientX, e.clientY)){
 				this.$refs.popup.hide();
 			}
 		},
-		// display clicked item of popup after emit itemis-clicked
+		/** 
+		 * @memberOf module:App.methods
+		 * @method itemisClicked
+		 * @desc display clicked item of popup on emit itemis-clicked
+		 */
 		itemisClicked(item) {
 			console.log(item);
 		},
-		// SelectBox component
-		// display clicked item of popup after emit option-selected
+		/** 
+		 * @memberOf module:App.methods
+		 * @method optionSelected
+		 * @desc display clicked item of selectBox popup on emit option-selected
+		 */
 		optionSelected(e) {
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);
 		},
-		// display clicked option of filterBox after emit filter-selected
+		/** 
+		 * @memberOf module:App.methods
+		 * @method filterSelected
+		 * @desc display clicked option of filterBox on emit filter-selected
+		 */
 		filterSelected(e) {
 			var obj= JSON.parse(JSON.stringify(e))
 			console.log(obj);
 		},
-		// Password component
+		/** 
+		 * @memberOf module:App.methods
+		 * @method passwordSet
+		 * @desc display set password string value on emit password-set
+		 */
 		passwordSet(e) {
 			console.log("Password: "+e);
 		}

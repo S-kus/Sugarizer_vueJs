@@ -1,3 +1,12 @@
+/**
+ * @module Popup
+ * @desc This is an popup component for wich contains title, name, icon with optional itemList and footerList
+ * @vue-prop {Object.<Object>} item - stores a data object with name, title, item and footerList of selected icon
+ * @vue-data {Boolean} [isShown=false] - to ensure if popup instance is visible in DOM
+ * @vue-data {Number} [xData=null] - left position of popup component
+ * @vue-data {Number} [yData=null] - top position of popup component
+ * @vue-data {Number} [iconKey=0] - key of icon component 
+ */
 const Popup ={
 	name: 'Popup',
 	template: ` <div ref="homePopup" class="home-activity-popup" 
@@ -63,28 +72,20 @@ const Popup ={
 						</div>
 					</div>
 				</div>`,
-	// for different icons
 	components: {
 		'icon': Icon, 
 	},
-	// a data object with name, title, itme and footerList of selected icon
 	props: ['item'],
 	data() {
 		return {
-			// item prop data
 			itemData: this.item? this.item: null,
-			// left position of popup component
 			xData: null,
-			// top position of popup component
 			yData: null,
-			// to ensure if popup instance is visible 
 			isShown: false,
-			// key for icon component
 			iconKey: 0
 		}
 	},
 	watch: {
-		// updates item data and re-render icons
 		item: async function(newItem, oldItem){
 			this.itemData= newItem;
 			this.iconKey= !this.iconKey;

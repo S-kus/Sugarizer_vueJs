@@ -1,3 +1,14 @@
+/**
+ * @module SelectBox
+ * @desc This is an dropdown component to select any option
+ * @vue-prop {Object.<Object>} options - stores data of options to be displayed in popup and dedault option in select-bar
+ * @vue-data {Object} [selectedData=null] - select-bar data object value
+ * @vue-data {Boolean} [showselectBox=false] - condition to display popup of options
+ * @vue-data {Number} [xData=null] - left position of popup
+ * @vue-data {Number} [yData=null] - top position of popup
+ * @vue-data {Number} [popupKey=0] - key of popup component
+ * @vue-data {Number} [iconKey=0] - key of icon component 
+ */
 const SelectBox ={
 	name: 'SelectBox',
 	template: `
@@ -25,33 +36,22 @@ const SelectBox ={
 			></popup>
 		</div>
 	`,
-	// stores data ([object]) of options to be displayed in popup and 
-	// the default data value to shown in select-bar
 	props: ['options'],
 	components: {
-		// for displaying options data
 		'popup': Popup, 
-		// for diffrenet icons
 		'icon': Icon
 	},
 	data() {
 		return {
-			// stores options prop
 			optionsData: this.options? this.options: null,
-			// stores select-bar data object value
 			selectedData: {
 				icon: this.options? this.options.icon: null,
 				name: this.options? this.options.name: null,
 			},
-			// condition to display popup
 			showselectBox: false,
-			// left position of popup
 			xData: null,
-			// top position of popup
 			yData: null,
-			// key for the popup component
 			popupKey: 0,
-			// key for the icon component
 			iconKey: 0
 		}
 	},
@@ -61,17 +61,25 @@ const SelectBox ={
 		},
 	},
 	methods: {
-		// check for the cursor position and call hide() of popup component 
+		/** 
+		 * @memberOf module:SelectBox.methods
+		 * @method removePopup
+		 * @desc check for the cursor position and call hide() of popup component 
+		 * @param {Event} e - click event data to get the cursor position
+		 */
 		removePopup(e) {
 			if(!this.$refs.selectboxPopup.isCursorInside(e.clientX, e.clientY)){
 				this.$refs.selectboxPopup.hide();
 				this.showselectBox= false;
-				// re-render popup component with updated value
 				this.popupKey= !this.popupKey;
 			}
 		},
-		// set the select-bar data and emit optionSelected with the selected option
-		// it's excuted on the emit "itemis-clicked" from popup component
+		/** 
+		 * @memberOf module:SelectBox.methods
+		 * @method optionisSelected
+		 * @desc excuted on the emit 'itemis-clicked' from popup component, set the select-bar data and emit optionSelected with the selected option
+		 * @param {String} str - sotred selected option data in <popupComponentId+'_'+optionName> format
+		 */
 		optionisSelected(str) {
 			const selectedDataName = str.split('_').pop();
 			if(this.optionsData.name==selectedDataName) {
@@ -93,9 +101,12 @@ const SelectBox ={
 			this.popupKey= !this.popupKey;
 			this.$emit('optionSelected',this.selectedData);
 		},
-		// get the top and left offset of select-box and 
-		// call show(x,y) of popup component with positions as parameter of popup
-		showPopup(e) {
+		/** 
+		 * @memberOf module:SelectBox.methods
+		 * @method showPopup
+		 * @desc get the top and left offset of select-box and call show(x,y) of popup component with positions as parameter of popup
+		 */
+		showPopup() {
 			if(this.showselectBox) {
 				this.showselectBox= false;
 				return;
