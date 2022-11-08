@@ -26,10 +26,7 @@
 		<h3>{{ message }}</h3>
 
 		<div class="password-demo">
-			<password 
-				v-bind:emojis="PasswordData"
-				v-on:password-set="passwordSet($event)"
-			></password>
+			<password v-on:password-set="passwordSet($event)"></password>
 		</div>
 		<div class="filterBox-demo">
 			<filter-box 
