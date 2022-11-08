@@ -5,12 +5,17 @@
  * @vue-prop {Number} id - Id of the icon component div
  * @vue-prop {String} svgfile - Url of svg file
  * @vue-prop {Number} [color=512] - color index value
- * @vue-prop {Number} [size=55] - size in `px`
+ * @vue-prop {Number} [size=55] - size value in `px`
  * @vue-prop {Number} [x=0] - left-right margin
  * @vue-prop {Number} [y=0] - top-bottom margin
  * @vue-prop {String} [isNative='false'] true for native svg icons
- * @vue-data {String} [svg=null] - stores svg text in raw form after native icon loaded
- * @vue-data {String} [_element=null] - stores current svg element of the icon
+ * @vue-data {Number} idData - stores id data
+ * @vue-data {Boolean} [isSugarNative=false] - stores isNative data 
+ * @vue-data {String} iconData - stores svgfile url data
+ * @vue-data {Number} [sizeData=55] - stores size data
+ * @vue-data {Number} [colorData=512] - stores color data
+ * @vue-data {Number} [xData=0] - stores left-right margin data
+ * @vue-data {Number} [yData=0] - stores top-bottom margin data
  * @vue-computed {String} gensvg returns final svg of native icon after removing Sugar stuffs
  */
 const Icon ={
@@ -19,7 +24,7 @@ const Icon ={
 	props: ['id','svgfile','color','size','x','y','isNative'],
 	data() {
 		return {
-			svg: null,
+			_svg: null,
 			idData: this.id,
 			isSugarNative : this.isNative=="true"? true: false,
 			iconData: this.svgfile,
@@ -34,7 +39,7 @@ const Icon ={
 		var vm = this;
 		if(this.isSugarNative) {
 			await this._loadIcon(this.svgfile).then(function(svg) {
-				vm.svg=svg;
+				vm._svg=svg;
 			});
 		}
 	},
@@ -46,8 +51,8 @@ const Icon ={
 	},
 	computed: {
 		gensvg: function() {
-			if (this.svg == null) return "";
-			return this._convertSVG(this.svg, this.idData);
+			if (this._svg == null) return "";
+			return this._convertSVG(this._svg, this.idData);
 		}
 	},
 	updated: function() {

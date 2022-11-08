@@ -11,6 +11,9 @@
  * @vue-prop {Boolean} [disabled=false] - to disable the button
  * @vue-prop {Function} clickFunction - function needed to performed when this iconbutton is clicked
  * @vue-data {Number} [componentKey=0] - key of icon component
+ * @vue-data {Number} iconData - stores icon file url data
+ * @vue-data {String} [textData='empty String'] - stores label data
+ * @vue-data {Boolean} [disabledData=false] - sotres diability condition
  */
 const IconButton ={
 	name: 'IconButton',

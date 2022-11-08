@@ -1,13 +1,15 @@
 /**
  * @module SelectBox
  * @desc This is an dropdown component to select any option
- * @vue-prop {Object.<Object>} options - stores data of options to be displayed in popup and dedault option in select-bar
+ * @vue-prop {Object.<Object>} options - stores data of options to be displayed in popup and default option in select-bar
  * @vue-data {Object} [selectedData=null] - select-bar data object value
+ * @vue-data {Object.<Object>} [optionsData=null] - stores options data
  * @vue-data {Boolean} [showselectBox=false] - condition to display popup of options
  * @vue-data {Number} [xData=null] - left position of popup
  * @vue-data {Number} [yData=null] - top position of popup
  * @vue-data {Number} [popupKey=0] - key of popup component
  * @vue-data {Number} [iconKey=0] - key of icon component 
+ * @vue-event {Object} optionSelected - Emit selected option's icon and name when a option is clicked
  */
 const SelectBox ={
 	name: 'SelectBox',

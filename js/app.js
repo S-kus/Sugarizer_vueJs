@@ -229,7 +229,7 @@ const app = Vue.createApp({
 		/** 
 		 * @memberOf module:App.methods
 		 * @method searchFunction
-		 * @desc updates displayed products based on input in searchBox
+		 * @desc updates products array based on input in searchBox
 		 */ 
 		searchFunction(searchInput) {
 			this.filterProducts = this.products.filter((product) => {
@@ -265,7 +265,7 @@ const app = Vue.createApp({
 		/** 
 		 * @memberOf module:App.methods
 		 * @method removePopupFunction
-		 * @desc check for cursor position and call hide() to hide the popup
+		 * @desc check for cursor position and call hide() of popup component to hide the popup
 		 */ 
 		removePopupFunction(e) {
 			if(!this.$refs.popup.isCursorInside(e.clientX, e.clientY)){
