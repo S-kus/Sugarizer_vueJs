@@ -2,13 +2,13 @@
  * @module IconButton
  * @desc This is an button component to display button with label and icon
  * @vue-prop {String} [text='empty String'] - text label of button
- * @vue-prop {Number} id - Id of the icon component button
+ * @vue-prop {Number} id - Id of the icon component of button
  * @vue-prop {String} svgfile - Url of svg file of icon in button
  * @vue-prop {Number} [color=512] - color index value of icon in button
  * @vue-prop {Number} [size=55] - size in `px` of icon in button
  * @vue-prop {Number} [x=0] - left-right margin of icon in button
  * @vue-prop {Number} [y=0] - top-bottom margin of icon in button
- * @vue-prop {Boolean} [disabled=false] - to disable the button
+ * @vue-prop {Boolean} [disabled=false] - true for disabling the button
  * @vue-prop {Function} clickFunction - function needed to performed when this iconbutton is clicked
  * @vue-data {Number} [componentKey=0] - key of icon component
  * @vue-data {Number} iconData - stores icon file url data

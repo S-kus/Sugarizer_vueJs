@@ -1,3 +1,17 @@
+/**
+ * @module Password
+ * @desc This is a password component to set password in form of images (emojis)
+ * @vue-data {Boolean} [showCancel=false] - conditional data to show cancel svg in input box
+ * @vue-data {String} [passwordValue='emplty string'] - stores password in form of emoji's code
+ * @vue-data {String} [passwordText='emplty string'] - stores password in form of letters
+ * @vue-data {Array} [currentEmojis=[]] - current set of 10 emojis related to active category and currentIndex
+ * @vue-data {Number} [currentIndex=0] - strating index of active set of emojis related to active category
+ * @vue-data {Number} [category0Index=0] - strating index of emojis for top-most button of carousel
+ * @vue-data {Number} [category1Index=10] - strating index of emoji for middle button of carousel
+ * @vue-data {Number} [category2Index=20] - strating index of emoji for bottom-most button of carousel
+ * @vue-data {Array.<Object>} emojisData - array of diffrent emoji object with letter, code, name etc
+ * @vue-event {String} passwordSet - Emit set password text in form of letters when 'enter' key pressed
+ */
 const Password ={
 	name: 'Password',
 	template: `<div class="password-class">
@@ -148,10 +162,22 @@ const Password ={
 		}
 	},
 	methods: {
+		/** 
+		 * @memberOf module:Password.methods
+		 * @method cancelClicked
+		 * @desc clear the input box
+		 */
 		cancelClicked() {
 			this.passwordValue=''
 			this.passwordText='';
 		},
+		/** 
+		 * @memberOf module:Password.methods
+		 * @method emojiClicked
+		 * @desc show a flash for this emoji button and update passwordValue and passwordText
+		 * @param {Event} e - clicked event data
+		 * @param {Number} index - index value of clicked emoji based on currentEmojis array
+		 */
 		emojiClicked(e, index) {
 			var element;
 			if(e.target.className!='emoji') {
@@ -166,8 +192,14 @@ const Password ={
 			this.$refs.password.focus();
 			var emoji=this.currentEmojis[index];
 			this.passwordText=this.passwordText+emoji.letter;
-			this.passwordValue=this.passwordValue+String.fromCodePoint(this.convertToEmoji(emoji.letter));
+			this.passwordValue=this.passwordValue+String.fromCodePoint(this._convertToEmoji(emoji.letter));
 		},
+		/** 
+		 * @memberOf module:Password.methods
+		 * @method keyEntered
+		 * @desc excute action based on key pressed
+		 * @param {Event} e - key pressed data on keyup
+		 */
 		keyEntered(e) {
 			var key= e.key;
 			var keyCode= e.keyCode;
@@ -177,7 +209,7 @@ const Password ={
 				var char=this.passwordText[this.passwordText.length-1];
 				this.passwordText=this.passwordText.substring(0, this.passwordText.length - 1);
 				
-				var lastIndex = this.passwordValue.lastIndexOf(String.fromCodePoint(this.convertToEmoji(char)));
+				var lastIndex = this.passwordValue.lastIndexOf(String.fromCodePoint(this._convertToEmoji(char)));
 				this.passwordValue = this.passwordValue.substring(0, lastIndex);
 			}
 			else if(key=="Enter") {
@@ -186,56 +218,71 @@ const Password ={
 			}
 			else if((keyCode>64 && keyCode<91) ||(keyCode>96 && keyCode<123) || (keyCode>47 && keyCode<58) ) {
 				this.passwordText=this.passwordText+key;
-				this.passwordValue=this.passwordValue+String.fromCodePoint(this.convertToEmoji(key));
+				this.passwordValue=this.passwordValue+String.fromCodePoint(this._convertToEmoji(key));
 			}
 		},
+		/** 
+		 * @memberOf module:Password.methods
+		 * @method category0Clicked
+		 * @desc updates focus, currentEmojis set array based on currentIndex value
+		 */
 		category0Clicked() {
 			if(this.currentIndex==0)
 				return;
 			if(this.currentIndex==10) {
 				this.currentIndex=0;
-				this.removeAddFocus("category1","category0")
+				this._removeAddFocus("category1","category0")
 			}
 			else {
 				this.currentIndex= this.category1Index-10;
-				this.removeAddFocus("category0","category1")
-				this.removeAddFocus("category2");
+				this._removeAddFocus("category0","category1")
+				this._removeAddFocus("category2");
 
 				this.category0Index= this.category0Index-10;
 				this.category1Index= this.category1Index-10;
 				this.category2Index= this.category2Index-10;
 			}
 		},
+		/** 
+		 * @memberOf module:Password.methods
+		 * @method category1Clicked
+		 * @desc updates focus, currentEmojis set array based on currentIndex value
+		 */
 		category1Clicked() {
 			if(this.currentIndex==this.category1Index)
 				return;
 			if(this.currentIndex==0) {
 				this.currentIndex=10;
-				this.removeAddFocus("category0","category1")
+				this._removeAddFocus("category0","category1")
 			}
 			else if(this.currentIndex==50) {
 				this.currentIndex=40;
-				this.removeAddFocus("category2","category1")
+				this._removeAddFocus("category2","category1")
 			}
 		},
+		/** 
+		 * @memberOf module:Password.methods
+		 * @method category2Clicked
+		 * @desc updates focus, currentEmojis set array based on currentIndex value
+		 */
 		category2Clicked() {
 			if(this.currentIndex==50)
 				return;
 			else if(this.currentIndex==40) {
 				this.currentIndex=50;
-				this.removeAddFocus("category1","category2")
+				this._removeAddFocus("category1","category2")
 			}
 			else {
 				this.currentIndex= this.category1Index+10;
-				this.removeAddFocus("category0","category1")
-				this.removeAddFocus("category2");
+				this._removeAddFocus("category0","category1")
+				this._removeAddFocus("category2");
 				this.category0Index= this.category1Index;
 				this.category1Index= this.category1Index+10;
 				this.category2Index= this.category1Index+10;
 			}
 		},
 		// Convert a char to an emoji code and reversly
-		convertToEmoji(char) {
+		_convertToEmoji(char) {
 			for (var i = 0 ; i < this.emojisData.length ; i++) {
 				var item = this.emojisData[i];
 				if (item.letter == char) {
@@ -244,7 +291,7 @@ const Password ={
 			}
 			return "";
 		},
-		removeAddFocus(currentFocusRef, newFocusRef) {
+		_removeAddFocus(currentFocusRef, newFocusRef) {
 			this.$refs[currentFocusRef].classList.add("emoji-unselected");
 			this.$refs[currentFocusRef].classList.remove("emoji-selected");
 			if(newFocusRef) {

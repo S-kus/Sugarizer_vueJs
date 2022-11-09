@@ -10,12 +10,11 @@ requirejs.config({
  * @module App
  * @desc This is main app component
  * @vue-data {Array.<Object>} products - dummy data of searchField component
- * @vue-data {Array.<Object>} filterProducts - products filtered array based on input in searchBox
+ * @vue-data {Array.<Object>} [filterProducts=null] - products filtered array based on input in searchBox
  * @vue-data {Object.<Object>} popupDummyData - dummy data of popup component
- * @vue-data {Object.<Object>} popupData - popup div data based on selected icon
+ * @vue-data {Object.<Object>} [popupData=null] - popup div data based on selected icon
  * @vue-data {Object.<Object>} selectBoxDummyData - dummy data of selectBox component
  * @vue-data {Object.<Object>} FilterBoxData - dummy data of filter component
- * @vue-data {Array.<Object>} passwordData - dummy data of password component
  */
 const app = Vue.createApp({
 	components: {
@@ -172,7 +171,7 @@ const app = Vue.createApp({
 		/** 
 		 * @memberOf module:App.methods
 		 * @method showPopupFunction
-		 * @desc call show() of Popup component with position as parameter and data to be displayed as prop
+		 * @desc call show() of Popup component with position as parameter and set data to be displayed as prop
 		 */ 
 		showPopupFunction(e) {
 			var itemId, x, y;

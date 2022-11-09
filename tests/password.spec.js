@@ -13,13 +13,13 @@ describe('Password.vue', () => {
 
 	it('convertToEmoji should return emoji code of char if its present in data when passed',async () => {
 		var emoji;
-		emoji =await wrapper.vm.convertToEmoji('p');
+		emoji =await wrapper.vm._convertToEmoji('p');
 		expect(emoji).toStrictEqual('0x1F60E');
 
-		emoji =await wrapper.vm.convertToEmoji('+');
+		emoji =await wrapper.vm._convertToEmoji('+');
 		expect(emoji).toStrictEqual('');
 
-		emoji =await wrapper.vm.convertToEmoji('8');
+		emoji =await wrapper.vm._convertToEmoji('8');
 		expect(emoji).toStrictEqual('0x1F3BE');
 	});
 

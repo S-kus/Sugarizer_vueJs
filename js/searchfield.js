@@ -2,9 +2,9 @@
  * @module SearchField
  * @desc This is an searchBox component to take input
  * @vue-prop {String} [placeholder='empty String'] - placeholder value for search-box
- * @vue-data {String} [searchQuery='empty String'] - stores input value of searchBox
+ * @vue-data {String} [searchQuery='empty String'] - stores current input value of searchBox
  * @vue-data {String} [placeholderData='empty String'] - stores placeholder data
- * @vue-data {Number} [showCancel=false] - conditional data to show the cancel.svg
+ * @vue-data {Boolean} [showCancel=false] - conditional data to show the cancel.svg
  * @vue-event {String} inputChanged - Emit current inputString whenever its changes 
  */
 const SearchField ={
