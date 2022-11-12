@@ -9,11 +9,10 @@
  * @vue-prop {Number} [x=0] - left-right margin of icon in button
  * @vue-prop {Number} [y=0] - top-bottom margin of icon in button
  * @vue-prop {Boolean} [disabled=false] - true for disabling the button
- * @vue-prop {Function} clickFunction - function needed to performed when this iconbutton is clicked
- * @vue-data {Number} [componentKey=0] - key of icon component
- * @vue-data {Number} iconData - stores icon file url data
- * @vue-data {String} [textData='empty String'] - stores label data
- * @vue-data {Boolean} [disabledData=false] - sotres diability condition
+ * @vue-data {Number} iconData - to change the icon file url data
+ * @vue-data {String} [textData='empty String'] - to change the label data
+ * @vue-data {Boolean} [disabledData=false] - to change the diability condition
+ * @vue-event {Object} buttonClick - Emit buttonClick event to perform required action
  */
 const IconButton ={
 	name: 'IconButton',
@@ -40,7 +39,6 @@ const IconButton ={
 		x: String,
 		y: String,
 		disabled: Boolean,
-		clickFunction: { type: Function },
 	},
 	components: {
 		'button-icon': Icon, 
@@ -66,13 +64,8 @@ const IconButton ={
 		}
 	},
 	methods: {
-		/** 
-		 * @memberOf module:IconButton.methods
-		 * @method buttonClicked
-		 * @desc excutes `clickFunction` of prop if button clicked
-		 */
 		buttonClicked() {
-			this.clickFunction();
+			this.$emit('buttonClick')
 		}
 	}
 };

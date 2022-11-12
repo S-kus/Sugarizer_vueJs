@@ -34,8 +34,7 @@ describe('IconButton.vue', () => {
 				x: x,
 				y: y,
 				text: text,
-				disabled: disabled,
-				clickFunction: jest.fn()
+				disabled: disabled
 			},
 		})
 	});
@@ -82,12 +81,12 @@ describe('IconButton.vue', () => {
 		expect(wrapper.find('.web-activity-disable').exists()).toBe(true);
 	});
 
-	it("clickFunction is called when button is clicked", () => {
+	it("buttonClicked is called and emit when button is clicked", () => {
 		const iconButton = wrapper.find('.icon-button')
-		const spy = jest.spyOn(wrapper.vm, 'clickFunction');
 		iconButton.trigger('click')
-		expect(spy).toHaveBeenCalled()
-		jest.restoreAllMocks()
+
+		expect(wrapper.emitted()).toHaveProperty('buttonClick')
+		expect(wrapper.emitted().buttonClick).toHaveLength(1)
 	});
 
 	it('changed icon of button when passed',async () => {
