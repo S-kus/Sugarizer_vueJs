@@ -9,15 +9,13 @@
  * @vue-prop {Number} [x=0] - left-right margin
  * @vue-prop {Number} [y=0] - top-bottom margin
  * @vue-prop {String} [isNative='false'] true for native svg icons
- * @vue-data {Number} idData - stores id data
- * @vue-data {Boolean} [isSugarNative=false] - stores isNative data 
- * @vue-data {String} iconData - stores svgfile url data
- * @vue-data {Number} [sizeData=55] - stores size data
- * @vue-data {Number} [colorData=512] - stores color data
- * @vue-data {Number} [xData=0] - stores left-right margin data
- * @vue-data {Number} [yData=0] - stores top-bottom margin data
- * @vue-computed {String} gensvg returns final svg of native icon after removing Sugar stuffs
- */
+ * @vue-data {Number} idData - to change the id data
+ * @vue-data {String} iconData - to change the svgfile url data
+ * @vue-data {Number} [sizeData=55] - to change the size data
+ * @vue-data {Number} [colorData=512] - to change the color data
+ * @vue-data {Number} [xData=0] - to change the left-right margin data
+ * @vue-data {Number} [yData=0] - to change the top-bottom margin data
+*/
 const Icon ={
 	name: 'Icon',
 	template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
@@ -26,7 +24,7 @@ const Icon ={
 		return {
 			_svg: null,
 			idData: this.id,
-			isSugarNative : this.isNative=="true"? true: false,
+			_isSugarNative : this.isNative=="true"? true: false,
 			iconData: this.svgfile,
 			sizeData: this.size? this.size: 55,
 			colorData: this.color? this.color: 512,
@@ -37,7 +35,7 @@ const Icon ={
 	},
 	async created() {
 		var vm = this;
-		if(this.isSugarNative) {
+		if(this._isSugarNative) {
 			await this._loadIcon(this.svgfile).then(function(svg) {
 				vm._svg=svg;
 			});
@@ -45,8 +43,8 @@ const Icon ={
 	},
 	mounted() {
 		// to render the newformat icon
-		if(!this.isSugarNative) {
-			this.createIcon(this.svgfile, this.colorData, this.sizeData);
+		if(!this._isSugarNative) {
+			this._createIcon(this.svgfile, this.colorData, this.sizeData);
 		}
 	},
 	computed: {
@@ -56,7 +54,7 @@ const Icon ={
 		}
 	},
 	updated: function() {
-		if(this.isSugarNative) {
+		if(this._isSugarNative) {
 			let vm=this, element = null;
 			let icon= document.getElementById(vm.idData);
 			if (!icon) {
@@ -94,17 +92,7 @@ const Icon ={
 		}
 	},
 	methods: {
-		/** 
-		 * @memberOf module:Icon.methods
-		 * @method createIcon
-		 * @desc create function to set newSvg format icons, append the final svgElement inside the assign parent
-		 * @param {String} svgfile - file name
-		 * @param {Number} color - color index
-		 * @param {Number} size - size value
-		 * @param {callback} callback - callback called
-		 * @returns {number}
-		 */ 
-		createIcon(svgfile, color, size, callback) {
+		_createIcon(svgfile, color, size, callback) {
 			if(!svgfile)
 				return null;
 			var parent =document.getElementById(this.id);
