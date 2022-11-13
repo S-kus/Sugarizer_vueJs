@@ -65,15 +65,23 @@
 			v-on:option-selected="optionSelected($event)" 
 		></select-box>
 		<icon-button ref="buttonIcon1"
-			text="hello"
+			text="button one"
 			id="3"
 			svgfile="icons/abcd.svg" 
 			size="28"
 			color="256"
-			v-bind:click-function="testFunction"
+			v-on:button-click="buttonfunc1"
 			v-bind:disabled=false
 		></icon-button>
-
+		<icon-button ref="buttonIcon2"
+			text="button two"
+			id="29"
+			svgfile="icons/star.svg" 
+			size="28"
+			color="256"
+			v-on:button-click="buttonfunc2"
+			v-bind:disabled=false
+		></icon-button>
 		<icon ref="popupIcon"
 			id="4"
 			svgfile="icons/star.svg" 

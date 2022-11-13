@@ -1,6 +1,13 @@
-// global variable which stores active ref value of filterBox instance (whose subPopup is visible)
-var currentFilterBoxRef= null;
+/**
+ * @module FilterBox
+ * @desc This is an filter selelector component which contains different options of filter to select
+ * @vue-prop {Object.<Object>} options - stores options array and a default filter option for filter-bar
+ * @vue-data {String} [currentFilterBoxRef=null] - global variable which stores active ref value of filterBox instance
+ * @vue-data {Object.<Object>} [optionsData=null] - to change the filter options data
+ * @vue-event {Object} filterSelected - Emit selected item object with its icon and text when clicked
+ */
 
+var currentFilterBoxRef= null;
 const FilterBox ={
 	name: 'FilterBox',
 	template: ` <div 
@@ -46,34 +53,26 @@ const FilterBox ={
 						</div>
 					</div>
 				</div>`,
-	// for different icons
 	components: {
 		'icon': Icon,
 	},
-	// filterBox options object data with default value in filterBox-bar
 	props: ['options'],
 	data() {
 		return {
-			// options prop 
 			optionsData: this.options? this.options: null,
-			// current selected filterBox option data
 			selectedData: {
 				icon: this.options? this.options.icon: null,
 				name: this.options? this.options.name: null,
 			},
-			// condition to show subPopup
 			showSubpopup: false,
-			// key of icon component
 			iconKey: 0
 		}
 	},
 	methods: {
-		// hide the subPopup
 		removeFilterBox() {
 			this.showSubpopup= false;
 			currentFilterBoxRef= null;
 		},
-		// to show the subPopup
 		showFilterBox() {
 			// retrieve current instance name attribute
 			const currRef= this.$refs.filterBox.getAttribute('name');
@@ -89,16 +88,13 @@ const FilterBox ={
 				this.$root.$refs[currentFilterBoxRef].removeFilterBox();
 				currentFilterBoxRef= null;
 			}
-			// if there is no active subPopup and current subPopup is also false
-			// we have filterBoxList length to show some values in the subPopup then show subPopup
+			// if there is no active subPopup and current subPopup is also false or if it's have options to show
 			if(!currentFilterBoxRef && !this.showSubpopup && this.optionsData.filterBoxList && this.optionsData.filterBoxList.length >0) {
 				this.showSubpopup= true;
 				this.iconKey= !this.iconKey;
 				currentFilterBoxRef= currRef;
 			}
 		},
-		// if option is selected, the update the filterBox-bar with this,
-		// emit filterBoxSelected with selected option and close the subPopup
 		optionisSelected(item) {
 			var data= JSON.parse(JSON.stringify(item))
 			if(data.icon) {

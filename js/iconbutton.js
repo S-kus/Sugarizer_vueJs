@@ -1,3 +1,19 @@
+/**
+ * @module IconButton
+ * @desc This is an button component to display button with label and icon
+ * @vue-prop {String} [text='empty String'] - text label of button
+ * @vue-prop {Number} id - Id of the icon component of button
+ * @vue-prop {String} svgfile - Url of svg file of icon in button
+ * @vue-prop {Number} [color=512] - color index value of icon in button
+ * @vue-prop {Number} [size=55] - size in `px` of icon in button
+ * @vue-prop {Number} [x=0] - left-right margin of icon in button
+ * @vue-prop {Number} [y=0] - top-bottom margin of icon in button
+ * @vue-prop {Boolean} [disabled=false] - true for disabling the button
+ * @vue-data {Number} iconData - to change the icon file url data
+ * @vue-data {String} [textData='empty String'] - to change the label data
+ * @vue-data {Boolean} [disabledData=false] - to change the diability condition
+ * @vue-event {Object} buttonClick - Emit buttonClick event to perform required action
+ */
 const IconButton ={
 	name: 'IconButton',
 	template: `<div :class="this.disabledData? 'web-activity-disable icon-button': 'icon-button'"
@@ -15,37 +31,26 @@ const IconButton ={
 				<p class="icon-button-text">{{ this.textData }}</p>
 			</div>`,
 	props: {
-		// button label
 		text: String,
-		// input for icon
 		id: String,
 		svgfile: String,
 		color: String,
 		size: String,
 		x: String,
 		y: String,
-		// button's disablity condition
 		disabled: Boolean,
-		// function needed to performed when this button is clicked
-		clickFunction: { type: Function },
 	},
-	// for icons
 	components: {
 		'button-icon': Icon, 
 	},
 	data() {
 		return {
-			// icon file url
 			iconData: this.svgfile,
-			// button label prop data
 			textData: this.text? this.text: '',
-			// conditional data of "disabled" prop
 			disabledData: this.disabled? this.disabled: false,
-			// key for icon component
 			componentKey: 0,
 		}
 	},
-	// updates data values
 	watch: {
 		textData: function(newText, oldText) {
 			this.textData = newText
@@ -59,9 +64,8 @@ const IconButton ={
 		}
 	},
 	methods: {
-		// excute prop function if button clicked
 		buttonClicked() {
-			this.clickFunction();
+			this.$emit('buttonClick')
 		}
 	}
 };

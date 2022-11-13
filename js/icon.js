@@ -1,72 +1,62 @@
 
 /**
  * @module Icon
- * @desc This is an icon
- * @vue-prop {Number} initialCounter
- * @vue-prop {Number} [step=1] Step
- * @vue-data {Number} counter - Current counter's value
- * @vue-computed {Array.<String>} fooList - A list of foo
- * @vue-computed {Array.<String>} barList - A list of bar
- * @vue-computed {String} message A message
- */
+ * @desc This is an icon component for both native and simple SVG icons
+ * @vue-prop {Number} id - Id of the icon component div
+ * @vue-prop {String} svgfile - Url of svg file
+ * @vue-prop {Number} [color=512] - color index value
+ * @vue-prop {Number} [size=55] - size value in `px`
+ * @vue-prop {Number} [x=0] - left-right margin
+ * @vue-prop {Number} [y=0] - top-bottom margin
+ * @vue-prop {String} [isNative='false'] true for native svg icons
+ * @vue-data {Number} idData - to change the id data
+ * @vue-data {String} iconData - to change the svgfile url data
+ * @vue-data {Number} [sizeData=55] - to change the size data
+ * @vue-data {Number} [colorData=512] - to change the color data
+ * @vue-data {Number} [xData=0] - to change the left-right margin data
+ * @vue-data {Number} [yData=0] - to change the top-bottom margin data
+*/
 const Icon ={
 	name: 'Icon',
 	template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
-	// id, fileUrl, color, size, left and top margin, native property of icon
 	props: ['id','svgfile','color','size','x','y','isNative'],
 	data() {
 		return {
-			// stores svg text in raw form after native icon loaded
-			svg: null,
-			// id prop data of icon
+			_svg: null,
 			idData: this.id,
-			// native property of icon, false by default
-			isSugarNative : this.isNative=="true"? true: false,
-			// fileUrl prop data of icon
+			_isSugarNative : this.isNative=="true"? true: false,
 			iconData: this.svgfile,
-			// size prop data of icon
 			sizeData: this.size? this.size: 55,
-			// color prop data of icon
 			colorData: this.color? this.color: 512,
-			// positions(margin) prop (x,y) data of icon
 			xData: this.x ? this.x: 0,
 			yData: this.y ? this.y: 0,
-			// stores current svg element of the icon
 			_element: null
 		}
 	},
 	async created() {
 		var vm = this;
-		// ready the raw svg data of the Native icons
-		if(this.isSugarNative) {
+		if(this._isSugarNative) {
 			await this._loadIcon(this.svgfile).then(function(svg) {
-				vm.svg=svg;
+				vm._svg=svg;
 			});
 		}
 	},
 	mounted() {
 		// to render the newformat icon
-		if(!this.isSugarNative) {
-			this.createIcon(this.svgfile, this.colorData, this.sizeData);
+		if(!this._isSugarNative) {
+			this._createIcon(this.svgfile, this.colorData, this.sizeData);
 		}
 	},
 	computed: {
-		// genrating final svg of oldSvg format
-		// takes input raw data form of svgfile and return pure SVG (remove Sugar stuff)
 		gensvg: function() {
-			if (this.svg == null) return "";
-			return this._convertSVG(this.svg, this.genid);
-		},
-		// set id of the icon
-		genid: function() {
-			return this.idData ? this.idData : this._uid;
+			if (this._svg == null) return "";
+			return this._convertSVG(this._svg, this.idData);
 		}
 	},
 	updated: function() {
-		// set the _element value by retrieving svgElement from Native icon
-		if(this.isSugarNative) {
+		if(this._isSugarNative) {
 			let vm=this, element = null;
-			let icon= document.getElementById(vm.genid);
+			let icon= document.getElementById(vm.idData);
 			if (!icon) {
 				return null;
 			}
@@ -83,7 +73,6 @@ const Icon ={
 		}
 	},
 	watch: {
-		// updates color, position and size of the icon
 		colorData: function(newColor, oldColor) {
 			var element = this._element;
 			element.setAttribute("class", "xo-color"+newColor);
@@ -103,17 +92,7 @@ const Icon ={
 		}
 	},
 	methods: {
-		/** 
-		 * @memberOf module:Icon.methods
-		 * @method createIcon
-		 * @desc create function to set newSvg format icons, append the final svgElement inside the assign parent
-		 * @param {String} svgfile - file name
-		 * @param {Number} color - color index
-		 * @param {Number} size - size value
-		 * @param {callback} callback - callback called
-		 * @returns {number}
-		 */ 
-		createIcon(svgfile, color, size, callback) {
+		_createIcon(svgfile, color, size, callback) {
 			if(!svgfile)
 				return null;
 			var parent =document.getElementById(this.id);
@@ -169,8 +148,6 @@ const Icon ={
 				});
 			});
 		},
-		// Convert SVG to a pure SVG (remove Sugar stuff) by removing <!DOCTYPE..> tag
-		// replacing stroke and fill color variable in new format and adding symbol tag inside the svgElement
 		_convertSVG(svg, id) {
 			// Remove ENTITY HEADER
 			let read = svg;
@@ -187,7 +164,6 @@ const Icon ={
 			return buf;
 		},
 
-		// Change CSS color to given color number class
 		_setColor(vm, color) {
 			let element = vm._element;
 			if (element) {
@@ -197,7 +173,6 @@ const Icon ={
 				element.setAttribute("class", "xo-color"+color);
 			}
 		},
-		// Change CSS size
 		_setSize(vm, size) {
 			let element = vm._element;
 			if (element) {

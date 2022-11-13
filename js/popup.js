@@ -1,3 +1,13 @@
+/**
+ * @module Popup
+ * @desc This is an popup component which contains title, name, icon with optional itemList and footerList
+ * @vue-prop {Object.<Object>} item - stores a data object content with name, title, item and footerList of selected icon
+ * @vue-data {Object.<Object>} [itemData=null] - to change the content of component
+ * @vue-data {Boolean} [isShown=false] - to ensure if popup instance is currently visible in DOM
+ * @vue-data {Number} [xData=null] - left position of popup component
+ * @vue-data {Number} [yData=null] - top position of popup component
+ * @vue-event {String} itemisClicked - Emit selected item when clicked in "'popup component id'_'selected item name'" format
+ */
 const Popup ={
 	name: 'Popup',
 	template: ` <div ref="homePopup" class="home-activity-popup" 
@@ -63,28 +73,20 @@ const Popup ={
 						</div>
 					</div>
 				</div>`,
-	// for different icons
 	components: {
 		'icon': Icon, 
 	},
-	// a data object with name, title, itme and footerList of selected icon
 	props: ['item'],
 	data() {
 		return {
-			// item prop data
 			itemData: this.item? this.item: null,
-			// left position of popup component
 			xData: null,
-			// top position of popup component
 			yData: null,
-			// to ensure if popup instance is visible 
 			isShown: false,
-			// key for icon component
 			iconKey: 0
 		}
 	},
 	watch: {
-		// updates item data and re-render icons
 		item: async function(newItem, oldItem){
 			this.itemData= newItem;
 			this.iconKey= !this.iconKey;
@@ -103,19 +105,30 @@ const Popup ={
 		}
 	},
 	methods: {
-		// emit message with selected item
-		// return value will be "<popup component id>_<selected item name>"
 		itemClicked(event) {
 			this.$emit('itemisClicked',event)
 		},
-		// set the position of popup component based on x,y argument data and display it
+		/** 
+		 * @memberOf module:Popup.methods
+		 * @method show
+		 * @desc set the position of popup component based on x, y argument data and display it
+		 * @param {Number} x - left position of cursor
+		 * @param {Number} y - top position of cursor
+		 */
 		show(x, y) {
 			if(this.isShown) return;
 			this.xData= x;
 			this.yData= y;
 			this.isShown= true;
 		},
-		// check if cursor (takes x and y position as argument) is inside the this popup component
+		/** 
+		 * @memberOf module:Popup.methods
+		 * @method isCursorInside
+		 * @desc check if cursor is inside the popup component or not
+		 * @param {Number} x - x position of cursor
+		 * @param {Number} y - y position of cursor
+		 * @returns {Boolean}
+		 */
 		isCursorInside(x, y) {
 			var ele= this.$refs.homePopup;
 			if(ele) {
@@ -130,7 +143,11 @@ const Popup ={
 			} else 
 				return false;
 		},
-		// hide the popup component and set all data values back to null
+		/** 
+		 * @memberOf module:Popup.methods
+		 * @method hide
+		 * @desc hide the popup component and set all data values back to null
+		 */
 		hide() {
 			this.isShown= false;
 			this.itemData= null;
