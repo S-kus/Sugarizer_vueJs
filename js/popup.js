@@ -2,11 +2,10 @@
  * @module Popup
  * @desc This is an popup component which contains title, name, icon with optional itemList and footerList
  * @vue-prop {Object.<Object>} item - stores a data object content with name, title, item and footerList of selected icon
- * @vue-data {Object.<Object>} [itemData=null] - stores content of component
+ * @vue-data {Object.<Object>} [itemData=null] - to change the content of component
  * @vue-data {Boolean} [isShown=false] - to ensure if popup instance is currently visible in DOM
  * @vue-data {Number} [xData=null] - left position of popup component
  * @vue-data {Number} [yData=null] - top position of popup component
- * @vue-data {Number} [iconKey=0] - key of icon component 
  * @vue-event {String} itemisClicked - Emit selected item when clicked in "'popup component id'_'selected item name'" format
  */
 const Popup ={

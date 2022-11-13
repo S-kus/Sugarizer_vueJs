@@ -2,13 +2,9 @@
  * @module SelectBox
  * @desc This is an dropdown component to select any option
  * @vue-prop {Object.<Object>} options - stores data of options to be displayed in popup and default option in select-bar
- * @vue-data {Object} [selectedData=null] - select-bar data object value
- * @vue-data {Object.<Object>} [optionsData=null] - stores options data
- * @vue-data {Boolean} [showselectBox=false] - condition to display popup of options
+ * @vue-data {Object.<Object>} [optionsData=null] - to change the options data
  * @vue-data {Number} [xData=null] - left position of popup
  * @vue-data {Number} [yData=null] - top position of popup
- * @vue-data {Number} [popupKey=0] - key of popup component
- * @vue-data {Number} [iconKey=0] - key of icon component 
  * @vue-event {Object} optionSelected - Emit selected option's icon and name when a option is clicked
  */
 const SelectBox ={
@@ -33,7 +29,7 @@ const SelectBox ={
 				:key="this.popupKey" 
 				v-show="this.showselectBox"
 				:item="this.optionsData"
-				v-on:mouseleave="removePopup($event)"
+				v-on:mouseleave="hidePopup($event)"
 				v-on:itemis-clicked="optionisSelected($event)"
 			></popup>
 		</div>
@@ -65,23 +61,17 @@ const SelectBox ={
 	methods: {
 		/** 
 		 * @memberOf module:SelectBox.methods
-		 * @method removePopup
+		 * @method hidePopup
 		 * @desc check for the cursor position and call hide() of popup component 
 		 * @param {Event} e - click event data to get the cursor position
 		 */
-		removePopup(e) {
+		hidePopup(e) {
 			if(!this.$refs.selectboxPopup.isCursorInside(e.clientX, e.clientY)){
 				this.$refs.selectboxPopup.hide();
 				this.showselectBox= false;
 				this.popupKey= !this.popupKey;
 			}
 		},
-		/** 
-		 * @memberOf module:SelectBox.methods
-		 * @method optionisSelected
-		 * @desc excuted on the emit 'itemis-clicked' from popup component, set the select-bar data and emit optionSelected with the selected option
-		 * @param {String} str - sotred selected option data in <popupComponentId+'_'+optionName> format
-		 */
 		optionisSelected(str) {
 			const selectedDataName = str.split('_').pop();
 			if(this.optionsData.name==selectedDataName) {

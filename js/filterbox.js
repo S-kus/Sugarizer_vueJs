@@ -3,10 +3,7 @@
  * @desc This is an filter selelector component which contains different options of filter to select
  * @vue-prop {Object.<Object>} options - stores options array and a default filter option for filter-bar
  * @vue-data {String} [currentFilterBoxRef=null] - global variable which stores active ref value of filterBox instance
- * @vue-data {Object.<Object>} [optionsData=null] - stores filter options data
- * @vue-data {Object} selectedData - current selected filterBox option data
- * @vue-data {Boolean} [showSubpopup=false] - condition to show subPopup of options
- * @vue-data {Number} [iconKey=0] - key of icon component 
+ * @vue-data {Object.<Object>} [optionsData=null] - to change the filter options data
  * @vue-event {Object} filterSelected - Emit selected item object with its icon and text when clicked
  */
 
@@ -72,20 +69,10 @@ const FilterBox ={
 		}
 	},
 	methods: {
-		/** 
-		 * @memberOf module:FilterBox.methods
-		 * @method removeFilterBox
-		 * @desc hide the subPopup of options
-		 */
 		removeFilterBox() {
 			this.showSubpopup= false;
 			currentFilterBoxRef= null;
 		},
-		/** 
-		 * @memberOf module:FilterBox.methods
-		 * @method showFilterBox
-		 * @desc show the subPopup of options
-		 */
 		showFilterBox() {
 			// retrieve current instance name attribute
 			const currRef= this.$refs.filterBox.getAttribute('name');
@@ -108,12 +95,6 @@ const FilterBox ={
 				currentFilterBoxRef= currRef;
 			}
 		},
-		/** 
-		 * @memberOf module:FilterBox.methods
-		 * @method optionisSelected
-		 * @desc show the subPopup of options
-		 * @param {Object} item - update filterBox-bar with selected option and close the subPopup
-		 */
 		optionisSelected(item) {
 			var data= JSON.parse(JSON.stringify(item))
 			if(data.icon) {
