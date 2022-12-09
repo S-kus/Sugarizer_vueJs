@@ -2,7 +2,8 @@ const { mount } = require('@vue/test-utils');
 const fs = require('fs');
 if (typeof axios == 'undefined') axios = {
     get: function(url) {
-        var content = fs.readFileSync(url, {encoding:'utf8', flag:'r'});
+		var content;
+		if(url) content = fs.readFileSync(url.replace("file://", ""), {encoding:'utf8', flag:'r'});
         return {
             then: function(callback) {
                 var result = {};
@@ -10,6 +11,7 @@ if (typeof axios == 'undefined') axios = {
                 callback(result);
                 return {
                     catch: function() {
+						reject(error);
                     }
                 }
             }
@@ -152,63 +154,63 @@ describe('Icon.vue', () => {
 		expect(wrapper.vm._element.getAttribute("width")).toBe('100px');
 	});
 
-	// it('changes color and position data when passed for isSugarNative is true', async () => {
-	// 	isSugarNative= "true";
-	// 	// Mount object
-	// 	wrapper = mount(Icon, {
-	// 		props: { 
-	// 			id: id,
-	// 			svgfile: svgfileOld,
-	// 			color: color,
-	// 			size: size,
-	// 			x: x,
-	// 			y: y,
-	// 			isNative: isSugarNative
-	// 		},
-	// 	})
-	// 	await delay(1000);
+	it('changes color and position data when passed for isSugarNative is true', async () => {
+		isSugarNative= "true";
+		// Mount object
+		wrapper = mount(Icon, {
+			props: { 
+				id: id,
+				svgfile: svgfileOld,
+				color: color,
+				size: size,
+				x: x,
+				y: y,
+				isNative: isSugarNative
+			},
+		})
+		await delay(1000);
 
-	// 	expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color5'); // HACK: get SVG directly in data _element 
-	// 	expect(wrapper.vm._element.getAttribute("style")).toBe('margin: -2px -4px');
+		expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color5'); // HACK: get SVG directly in data _element 
+		expect(wrapper.vm._element.getAttribute("style")).toBe('margin: -2px -4px');
 
-	// 	await wrapper.setData({colorData: '6'});
-	// 	expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color6');
+		await wrapper.setData({colorData: '6'});
+		expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color6');
 
-	// 	await wrapper.setData({xData: 100, yData: 200});
-	// 	expect(wrapper.vm._element.getAttribute("style")).toBe('margin: 100px 200px');
-	// });
+		await wrapper.setData({xData: 100, yData: 200});
+		expect(wrapper.vm._element.getAttribute("style")).toBe('margin: 100px 200px');
+	});
 
-	// it('should not render icon if svgfile data is empty when passed for isSugarNative is true', async () => {
-	// 	isSugarNative= "true";
-	// 	wrapper = mount(Icon, {
-	// 		props: { 
-	// 			id: id,
-	// 			color: color,
-	// 			size: size,
-	// 			x: x,
-	// 			y: y,
-	// 			isNative: isSugarNative
-	// 		},
-	// 	})
+	it('should not render icon if svgfile data is empty when passed for isSugarNative is true', async () => {
+		isSugarNative= "true";
+		wrapper = mount(Icon, {
+			props: { 
+				id: id,
+				color: color,
+				size: size,
+				x: x,
+				y: y,
+				isNative: isSugarNative
+			},
+		})
 
-	// 	await delay(1000);
-	// 	expect(wrapper.vm._element).toBeNull();
-	// });
+		await delay(1000);
+		expect(wrapper.vm._element).toBeNull();
+	});
 
-	// it('renders icon with default color, position and size data when passed for isSugarNative is true', async () => {
-	// 	isSugarNative= "true";
-	// 	wrapper = mount(Icon, {
-	// 		props: { 
-	// 			id: id,
-	// 			svgfile: svgfileOld,
-	// 			isNative: isSugarNative
-	// 		},
-	// 	})
+	it('renders icon with default color, position and size data when passed for isSugarNative is true', async () => {
+		isSugarNative= "true";
+		wrapper = mount(Icon, {
+			props: { 
+				id: id,
+				svgfile: svgfileOld,
+				isNative: isSugarNative
+			},
+		})
 
-	// 	await delay(1000);
-	// 	expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color512');
-	// 	expect(wrapper.vm._element.getAttribute("height")).toBe('55px');
-	// 	expect(wrapper.vm._element.getAttribute("width")).toBe('55px');
-	// 	expect(wrapper.vm._element.getAttribute("style")).toBe('margin: 0px 0px');
-	// });
+		await delay(1000);
+		expect(wrapper.vm._element.getAttribute("class")).toBe('xo-color512');
+		expect(wrapper.vm._element.getAttribute("height")).toBe('55px');
+		expect(wrapper.vm._element.getAttribute("width")).toBe('55px');
+		expect(wrapper.vm._element.getAttribute("style")).toBe('margin: 0px 0px');
+	});
 })

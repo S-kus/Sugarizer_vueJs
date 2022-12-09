@@ -18,7 +18,7 @@
 */
 const Icon ={
 	name: 'Icon',
-	template: `<div class="icon" v-html="gensvg" :id="this.idData"></div>`,
+	template: `<div class="icon" ref="icon" v-html="gensvg" :id="this.idData"></div>`,
 	props: ['id','svgfile','color','size','x','y','isNative'],
 	data() {
 		return {
@@ -56,7 +56,7 @@ const Icon ={
 	updated: function() {
 		if(this._isSugarNative) {
 			let vm=this, element = null;
-			let icon= document.getElementById(vm.idData);
+			let icon= this.$refs.icon;
 			if (!icon) {
 				return null;
 			}
@@ -67,9 +67,7 @@ const Icon ={
 			}
 			vm._element=element;
 			vm._setColor(vm, vm.colorData);
-			if (vm.size) {
-				vm._setSize(vm, vm.size);
-			}
+			vm._setSize(vm, vm.sizeData);
 		}
 	},
 	watch: {
