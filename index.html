@@ -24,6 +24,17 @@
 	<div id="app">
 		<h2>Hello Sugarizer</h2>
 		<h3>{{ message }}</h3>
+		<icon-button ref="settings"
+			text="My settings"
+			id="30"
+			svgfile="icons/preferences-system.svg" 
+			size="24"
+			color="256"
+			v-on:button-click="settingsClicked"
+			v-bind:disabled=false
+		></icon-button>
+
+		<dialog-box ref="dialogModal"></dialog-box>
 
 		<div class="password-demo">
 			<password v-on:password-set="passwordSet($event)"></password>
@@ -127,6 +138,7 @@
 	<script src="js/selectbox.js"></script>
 	<script src="js/filterbox.js"></script>
 	<script src="js/password.js"></script>
+	<script src="js/dialog.js"></script>
 	<script src="js/app.js"></script>
   </body>
 </html>

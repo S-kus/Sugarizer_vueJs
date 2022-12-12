@@ -22,7 +22,15 @@ html, button {
 
 /* sugar-vue-Icon */
 
+.icon {
+	padding: 2px;
+	width: fit-content;
+}
 
+.icon:hover {
+	background-color: #d5d5d5;
+	border-radius: 5px;
+}
 /* sugar-vue-IconButton */
 
 .web-activity-disable {
@@ -508,6 +516,115 @@ html, button {
 	left: -10000px;
 }
 
+/* sugar-vue-Dialog */
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.settings-dialog {
+	position: absolute;
+	margin-top: 4%;
+	z-index: 5;
+	width: 95%;
+	max-width: 800px;
+	height: 95%;
+	max-height: 500px;
+	background-color: #000000;
+	border: 2px solid #808080;
+	color: white;
+	overscroll-behavior-y: contain;
+    overflow-y: auto;
+}
+
+.settings-filter-text {
+	position: relative;
+	margin-left: 10px;
+	margin-top: 5px;
+	width: 350px;
+}
+
+.settings-close-button {
+	background-image: url(../icons/dialog-cancel.svg);
+	position: absolute !important;
+	top: 5px;
+	right: 30px;
+	width: 35px !important;
+	height: 35px !important;
+}
+
+.toolbar {
+	height: 60px;
+	padding: 0 77px;
+	color: white;
+	background-color: #282828;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	position: sticky;
+	top: 0px;
+}
+
+.toolbar hr {
+	display: inline-block;
+	height: 45px;
+	margin: 4.5px;
+	margin-bottom: -21px;
+	border: 1px solid #808080;
+}
+
+.toolbar .toolbutton {
+	position: relative;
+	width: 67px;
+	height: 67px;
+	margin: 4px 2px;
+	color: white;
+	color: transparent;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: 0;
+	border-radius: 7.5px;
+}
+
+.toolbar .toolbutton:hover {
+	background-color: black;
+}
+
+.dialog-items {
+	display: flex;
+	text-align: center;
+	flex-wrap: wrap;
+}
+
+.dialog-items > div{
+	display: grid;
+	flex: 1 1 auto;
+	margin: 20px;
+	padding: 20px 40px;
+	justify-content: center;
+}
+
+.dialog-item-text {
+	padding-left: 10px;
+	padding-top: 4px;
+}
+
+.dialog-item-disable {
+	color: #808080 !important;
+	pointer-events: none;
+}
+
+.dialog-item-disable :first-child {
+	opacity: 0.8;
+}
+
 /* Handle small screen resolution */
 @media screen and (max-width: 410px) {
 	.search-field-border {
@@ -516,6 +633,10 @@ html, button {
 	}
 
 	.search-field-input {
+		visibility: hidden;
+		width: 0px;
+	}
+	.settings-filter-text {
 		visibility: hidden;
 		width: 0px;
 	}

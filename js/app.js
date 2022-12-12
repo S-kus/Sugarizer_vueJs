@@ -14,7 +14,8 @@ const app = Vue.createApp({
 		"popup": Popup,
 		"select-box": SelectBox,
 		"filter-box": FilterBox,
-		"password": Password
+		"password": Password,
+		"dialog-box": Dialog
 	},
 	data() {
 		return {
@@ -175,6 +176,9 @@ const app = Vue.createApp({
 		},
 		passwordSet(e) {
 			console.log("Password: "+e);
+		},
+		settingsClicked(e) {
+			this.$refs.dialogModal.showDialog= true;
 		}
 	},
 });
