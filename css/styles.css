@@ -607,13 +607,15 @@ html, button {
 	display: grid;
 	flex: 1 1 auto;
 	margin: 20px;
-	padding: 20px 40px;
+	padding: 5px 40px;
 	justify-content: center;
 }
 
 .dialog-item-text {
-	padding-left: 10px;
 	padding-top: 4px;
+}
+.dialog-icon {
+	padding: 10px;
 }
 
 .dialog-item-disable {
