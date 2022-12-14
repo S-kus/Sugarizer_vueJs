@@ -528,13 +528,20 @@ html, button {
 	justify-content: center;
 }
 
-.settings-dialog {
-	position: absolute;
+.modal {
 	margin-top: 4%;
 	z-index: 5;
-	width: 95%;
+	width: 800px;
+	height: 500px;
+}
+
+.settings-dialog {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 	max-width: 800px;
-	height: 95%;
+	height: 100%;
 	max-height: 500px;
 	background-color: #000000;
 	border: 2px solid #808080;
@@ -597,16 +604,60 @@ html, button {
 	background-color: black;
 }
 
+.module-dialog {
+	width: 100%;
+	max-width: 800px;
+	height: 100%;
+	max-height: 500px;
+	overscroll-behavior-y: contain;
+    overflow-y: auto;
+	background-color: #ffffff;
+	border: 2px solid #808080;
+}
+
+.module-icon {
+	position: absolute;
+	left: 10px;
+}
+
+.module-text {
+	position: absolute;
+	left: 80px;
+	top: 20px;
+	color: white;
+	word-wrap: break-word;
+}
+
+.module-cancel-button {
+	background-image: url(../icons/dialog-cancel.svg);
+	position: absolute !important;
+	top: 5px;
+	right: 60px;
+	width: 35px !important;
+	height: 35px !important;
+}
+
+.module-ok-button {
+	background-image: url(../icons/dialog-ok.svg);
+	position: absolute !important;
+	top: 5px;
+	right: 15px;
+	width: 35px !important;
+	height: 35px !important;
+}
+
 .dialog-items {
 	display: flex;
 	text-align: center;
 	flex-wrap: wrap;
+	overscroll-behavior-y: contain;
+    overflow-y: auto;
 }
 
 .dialog-items > div{
 	display: grid;
 	flex: 1 1 auto;
-	margin: 20px;
+	margin: 10px;
 	padding: 5px 40px;
 	justify-content: center;
 }
@@ -625,6 +676,101 @@ html, button {
 
 .dialog-item-disable :first-child {
 	opacity: 0.8;
+}
+
+.computer-content {
+	max-height: 90%;
+	color: black;
+	overscroll-behavior-y: contain;
+    overflow-y: auto;
+}
+
+.computer-software {
+	border-color: #808080;
+	border-style: solid none none none;
+	border-width: 2px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.computer-sugarizer {
+	color: #808080;
+	text-align: right;
+	width: 200px;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+.computer-clienttype {
+	color: #808080;
+	text-align: right;
+	width: 200px;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.computer-browser {
+	color: #808080;
+	text-align: right;
+	width: 200px;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.computer-browserversion {
+	color: #808080;
+	text-align: right;
+	width: 200px;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.computer-useragent {
+	color: #808080;
+	text-align: right;
+	width: 200px;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.computer-storage {
+	color: #808080;
+	text-align: right;
+	width: 200px;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.computer-line {
+}
+
+.computer-copyright {
+	border-color: #808080;
+	border-style: solid none none none;
+	border-width: 2px;
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
+.computer-contributor {
+	margin-left: 30px;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+.computer-contributor-link {
+	display: inline-block;
+	text-decoration: underline;
+}
+
+.computer-licence {
+	margin-left: 30px;
+}
+
+.computer-value {
+	margin-left: 10px;
+	color: black;
+	display: inline-block;
 }
 
 /* Handle small screen resolution */
