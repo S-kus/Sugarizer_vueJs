@@ -79,10 +79,68 @@
 		},
 		cancelClicked() {
 			this.$root.$refs.dialogModal.activeBox= 'dialog'
-			// this.show= false;
 		},
 		okClicked() {
 			this.$root.$refs.dialogModal.activeBox= 'dialog'
+		}
+	}
+}
+
+const Language= {
+	name: 'Language',
+	template: `
+		<div class="module-dialog">
+			<div class="toolbar">
+				<div class="module-icon">
+					<icon id="37" svgfile="icons/module-language.svg" color="256" x="4" y="4" size="40" is-native="true"
+				></icon></div>
+				<div class="module-text">Language</div>
+				<div class="toolbutton module-cancel-button" @click="cancelClicked"></div>
+				<div class="toolbutton module-ok-button" @click="okClicked"></div>
+			</div>
+			<div class="language-message">Choose language you prefer:</div>
+			<div class="language-select">
+				<select-box 
+					v-bind:options="languagesData"
+					v-on:option-selected="languageChanged($event)"
+				></select-box>
+			</div>	
+		</div>
+	`,
+	components: {
+		'icon': Icon,
+		'select-box': SelectBox,
+	},
+	data() {
+		return {
+			languagesData: {
+				id: "38",
+				icon: {},
+				name: "language1",
+				itemList: [
+					{ icon: {}, name: "language2" },
+					{ icon: {}, name: "language3" },
+					{ icon: {}, name: "language4" },
+					{ icon: {}, name: "language5" },
+					{ icon: {}, name: "language6" }
+				]
+			},
+			selectedLanguage: ''
+		}
+	},
+	methods: {
+		languageChanged(e) {
+			var obj= JSON.parse(JSON.stringify(e))
+			this.selectedLanguage= obj.name;
+		},
+		cancelClicked() {
+			this.$root.$refs.dialogModal.activeBox= 'dialog'
+		},
+		okClicked() {
+			// code to set the language globlally and reload the server
+			console.log(this.selectedLanguage);
+
+			this.$root.$refs.dialogModal.closeModal();
 		}
 	}
 }
@@ -132,7 +190,7 @@
 							<div class="dialog-item-text">My security</div>
 						</div>
 						<div :class="(filtersettings.find(v => ('Language').includes(v))) ? '' :'dialog-item-disable'">
-							<div class="dialog-icon">
+							<div class="dialog-icon" @click="moduleClicked('language')">
 								<icon id="36" svgfile="icons/module-language.svg" color="256" size="75" is-native="true"
 							></icon></div>
 							<div class="dialog-item-text">Language</div>
@@ -140,6 +198,7 @@
 					</div>
 				</div>
 				<about-my-computer v-if="activeBox=='aboutmycomputer'"></about-my-computer>
+				<language v-if="activeBox=='language'"></language>
 			</div>
 		</div>
 	`,
@@ -147,9 +206,9 @@
 		'icon': Icon, 
 		'icon-button': IconButton,
 		'search-field': SearchField,
-		'select-box': SelectBox,
 		'password': Password,
-		'about-my-computer': AboutMyComputer
+		'about-my-computer': AboutMyComputer,
+		'language': Language
 	},
 	data() {
 		return {

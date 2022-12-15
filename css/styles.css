@@ -773,6 +773,19 @@ html, button {
 	display: inline-block;
 }
 
+.language-message {
+	margin-left: 20px;
+	margin-top: 20px;
+	color: #808080;
+}
+
+.language-select {
+	margin-left: 30px;
+	margin-top: 30px;
+	color: white;
+	width: 200px;
+}
+
 /* Handle small screen resolution */
 @media screen and (max-width: 410px) {
 	.search-field-border {
