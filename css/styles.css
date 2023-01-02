@@ -21,7 +21,12 @@ html, button {
 }
 
 /* sugar-vue-Icon */
-
+.test {
+    width:80px;
+    height:50px;
+    background-color:#808080;
+    margin:20px;
+}
 .icon {
 	padding: 2px;
 	width: fit-content;

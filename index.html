@@ -34,7 +34,9 @@
 			v-bind:disabled=false
 		></icon-button>
 
-		<dialog-box ref="dialogModal"></dialog-box>
+		<dialog-box ref="dialogModal">
+			Welcome
+		</dialog-box>
 
 		<div class="password-demo">
 			<password v-on:password-set="passwordSet($event)"></password>
