@@ -540,7 +540,7 @@ html, button {
 	height: 500px;
 }
 
-.settings-dialog {
+.dialog-content {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
@@ -580,6 +580,7 @@ html, button {
 	-moz-user-select: none;
 	position: sticky;
 	top: 0px;
+	display: flex;
 }
 
 .toolbar hr {
@@ -626,9 +627,7 @@ html, button {
 }
 
 .module-text {
-	position: absolute;
-	left: 80px;
-	top: 20px;
+	margin: 20px 10px 0px 0px;
 	color: white;
 	word-wrap: break-word;
 }
@@ -657,6 +656,7 @@ html, button {
 	flex-wrap: wrap;
 	overscroll-behavior-y: contain;
     overflow-y: auto;
+	height: inherit;
 }
 
 .dialog-items > div{
@@ -688,6 +688,8 @@ html, button {
 	color: black;
 	overscroll-behavior-y: contain;
     overflow-y: auto;
+	background-color: white;
+	height: inherit;
 }
 
 .computer-software {

@@ -97,15 +97,24 @@ const app = Vue.createApp({
 					{ name: "item4" },
 					{ name: "item5" }
 				]
-			}
+			},
+			settingsData: ['About me', 'About my computer', 'About my server', 'My privacy', 'My security', 'Language'],
+			filtersettings: null,
+			computerData: {},
+			contributorsUrl: "https://github.com/llaske/sugarizer/blob/dev/docs/credits.md"
 		}
 	},
 	mounted() {
 		this.filterProducts=this.products
+		this.filtersettings=this.settingsData
+		this.computerData= this.getComputerData();
 	},
 	watch: {
 		filterProducts: function(newData, oldData) {
 			this.filterProducts= newData
+		}, 
+		filtersettings: function(newData, oldData) {
+			this.filtersettings= newData
 		}, 
 	},
 	methods: {
@@ -177,9 +186,36 @@ const app = Vue.createApp({
 		passwordSet(e) {
 			console.log("Password: "+e);
 		},
-		settingsClicked(e) {
-			this.$refs.dialogModal.showDialog= true;
-		}
+		openModal(e) {
+			this.$refs[e].showDialog= true;
+		},
+		userSearchMethod(input) {
+			this.filtersettings = this.settingsData.filter((setting) => {
+				return setting.toUpperCase().includes(input.toUpperCase())
+			})
+		},
+		userOkMethod(e) {
+			// code to save the changes and re-render
+			this.$refs[e].showDialog= false
+		},
+		userCancelMethod(e) {
+			this.$refs[e].showDialog= false
+		},
+		getComputerData() {
+			let computerDetails={};
+			// code to get computer details and return as object
+
+			// setting dummy data
+			computerDetails= {
+				sugarizerVersion: "0.0.1",
+				clientName: "User Name",
+				browser: "Firefox",
+				browserVersion: "107.0",
+				useragent: "xxx",
+				storage: "27994 bytes - 27 Kb"
+			}
+			return computerDetails;
+		},
 	},
 });
 
