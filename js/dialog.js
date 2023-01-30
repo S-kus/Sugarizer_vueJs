@@ -1,6 +1,15 @@
 /**
  * @module Dialog
- * @desc This is an modal component for different settings
+ * @desc This is an modal component for different settings overlay pages
+ * @vue-prop {Boolean} [searchField=null] - to show search-bar in the toolbar
+ * @vue-prop {Boolean} [okButton=null] - to show ok button in the toolbar
+ * @vue-prop {Boolean} [cancelButton=null] - to show cancel button in the toolbar
+ * @vue-prop {String} [iconData=null] - stores the url of svg file of icon in the toolbar
+ * @vue-prop {String} [titleData=null] - stores the title text of feature page in the toolbar
+ * @vue-data {Boolean} [showDialog=false] - condition to show or hide the dialog modal
+ * @vue-event {} onCancel - emit cancel event to close the dialogBox
+ * @vue-event {} onOk - emit ok event to save the changes and close the dialogBox
+ * @vue-event {String} searchInput - emit inputString of the search-bar whenever its changes 
  */
 
  const Dialog ={
