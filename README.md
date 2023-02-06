@@ -6,10 +6,10 @@
   <img src="https://user-images.githubusercontent.com/86892991/217034417-5844db6a-33ca-4155-9efe-c94cbd5c4540.gif" alt="animated" />
 </p>
 
-This activity was developed by [Saumya Kushwaha](https://github.com/S-kus) during GSoC 2022.
-Learn more about this work on [here](https://summerofcode.withgoogle.com/archive/2022/projects/m9tDqyN6).
+This activity was developed by [Saumya Kushwaha](https://github.com/S-kus) under the guidance of [Lionel Laské](https://github.com/llaske) during GSoC 2022.
+Learn more about this work [here](https://summerofcode.withgoogle.com/archive/2022/projects/m9tDqyN6).
 
-The project aims to create a framework of Vue.js UI components matching the Sugar UI by replacing old EnyoJS, a deprecated framework initially developed for WebOS. The VueJS source code is maintain here and, once build, the code is integrated in [Sugarizer](https://github.com/llaske/sugarizer).
+The project aims to create a framework of Vue.js UI components matching the Sugar UI by replacing old EnyoJS, a deprecated framework initially developed for WebOS. The VueJS source code is maintained here and, once built, the code is integrated in [Sugarizer](https://github.com/llaske/sugarizer).
 
 ## Tasks completed
 ### Rewriting the required files in Vue.js
@@ -21,7 +21,7 @@ These are newly written components in Vue.js with dummy data.
 
 ### Writing tests for these newly written files in Vue Test Utils with Jest
 
-These are tests and coverage table of the components:
+These are Coverage Table of the components:
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/86892991/217040308-bcc032da-f3c8-4717-8c1b-5600e2892f1b.png" alt="animated" />
