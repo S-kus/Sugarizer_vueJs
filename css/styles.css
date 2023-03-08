@@ -20,6 +20,26 @@ html, button {
 	cursor: url(../icons/ArrowSmall.cur), default;
 }
 
+/*login or signin*/
+.login{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:flex-end;
+}
+.login p{
+	font-size: 16px;
+	font-weight: 500;
+    color:gray
+}
+
+.userLogin{
+	display:flex;
+	flex-direction:row;
+	justify-content: center;
+	background-color: #eeeeee;
+}
+
 /* sugar-vue-Icon */
 .test {
     width:80px;
