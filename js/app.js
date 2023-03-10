@@ -15,7 +15,9 @@ const app = Vue.createApp({
 		"select-box": SelectBox,
 		"filter-box": FilterBox,
 		"password": Password,
-		"dialog-box": Dialog
+		"dialog-box": Dialog,
+		"login": Login,
+		"navbar": Navbar,
 	},
 	data() {
 		return {
