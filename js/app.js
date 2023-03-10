@@ -17,6 +17,7 @@ const app = Vue.createApp({
 		"password": Password,
 		"dialog-box": Dialog,
 		"login": Login,
+		"navbar": Navbar,
 	},
 	data() {
 		return {

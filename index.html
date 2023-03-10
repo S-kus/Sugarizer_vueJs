@@ -25,26 +25,25 @@
 
 		<div class="userLogin">
 			<login ref="login"
-			id="1"
 			svgfile="icons/newuser-icon.svg" 
-			color="8"
-			size="60"
-			x="-2"
-			is-native="true"
 			content="New User"
 		   ></login>
 
 			<login ref="login"
-			id="1"
 			svgfile="icons/login.svg" 
-			color="8"
-			size="60"
-			x="-2"
-			is-native="true"
 			content="login"
 		   ></login>
 		</div>
-		
+
+		<navbar ref="navbar"
+		   svgfile="icons/entry-search.svg"
+		   first="icons/view-radial.svg"
+		   second="icons/view-neighborhood.svg"
+		   third="icons/view-list.svg"
+		   queryimage="icons/help.svg"
+		   warningimage="icons/cloud-warning.svg"
+		   ></navbar>
+
 		<h2>Hello Sugarizer</h2>
 		<h3>{{ message }}</h3>
 		<icon-button ref="settings1"
@@ -268,7 +267,7 @@
 	<script src="js/password.js"></script>
 	<script src="js/dialog.js"></script>
 	<script src="js/login.js"></script>
+	<script src="js/navbar.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/dummy.js"></script>
   </body>
 </html>
